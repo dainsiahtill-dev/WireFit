@@ -1,0 +1,480 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/experiment-request.schema.json",
+  "title": "Finite experiment request union",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "simplify"
+        },
+        "reference_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "domain": {
+          "$ref": "common.schema.json#/$defs/domain"
+        },
+        "search": {
+          "type": "object",
+          "properties": {
+            "grammar": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "bv_add",
+                  "bv_sub",
+                  "bv_mul",
+                  "bv_and",
+                  "bv_or",
+                  "bv_xor",
+                  "bv_not",
+                  "bv_neg",
+                  "bv_shl",
+                  "bv_lshr",
+                  "bv_ashr",
+                  "bv_ult",
+                  "bv_slt",
+                  "select"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 32,
+              "uniqueItems": true
+            },
+            "constants": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/core_value"
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "objective": {
+              "const": "node_count"
+            }
+          },
+          "required": [
+            "grammar",
+            "constants",
+            "objective"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "reference_model_id",
+        "domain",
+        "search"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "compare_models"
+        },
+        "left_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "right_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "domain": {
+          "$ref": "common.schema.json#/$defs/domain"
+        },
+        "mapping": {
+          "$ref": "common.schema.json#/$defs/mapping"
+        },
+        "mode": {
+          "const": "exact_bv"
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "left_model_id",
+        "right_model_id",
+        "domain",
+        "mapping",
+        "mode"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "compare_models"
+        },
+        "left_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "right_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "domain": {
+          "$ref": "common.schema.json#/$defs/domain"
+        },
+        "mapping": {
+          "$ref": "common.schema.json#/$defs/mapping"
+        },
+        "mode": {
+          "const": "sampled_fp32"
+        },
+        "sample_source": {
+          "$ref": "common.schema.json#/$defs/sample_source"
+        },
+        "comparison_policy": {
+          "$ref": "common.schema.json#/$defs/fp32_policy"
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "left_model_id",
+        "right_model_id",
+        "domain",
+        "mapping",
+        "mode",
+        "sample_source",
+        "comparison_policy"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "compare_oracles"
+        },
+        "left_oracle_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "right_oracle_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "signature": {
+          "$ref": "common.schema.json#/$defs/signature"
+        },
+        "domain": {
+          "$ref": "common.schema.json#/$defs/domain"
+        },
+        "mapping": {
+          "$ref": "common.schema.json#/$defs/mapping"
+        },
+        "inputs_artifact": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "comparison_policy": {
+          "$ref": "common.schema.json#/$defs/comparison_policy"
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "left_oracle_id",
+        "right_oracle_id",
+        "signature",
+        "domain",
+        "mapping",
+        "inputs_artifact",
+        "comparison_policy"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "verify_candidate"
+        },
+        "candidate_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "dataset_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "mapping": {
+          "$ref": "common.schema.json#/$defs/mapping"
+        },
+        "splits": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "train",
+              "validation",
+              "holdout"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true
+        },
+        "source_mode": {
+          "const": "recorded"
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "candidate_model_id",
+        "dataset_id",
+        "mapping",
+        "splits",
+        "source_mode"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "verify_candidate"
+        },
+        "candidate_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "dataset_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "mapping": {
+          "$ref": "common.schema.json#/$defs/mapping"
+        },
+        "splits": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "train",
+              "validation",
+              "holdout"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true
+        },
+        "source_mode": {
+          "const": "live"
+        },
+        "oracle_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "candidate_model_id",
+        "dataset_id",
+        "mapping",
+        "splits",
+        "source_mode",
+        "oracle_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "fit_numeric"
+        },
+        "dataset_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "template_model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "backend": {
+          "enum": [
+            "analytic_baseline",
+            "reference",
+            "handwired"
+          ]
+        },
+        "training": {
+          "type": "object",
+          "properties": {
+            "optimizer": {
+              "enum": [
+                "adam",
+                "sgd",
+                "closed_form"
+              ]
+            },
+            "learning_rate": {
+              "$ref": "common.schema.json#/$defs/decimal_nonnegative"
+            },
+            "loss": {
+              "const": "mse"
+            },
+            "batch_size": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "restarts": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            },
+            "validation_interval": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            }
+          },
+          "required": [
+            "optimizer",
+            "learning_rate",
+            "loss",
+            "batch_size",
+            "restarts",
+            "validation_interval"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "dataset_id",
+        "template_model_id",
+        "backend",
+        "training"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "experiment_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "budget": {
+          "$ref": "budget.schema.json"
+        },
+        "operation": {
+          "const": "suggest_inputs"
+        },
+        "model_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "minItems": 2,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "domain": {
+          "$ref": "common.schema.json#/$defs/domain"
+        },
+        "strategy": {
+          "enum": [
+            "disagreement",
+            "boundaries"
+          ]
+        },
+        "max_inputs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        }
+      },
+      "required": [
+        "schema_version",
+        "experiment_id",
+        "budget",
+        "operation",
+        "model_ids",
+        "domain",
+        "strategy",
+        "max_inputs"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# Third-party notices
+
+Wirefit retains original copyright and license notices for incorporated source.
+
+- Handwired, https://github.com/chenglou/handwired, commit `257856e3b221140acb4cc4460626b850c0bd4ff1`: MIT. The unchanged numeric Circuit runtime is in `vendor/handwired/src/runtime/numeric-ui-core.ts`; license and per-file source hashes are in `vendor/handwired/LICENSE` and `vendor/handwired/manifest.json`.
+- REA, https://github.com/morluto/rea, release `6.7.0`, commit `27dc42d10249f0410904a75c0997842eb03b931c`: MIT. The minimal evidence validation dependency closure is in `vendor/rea/src`. See `vendor/rea/LICENSE`, `vendor/rea/THIRD_PARTY_NOTICES.md` and `vendor/rea/UPSTREAM.json`. The separately installed optional public MCP runtime is `rea-agents@6.7.0`; the complete upstream application is not incorporated into Wirefit.
+- npm dependencies retain their individual notices. Exact installed versions are recorded in `package-lock.json`; in particular the Z3 solver/WASM, MCP SDK, Ajv, canonicalize and Zod retain their upstream licenses.
+
+Fixture files retain existing source headers and accompanying license files. Wirefit's root MIT license applies to its original implementation, not as a replacement for third-party notices. Origin, integrity and runtime verification details are recorded in `upstream-lock.json` and the integration documentation.
+
+Optional local binary tools are separate executables: Detect It Easy 3.21 (MIT engine; bundled dependencies retain their licenses) and Unlicense 0.4.0 (GPL-3.0; unchanged reference source and LICENSE in .upstream/unlicense-0.4.0). Their identities, source URLs and integrity limits are recorded in docs/BINARY-TOOLS.md and artifacts/native/binary-tools.json. They are not incorporated into Handwired or the mathematical core.
+
+The optional native trace environment separately installs Frida 17.2.17 (wxWindows Library Licence 3.1, as declared by the installed wheel; COPYING retained under `.tools/analysis/frida-python/frida-17.2.17.dist-info/licenses/`) and typing_extensions 4.15.0 (PSF-2.0; installed LICENSE retained). It does not replace Unlicense's environment. Project-owned trace scripts are in `tools/native-trace/`; the separate Ghidra script uses the installed Ghidra public APIs. Local tools and retained proprietary analysis inputs are not relicensed by Wirefit's MIT license.
+
+Optional isolated CPU replay uses Unicorn 2.1.4 from a SHA256-pinned Windows ABI3 wheel under `.tools/analysis/unicorn-python`. The Python package metadata declares BSD for the bindings and GPLv2 for the engine; the upstream engine COPYING is retained under `.tools/analysis/unicorn-licenses/`, and the package retains its source headers. Installation file identities are recorded in `artifacts/research/vmde/kernel-replay/installation.json`. The emulator is a separate optional tool, not part of Handwired or the mathematical model verifier. Its synthetic machine-code replay is not execution of the original Windows program.
+
+Optional IDA integration separately installs [mrexodia/ida-pro-mcp](https://github.com/mrexodia/ida-pro-mcp/tree/c133c3853faa111a9b00ee615c013b720d0c4acd), revision `c133c3853faa111a9b00ee615c013b720d0c4acd`, package 2.0.0: MIT, Copyright (c) 2025 Duncan Ogilvie. Its installed source and license stay under the ignored local runtime directories. IDA Professional, IDAlib and Hex-Rays decompilers are separately installed proprietary tools and are not distributed in this repository. The project-owned integration wrappers are under `tools/ida-mcp/`.

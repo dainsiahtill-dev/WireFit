@@ -1,0 +1,850 @@
+@media(min-width:1500px) {
+  main {
+  padding:37px 48px 55px
+}
+.overview-columns {
+  gap:24px
+}
+.metrics-grid {
+  gap:20px
+}
+.hero-main {
+  padding:32px 35px
+}
+.sidebar {
+  width:239px
+}
+.workspace {
+  margin-left:239px
+}
+.topbar {
+  padding:0 48px
+}
+
+}
+
+@media(max-width:1120px) {
+  .sidebar {
+  width:194px;
+  padding-left:12px;
+  padding-right:12px
+}
+.sidebar nav a {
+  gap:10px;
+  padding-left:10px
+}
+.sidebar nav a.active::before {
+  left:-12px
+}
+.brand {
+  padding:0 5px;
+  font-size:24px;
+  gap:8px
+}
+.brand small {
+  font-size:6px
+}
+.brand-mark {
+  width:33px;
+  height:33px;
+  font-size:21px
+}
+.workspace {
+  margin-left:194px
+}
+.topbar {
+  padding:0 25px
+}
+main {
+  padding:27px 25px 40px
+}
+.page-description {
+  font-size:10px
+}
+.hero-main {
+  padding:22px
+}
+.hero-identity {
+  padding:0 20px
+}
+.hero-main h2 {
+  font-size:21px
+}
+.metric-card {
+  padding:15px
+}
+.metric-value {
+  font-size:25px
+}
+.overview-columns {
+  gap:16px
+}
+.panel-heading {
+  padding:16px
+}
+.timeline-layout {
+  grid-template-columns:minmax(0,1.2fr) minmax(240px,1fr)
+}
+.code-layout {
+  grid-template-columns:180px minmax(0,1fr);
+  gap:16px
+}
+.lab-layout {
+  grid-template-columns:270px minmax(0,1fr);
+  gap:16px
+}
+.validation-layout {
+  grid-template-columns:1fr
+}
+.tasks-layout {
+  grid-template-columns:minmax(280px,1fr) minmax(0,1fr);
+  gap:16px
+}
+td,th {
+  padding-left:13px;
+  padding-right:13px
+}
+.milestone-title {
+  align-items:flex-start;
+  flex-direction:column;
+  gap:5px
+}
+.milestone {
+  gap:9px
+}
+.run-selection {
+  grid-template-columns:1fr
+}
+.dependency-graph {
+  min-width:350px
+}
+.event-type {
+  min-width:0;
+  font-size:7px
+}
+.event-index {
+  display:none
+}
+.event-content {
+  gap:8px
+}
+
+}
+
+@media(max-width:850px) {
+  .sidebar {
+  width:172px
+}
+.workspace {
+  margin-left:172px
+}
+.sidebar nav a {
+  font-size:11px;
+  gap:10px
+}
+.sidebar nav a small {
+  font-size:8px
+}
+.sidebar-project {
+  margin-left:3px;
+  margin-right:3px
+}
+.brand {
+  font-size:22px
+}
+.brand small {
+  font-size:5px;
+  letter-spacing:.7px
+}
+.brand-mark {
+  width:30px;
+  height:30px;
+  font-size:19px
+}
+.topbar-case {
+  display:none
+}
+main {
+  padding:25px 20px 35px
+}
+.topbar {
+  padding:0 20px
+}
+.page-heading {
+  align-items:flex-start
+}
+.heading-actions {
+  padding-top:20px
+}
+.heading-actions .button {
+  font-size:9px;
+  padding:7px 9px
+}
+h1 {
+  font-size:25px
+}
+.project-hero {
+  grid-template-columns:1fr
+}
+.hero-identity {
+  border-top:1px solid #dce4d5;
+  border-left:0;
+  margin:0;
+  padding:16px 23px
+}
+.hero-identity .eyebrow {
+  font-size:7px;
+  margin-bottom:6px
+}
+.identity-hash {
+  margin-top:6px
+}
+.identity-path {
+  margin-top:4px
+}
+.metrics-grid {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px
+}
+.metric-card {
+  padding:16px
+}
+.metric-value {
+  margin:10px 0 7px
+}
+.overview-columns {
+  grid-template-columns:1fr
+}
+.milestone-title {
+  flex-direction:row
+}
+.timeline-layout,.lab-layout,.tasks-layout {
+  grid-template-columns:1fr
+}
+.timeline-layout>.panel:last-child {
+  max-height:800px;
+  overflow:auto
+}
+.lab-layout .input-fields {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px
+}
+.lab-layout .input-fields .field {
+  margin-bottom:0
+}
+.lab-results>.empty-state {
+  min-height:210px
+}
+.code-layout {
+  grid-template-columns:1fr
+}
+.code-layout>.panel {
+  position:static
+}
+.entity-list {
+  display:flex;
+  overflow:auto;
+  gap:5px
+}
+.button.entity {
+  min-width:170px;
+  width:170px;
+  flex-shrink:0;
+  margin:0
+}
+.code-layout>.panel>.panel-heading {
+  min-height:0;
+  padding:11px 15px
+}
+.code-layout .panel-heading p {
+  display:none
+}
+.workspace-footer {
+  padding:14px 20px;
+  font-size:7px
+}
+.workspace-footer span:last-child {
+  display:none
+}
+.task-forms .json-editor {
+  max-height:300px
+}
+.task-monitor .job-list {
+  max-height:300px
+}
+
+}
+
+@media(max-width:600px) {
+  .sidebar {
+  position:relative;
+  inset:auto;
+  width:100%;
+  padding:17px 17px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px 15px
+}
+.brand {
+  font-size:24px;
+  padding:0;
+  gap:9px
+}
+.brand-mark {
+  width:34px;
+  height:34px;
+  font-size:22px
+}
+.brand small {
+  font-size:5px;
+  letter-spacing:.9px
+}
+.sidebar-project {
+  margin:0
+}
+.sidebar-label {
+  font-size:7px;
+  letter-spacing:.8px
+}
+.sidebar select {
+  padding:5px 7px;
+  margin-top:5px;
+  font-size:10px;
+  border-radius:3px;
+  height:29px
+}
+.project-meta,.nav-label,.sidebar-bottom {
+  display:none
+}
+.sidebar nav {
+  grid-column:1/-1;
+  display:flex;
+  gap:3px;
+  margin:0 -9px;
+  padding-bottom:10px;
+  overflow:auto
+}
+.sidebar nav a {
+  flex-direction:column;
+  gap:5px;
+  padding:8px 8px;
+  font-size:9px;
+  flex:1;
+  white-space:nowrap;
+  min-width:53px;
+  border-radius:4px
+}
+.sidebar nav a svg {
+  width:16px;
+  height:16px
+}
+.sidebar nav a small {
+  display:none
+}
+.sidebar nav a.active::before {
+  width:auto;
+  height:2px;
+  top:auto;
+  bottom:-10px;
+  left:10px;
+  right:10px
+}
+.workspace {
+  margin-left:0;
+  min-height:calc(100vh - 135px)
+}
+.topbar {
+  height:40px;
+  padding:0 18px
+}
+.breadcrumb {
+  font-size:9px;
+  gap:9px
+}
+.topbar-right {
+  font-size:8px;
+  gap:0
+}
+.connection {
+  gap:5px
+}
+.connection .live-dot {
+  width:4px;
+  height:4px
+}
+main {
+  padding:23px 17px 32px
+}
+.view {
+  gap:18px
+}
+.page-heading {
+  gap:10px;
+  align-items:center
+}
+.eyebrow {
+  font-size:7px;
+  letter-spacing:1.5px;
+  margin-bottom:6px
+}
+h1 {
+  font-size:24px;
+  letter-spacing:-.6px
+}
+.page-description {
+  font-size:9px;
+  line-height:1.9;
+  margin-top:7px
+}
+.heading-actions {
+  padding:0;
+  max-width:94px
+}
+.heading-actions .button {
+  font-size:8px;
+  padding:7px 9px;
+  min-height:31px;
+  line-height:1.6
+}
+.hero-main {
+  padding:22px
+}
+.hero-main h2 {
+  font-size:21px
+}
+.hero-kicker {
+  font-size:7px;
+  letter-spacing:1px;
+  margin-bottom:12px
+}
+.hero-main>p {
+  font-size:10px;
+  line-height:1.9;
+  margin-top:10px
+}
+.hero-tags {
+  gap:6px;
+  margin-top:17px
+}
+.hero-tags .badge,.hero-tags .tag {
+  font-size:8px
+}
+.hero-identity {
+  padding:15px 22px
+}
+.hero-identity strong {
+  font-size:12px
+}
+.identity-path {
+  font-size:8px
+}
+.identity-hash {
+  font-size:7px
+}
+.metric-label {
+  font-size:9px
+}
+.metric-card {
+  padding:14px
+}
+.metric-value {
+  font-size:25px;
+  letter-spacing:-1px;
+  margin:11px 0 6px
+}
+.metric-card p {
+  font-size:8px
+}
+.metric-index {
+  font-size:7px
+}
+.panel-heading {
+  padding:15px 16px;
+  min-height:60px
+}
+.panel-heading h2 {
+  font-size:11px
+}
+.panel-heading p {
+  font-size:8px
+}
+.panel-heading .button {
+  font-size:8px;
+  padding:5px 6px
+}
+.milestones,.limitations {
+  padding-left:16px;
+  padding-right:16px
+}
+.milestone {
+  padding:14px 0;
+  gap:11px
+}
+.milestone-title {
+  gap:8px
+}
+.milestone strong {
+  font-size:10px
+}
+.milestone p {
+  font-size:9px
+}
+.milestone .badge {
+  font-size:8px
+}
+.milestone-index {
+  width:22px;
+  height:22px;
+  font-size:8px
+}
+.limitation p {
+  font-size:9px
+}
+.notice {
+  font-size:9px;
+  padding:9px 10px;
+  gap:7px
+}
+.notice svg {
+  width:13px;
+  height:13px
+}
+.panel>.notice {
+  margin:14px 16px
+}
+.badge {
+  font-size:8px;
+  padding:2px 5px
+}
+.record-list,.evidence-list {
+  padding:0 16px
+}
+.record-item strong {
+  font-size:9px
+}
+.record-item small {
+  font-size:7px
+}
+.record-item {
+  gap:9px;
+  padding:13px 0
+}
+.record-icon {
+  width:26px;
+  height:28px
+}
+.evidence-row .button.text {
+  font-size:9px
+}
+.evidence-row small {
+  font-size:7px
+}
+.record-item .badge {
+  font-size:7px
+}
+.workspace-footer {
+  font-size:6px;
+  padding:12px 17px;
+  letter-spacing:.1px
+}
+.button {
+  font-size:10px;
+  padding:7px 10px;
+  min-height:32px
+}
+td,th {
+  padding:10px 12px;
+  font-size:9px
+}
+th {
+  font-size:8px
+}
+td .button.text {
+  font-size:9px
+}
+td.mono {
+  font-size:8px
+}
+.code-layout {
+  gap:16px
+}
+.entity-list {
+  padding:6px
+}
+.button.entity {
+  min-width:145px;
+  width:145px;
+  padding:9px
+}
+.entity strong {
+  font-size:9px
+}
+.entity small {
+  font-size:8px
+}
+.entity-heading h2 {
+  font-size:17px
+}
+.entity-heading p {
+  font-size:9px
+}
+.graph-canvas {
+  padding:10px
+}
+.dependency-graph {
+  min-width:310px
+}
+.source-code {
+  font-size:9px;
+  max-height:360px
+}
+.line-number {
+  font-size:8px;
+  width:35px;
+  padding-right:12px
+}
+.source-file-bar {
+  font-size:8px;
+  padding:9px 13px
+}
+.toolbar {
+  padding:10px 13px
+}
+.source-line {
+  min-height:18px
+}
+.provenance-body {
+  padding:15px!important
+}
+.provenance-body p {
+  font-size:10px
+}
+.run-selection {
+  padding:16px;
+  gap:13px
+}
+.field>label {
+  font-size:9px
+}
+.field {
+  gap:6px;
+  margin-bottom:14px
+}
+input,select,textarea {
+  font-size:10px;
+  padding:8px 9px
+}
+.field-hint {
+  font-size:8px
+}
+.filter-bar {
+  padding:13px;
+  gap:8px;
+  flex-wrap:wrap
+}
+.filter-bar .field:first-child {
+  min-width:105px
+}
+.filter-bar .field:nth-child(2) {
+  min-width:120px
+}
+.filter-bar>.button {
+  font-size:9px;
+  padding:7px 10px
+}
+.filter-bar .field {
+  margin:0
+}
+.timeline-layout {
+  gap:16px
+}
+.event-type {
+  font-size:7px;
+  min-width:45px
+}
+.event-index {
+  display:block;
+  font-size:7px
+}
+.event-content {
+  gap:9px
+}
+.button.event-row {
+  padding:12px 5px
+}
+.event-label strong {
+  font-size:9px
+}
+.event-thread {
+  font-size:7px
+}
+.event-label small {
+  font-size:7px
+}
+.event-details {
+  padding:15px;
+  max-height:550px
+}
+.event-details .json-block {
+  font-size:8px
+}
+.pagination {
+  font-size:8px;
+  padding:9px 12px
+}
+.pagination .button {
+  font-size:8px;
+  padding:4px 7px
+}
+.lab-layout>.panel>form {
+  padding:16px
+}
+.lab-layout .input-fields {
+  gap:10px
+}
+.lab-layout .input-fields .field {
+  min-width:0
+}
+.parameter-fields>.notice {
+  font-size:8px
+}
+.output-value strong {
+  font-size:15px
+}
+.lab-output {
+  padding:16px!important
+}
+.output-value {
+  padding:12px
+}
+.chart-summary {
+  font-size:8px;
+  gap:6px;
+  padding:12px 15px 0
+}
+.chart-summary .mono {
+  font-size:7px
+}
+.chart-x-labels {
+  font-size:7px;
+  padding:0 25px 15px
+}
+.json-block {
+  font-size:9px;
+  padding:14px;
+  max-height:350px
+}
+.raw-details summary,details.panel>summary {
+  font-size:10px;
+  padding:15px 16px
+}
+.validation-layout {
+  gap:16px
+}
+.validation-meta {
+  padding:16px 16px 0
+}
+.validation-meta+.notice {
+  margin:13px 16px
+}
+.count-strip {
+  margin:15px 16px 9px
+}
+.count-strip>div {
+  padding:10px 13px;
+  min-width:75px
+}
+.count-strip strong {
+  font-size:20px
+}
+.count-strip span {
+  font-size:8px
+}
+.count-strip~.notice {
+  margin:10px 16px 15px
+}
+.validation-layout>.panel:nth-child(2)>div:last-child {
+  padding:16px
+}
+.tasks-layout {
+  gap:16px
+}
+.task-forms>.panel>div:last-child,.details-body {
+  padding:16px!important
+}
+.task-forms form>.field {
+  margin-bottom:15px
+}
+.preset-description {
+  font-size:9px;
+  padding:9px 10px
+}
+.json-editor {
+  font-size:9px
+}
+.task-monitor>.panel:nth-child(2)>div:last-child {
+  padding:16px
+}
+.task-monitor .key-values {
+  font-size:9px;
+  grid-template-columns:65px 1fr;
+  gap:9px
+}
+.task-monitor .key-values dd {
+  font-size:8px
+}
+.job-heading strong {
+  font-size:10px
+}
+.job-content>small {
+  font-size:7px
+}
+.job-time {
+  font-size:7px
+}
+.download-link {
+  font-size:8px;
+  flex-wrap:wrap;
+  gap:5px
+}
+.download-link>span:last-child {
+  font-size:7px
+}
+.evidence-dialog {
+  width:calc(100% - 22px);
+  max-height:90vh
+}
+.dialog-heading {
+  padding:13px 16px
+}
+.dialog-heading h2 {
+  font-size:11px
+}
+.evidence-dialog .key-values {
+  grid-template-columns:65px 1fr;
+  padding:16px;
+  gap:9px 10px
+}
+.evidence-dialog .key-values dd {
+  font-size:8px
+}
+.evidence-text {
+  font-size:9px;
+  padding:16px
+}
+.evidence-dialog>.notice {
+  margin:0 16px 13px
+}
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+  animation:none!important;
+  transition:none!important;
+  scroll-behavior:auto!important
+}
+
+}
+

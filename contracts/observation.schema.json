@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/observation.schema.json",
+  "title": "Recorded observation or explicit expected fixture",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "observation_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "sample_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "request_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "record_kind": {
+          "enum": [
+            "observed",
+            "expected_fixture"
+          ]
+        },
+        "source_kind": {
+          "$ref": "common.schema.json#/$defs/source_kind"
+        },
+        "source_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "source_identity_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "split": {
+          "enum": [
+            "train",
+            "validation",
+            "holdout"
+          ]
+        },
+        "inputs": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$": {
+              "$ref": "common.schema.json#/$defs/value"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 16
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "duration_ms": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "status": {
+          "const": "ok"
+        },
+        "outputs": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$": {
+              "$ref": "common.schema.json#/$defs/value"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 8
+        },
+        "error": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "schema_version",
+        "observation_id",
+        "sample_id",
+        "request_id",
+        "record_kind",
+        "source_kind",
+        "source_id",
+        "source_identity_sha256",
+        "split",
+        "inputs",
+        "observed_at",
+        "duration_ms",
+        "raw_artifacts",
+        "status",
+        "outputs",
+        "error"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "observation_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "sample_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "request_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "record_kind": {
+          "enum": [
+            "observed",
+            "expected_fixture"
+          ]
+        },
+        "source_kind": {
+          "$ref": "common.schema.json#/$defs/source_kind"
+        },
+        "source_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "source_identity_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "split": {
+          "enum": [
+            "train",
+            "validation",
+            "holdout"
+          ]
+        },
+        "inputs": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$": {
+              "$ref": "common.schema.json#/$defs/value"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 16
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "duration_ms": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "status": {
+          "enum": [
+            "target_error",
+            "timeout",
+            "crash",
+            "protocol_error",
+            "out_of_domain",
+            "nonfinite",
+            "cancelled"
+          ]
+        },
+        "outputs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "error": {
+          "$ref": "common.schema.json#/$defs/error"
+        }
+      },
+      "required": [
+        "schema_version",
+        "observation_id",
+        "sample_id",
+        "request_id",
+        "record_kind",
+        "source_kind",
+        "source_id",
+        "source_identity_sha256",
+        "split",
+        "inputs",
+        "observed_at",
+        "duration_ms",
+        "raw_artifacts",
+        "status",
+        "outputs",
+        "error"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "purpose": "handoff_contract_fixture_index",
+  "positive_examples": [
+    {
+      "file": "examples/budget.default.json",
+      "schema": "contracts/budget.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/dataset.numeric-expected.json",
+      "schema": "contracts/dataset.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.add-u8-wrong.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.add-u8.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.affine-clamp-initial.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.affine-initial.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.increment-u64.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.mba-u8.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.piecewise-initial.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/model.wide-shift-u8.json",
+      "schema": "contracts/model.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/oracle.reference-fp32.json",
+      "schema": "contracts/oracle.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/policy.bitwise-fp32.json",
+      "schema": "contracts/common.schema.json#/$defs/comparison_policy",
+      "format": "json"
+    },
+    {
+      "file": "examples/policy.tolerance-fp32.json",
+      "schema": "contracts/common.schema.json#/$defs/comparison_policy",
+      "format": "json"
+    },
+    {
+      "file": "examples/request.compare-counterexample.json",
+      "schema": "contracts/experiment-request.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/request.compare-equivalent.json",
+      "schema": "contracts/experiment-request.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/request.compare-numeric-samples.json",
+      "schema": "contracts/experiment-request.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/request.fit-handwired.json",
+      "schema": "contracts/experiment-request.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/request.simplify-mba.json",
+      "schema": "contracts/experiment-request.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/request.suggest-inputs.json",
+      "schema": "contracts/experiment-request.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/request.verify-initial-recorded.json",
+      "schema": "contracts/experiment-request.schema.json",
+      "format": "json"
+    },
+    {
+      "file": "examples/numeric-holdout.jsonl",
+      "schema": "contracts/observation.schema.json",
+      "format": "jsonl"
+    },
+    {
+      "file": "examples/numeric-inputs.jsonl",
+      "schema": "contracts/input-sample.schema.json",
+      "format": "jsonl"
+    },
+    {
+      "file": "examples/numeric-train.jsonl",
+      "schema": "contracts/observation.schema.json",
+      "format": "jsonl"
+    },
+    {
+      "file": "examples/numeric-validation.jsonl",
+      "schema": "contracts/observation.schema.json",
+      "format": "jsonl"
+    }
+  ],
+  "notes": "numeric-reference-definition.json 是夹具定义，不是 Model 或产品结果；不要套用产品结果 schema。"
+}

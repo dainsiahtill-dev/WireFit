@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "fit_handwired_example",
+  "budget": {
+    "wall_time_ms": 120000,
+    "solver_soft_time_ms": 10000,
+    "solver_hard_time_ms": 15000,
+    "max_candidates": 50000,
+    "max_ast_nodes": 9,
+    "max_oracle_calls": 512,
+    "max_iterations": 2000,
+    "seed": 20261019
+  },
+  "operation": "fit_numeric",
+  "dataset_id": "numeric_expected_fixture",
+  "template_model_id": "affine_clamp_initial",
+  "backend": "handwired",
+  "training": {
+    "optimizer": "adam",
+    "learning_rate": "0.01",
+    "loss": "mse",
+    "batch_size": 16,
+    "restarts": 3,
+    "validation_interval": 25
+  }
+}

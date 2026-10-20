@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "package": "unicorn",
+  "version": "2.1.4",
+  "scope": "Installed Python source files plus exact Windows x64 DLL and public header; no CPU execution",
+  "files": [
+    {
+      "file": "unicorn/__init__.py",
+      "size_bytes": 305,
+      "sha256": "0e8ac7115c755994a968fa865bd1b2f2075edea715c17e91d62af2cc52c13392"
+    },
+    {
+      "file": "unicorn/arm_const.py",
+      "size_bytes": 4284,
+      "sha256": "ace0c3e49f61649034a1bec4279576b67e064df146ea8062c67e68dc14e6eb7b"
+    },
+    {
+      "file": "unicorn/arm64_const.py",
+      "size_bytes": 7873,
+      "sha256": "ddadd814eccd0a312bb43da7b4f2298690660bd5698c27edc306b1d981cff972"
+    },
+    {
+      "file": "unicorn/include/unicorn/unicorn.h",
+      "size_bytes": 54032,
+      "sha256": "0414b3948a8bdd3f28451f7f2ae03b5c790d08ea93e6e02b2e4db19a0de49507"
+    },
+    {
+      "file": "unicorn/lib/unicorn.dll",
+      "size_bytes": 9598976,
+      "sha256": "010d85dce84b8f6ffaec3d5420f1b5f7768f859eb831be574c7da23e656ee8f1"
+    },
+    {
+      "file": "unicorn/m68k_const.py",
+      "size_bytes": 1144,
+      "sha256": "af95f32f2810fe19888ac723db70c74c7fb1df2bc8ba3578ede0a28b8eca94a7"
+    },
+    {
+      "file": "unicorn/mips_const.py",
+      "size_bytes": 5160,
+      "sha256": "087925a25a128662e095bb861af3c38a2a6c522fc21e222e31b71aeacaaa63d3"
+    },
+    {
+      "file": "unicorn/ppc_const.py",
+      "size_bytes": 10880,
+      "sha256": "11e0c52a1c137874352119fb3d1621639079feda6574ee575271ef683a0a8f17"
+    },
+    {
+      "file": "unicorn/riscv_const.py",
+      "size_bytes": 7270,
+      "sha256": "86e08d5f6327d154306d5d02899331892de6f44020ff86900a84d2b212205925"
+    },
+    {
+      "file": "unicorn/s390x_const.py",
+      "size_bytes": 4101,
+      "sha256": "4f6194d1697d8684921782a81f494458dc859f8ebf2f78e30f673bd5f7cd590f"
+    },
+    {
+      "file": "unicorn/sparc_const.py",
+      "size_bytes": 3381,
+      "sha256": "9dd58fa5aeab225a0f8186f653f5c8fc5fd161b75ccc6a541e5af79f36af2698"
+    },
+    {
+      "file": "unicorn/tricore_const.py",
+      "size_bytes": 3199,
+      "sha256": "88310f61e12b731b2550031eb6423fbf815e66428b483132d3df47614c9d53ae"
+    },
+    {
+      "file": "unicorn/unicorn_const.py",
+      "size_bytes": 3258,
+      "sha256": "c21d7c49f62296591a5f09ed0119ef95083b82f5f3f66b829578784c7b164368"
+    },
+    {
+      "file": "unicorn/unicorn_py2.py",
+      "size_bytes": 39639,
+      "sha256": "b82ccc7c00762e10f0326e8d8ad4381872cf531799d5e003ad52c9d7ac61ae42"
+    },
+    {
+      "file": "unicorn/unicorn_py3/__init__.py",
+      "size_bytes": 24,
+      "sha256": "2cd4a0d95ef236b5b9e3efb68b20fb6a6d1fb4190db2e9cc0a6447eb2c0aa755"
+    },
+    {
+      "file": "unicorn/unicorn_py3/arch/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "unicorn/unicorn_py3/arch/arm.py",
+      "size_bytes": 4108,
+      "sha256": "d486ff4a9c3f797e5e57a5201a1e2304b97a54b6bc61e320062f1290f4e3dc33"
+    },
+    {
+      "file": "unicorn/unicorn_py3/arch/arm64.py",
+      "size_bytes": 5040,
+      "sha256": "2e393f3f863da1576619e03abcbda2a2e2e54d673aac98979cf0b6caed8926b4"
+    },
+    {
+      "file": "unicorn/unicorn_py3/arch/intel.py",
+      "size_bytes": 5453,
+      "sha256": "b3b8338a85ac74623e7a67dfb4f44dc9933786a329e64d772987490dbf751637"
+    },
+    {
+      "file": "unicorn/unicorn_py3/arch/types.py",
+      "size_bytes": 2774,
+      "sha256": "525ed179db874a13291f9469bd6243e7293aba17454de9b10a9227106d093787"
+    },
+    {
+      "file": "unicorn/unicorn_py3/unicorn.py",
+      "size_bytes": 54301,
+      "sha256": "b4de7d560790a587157b17edd71c83b4f2d2bade2447d1a5433c497468ac8aeb"
+    },
+    {
+      "file": "unicorn/unicorn.py",
+      "size_bytes": 321,
+      "sha256": "2aed71e6d5bc60807198cdcc3ed43a485a7acae1f41f08d986137afc55df2029"
+    },
+    {
+      "file": "unicorn/x86_const.py",
+      "size_bytes": 41605,
+      "sha256": "d7663db6425f52838f3e79e45a8fe22b6c02be7edb44367ea2118aec04ee5728"
+    }
+  ]
+}

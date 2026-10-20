@@ -1,0 +1,46 @@
+{
+  "name": "wirefit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local reverse engineering behavior modeling and verification with Handwired",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "bin": {
+    "wirefit-mcp": "apps/mcp/bin/wirefit-mcp.js",
+    "wirefit": "apps/cli/bin/wirefit.js"
+  },
+  "scripts": {
+    "test:watch": "node scripts/run-local.mjs test:watch",
+    "doctor": "node scripts/run-local.mjs doctor",
+    "acceptance": "node scripts/run-local.mjs acceptance",
+    "demo": "node scripts/run-local.mjs demo",
+    "typecheck": "node scripts/run-local.mjs typecheck",
+    "test": "node scripts/run-local.mjs test",
+    "build": "node scripts/run-local.mjs build",
+    "benchmark": "node scripts/run-local.mjs benchmark",
+    "web": "node scripts/run-local.mjs web",
+    "test:web": "node scripts/run-local.mjs test:web",
+    "test:e2e": "node scripts/run-local.mjs test:e2e",
+    "test:ida": "node scripts/run-local.mjs test:ida"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "ajv": "8.20.0",
+    "canonicalize": "3.0.0",
+    "z3-solver": "5.3.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "model_id": "wide_shift_u8",
+  "title": "BV64 完整计数控制的 BV8 移位",
+  "kind": "bv_dag",
+  "semantics_profile": "wirefix.bv.total.v1",
+  "inputs": [
+    {
+      "id": "x",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      }
+    },
+    {
+      "id": "count",
+      "type": {
+        "kind": "bv",
+        "width": 64
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "result",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "ref": "shifted"
+    }
+  ],
+  "domain": {
+    "constraints": []
+  },
+  "scope": {
+    "kind": "expression",
+    "observation": "declared_outputs",
+    "source_completeness": "not_applicable",
+    "execution_guard": {
+      "kind": "all_inputs"
+    },
+    "observation_point": {
+      "kind": "expression_output",
+      "source_location": null
+    }
+  },
+  "provenance": {
+    "source_kind": "manual",
+    "source_ref": null,
+    "source_artifacts": [],
+    "notes": "本实施包自写模型/假设；不是 REA、Ghidra 或 Handwired 的已运行导出。"
+  },
+  "nodes": [
+    {
+      "id": "shifted",
+      "op": "bv_shl",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [
+        "x",
+        "count"
+      ],
+      "attrs": {}
+    }
+  ]
+}

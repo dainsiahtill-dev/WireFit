@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment_id": "simplify_mba_example",
+  "budget": {
+    "wall_time_ms": 120000,
+    "solver_soft_time_ms": 10000,
+    "solver_hard_time_ms": 15000,
+    "max_candidates": 50000,
+    "max_ast_nodes": 9,
+    "max_oracle_calls": 512,
+    "max_iterations": 2000,
+    "seed": 20261019
+  },
+  "operation": "simplify",
+  "reference_model_id": "mba_u8",
+  "domain": {
+    "constraints": []
+  },
+  "search": {
+    "grammar": [
+      "bv_add",
+      "bv_sub",
+      "bv_mul",
+      "bv_and",
+      "bv_or",
+      "bv_xor"
+    ],
+    "constants": [
+      {
+        "kind": "bv",
+        "width": 8,
+        "bits": "0x00"
+      },
+      {
+        "kind": "bv",
+        "width": 8,
+        "bits": "0x01"
+      },
+      {
+        "kind": "bv",
+        "width": 8,
+        "bits": "0x02"
+      }
+    ],
+    "objective": "node_count"
+  }
+}

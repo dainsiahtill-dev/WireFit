@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/oracle-request.schema.json",
+  "title": "Oracle request JSONL line",
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "const": 1
+    },
+    "request_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "inputs": {
+      "$ref": "common.schema.json#/$defs/value_map"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "request_id",
+    "inputs"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "compare_numeric_example",
+  "budget": {
+    "wall_time_ms": 120000,
+    "solver_soft_time_ms": 10000,
+    "solver_hard_time_ms": 15000,
+    "max_candidates": 50000,
+    "max_ast_nodes": 9,
+    "max_oracle_calls": 512,
+    "max_iterations": 2000,
+    "seed": 20261019
+  },
+  "operation": "compare_models",
+  "mode": "sampled_fp32",
+  "left_model_id": "affine_clamp_initial",
+  "right_model_id": "affine_initial",
+  "domain": {
+    "constraints": [
+      {
+        "input": "x",
+        "op": "ge",
+        "value": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        }
+      },
+      {
+        "input": "x",
+        "op": "le",
+        "value": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      }
+    ]
+  },
+  "mapping": {
+    "inputs": [
+      {
+        "left": "x",
+        "right": "x"
+      }
+    ],
+    "outputs": [
+      {
+        "left": "result",
+        "right": "result"
+      }
+    ]
+  },
+  "sample_source": {
+    "kind": "inputs_artifact",
+    "artifact": {
+      "sha256": "729da09185941851853000d9cb16b2ef00a13fcb0ef07dd3e72dba5f5c8fa146",
+      "relative_path": "examples/numeric-inputs.jsonl",
+      "media_type": "application/x-ndjson",
+      "size_bytes": 3000
+    }
+  },
+  "comparison_policy": {
+    "kind": "bitwise-fp32",
+    "nonfinite": "reject"
+  }
+}

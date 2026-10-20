@@ -1,0 +1,1139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/common.schema.json",
+  "title": "WireFix shared definitions",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "decimal_nonnegative": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+    },
+    "bv_type": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "bv"
+        },
+        "width": {
+          "enum": [
+            8,
+            16,
+            32,
+            64
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "width"
+      ],
+      "additionalProperties": false
+    },
+    "bool_type": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "bool"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "fp32_type": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "fp32"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "type": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bv"
+            },
+            "width": {
+              "enum": [
+                8,
+                16,
+                32,
+                64
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "width"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bool"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "fp32"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "core_type": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bv"
+            },
+            "width": {
+              "enum": [
+                8,
+                16,
+                32,
+                64
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "width"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bool"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "bv_value": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bv"
+            },
+            "width": {
+              "const": 8
+            },
+            "bits": {
+              "type": "string",
+              "pattern": "^0x[0-9a-f]{2}$"
+            }
+          },
+          "required": [
+            "kind",
+            "width",
+            "bits"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bv"
+            },
+            "width": {
+              "const": 16
+            },
+            "bits": {
+              "type": "string",
+              "pattern": "^0x[0-9a-f]{4}$"
+            }
+          },
+          "required": [
+            "kind",
+            "width",
+            "bits"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bv"
+            },
+            "width": {
+              "const": 32
+            },
+            "bits": {
+              "type": "string",
+              "pattern": "^0x[0-9a-f]{8}$"
+            }
+          },
+          "required": [
+            "kind",
+            "width",
+            "bits"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bv"
+            },
+            "width": {
+              "const": 64
+            },
+            "bits": {
+              "type": "string",
+              "pattern": "^0x[0-9a-f]{16}$"
+            }
+          },
+          "required": [
+            "kind",
+            "width",
+            "bits"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "bool_value": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "bool"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "fp32_value": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "fp32"
+        },
+        "bits": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{8}$"
+        }
+      },
+      "required": [
+        "kind",
+        "bits"
+      ],
+      "additionalProperties": false
+    },
+    "value": {
+      "oneOf": [
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 8
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{2}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 16
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{4}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 32
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 64
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{16}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bool"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "fp32"
+            },
+            "bits": {
+              "type": "string",
+              "pattern": "^0x[0-9a-f]{8}$"
+            }
+          },
+          "required": [
+            "kind",
+            "bits"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "core_value": {
+      "oneOf": [
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 8
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{2}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 16
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{4}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 32
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bv"
+                },
+                "width": {
+                  "const": 64
+                },
+                "bits": {
+                  "type": "string",
+                  "pattern": "^0x[0-9a-f]{16}$"
+                }
+              },
+              "required": [
+                "kind",
+                "width",
+                "bits"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bool"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "value_map": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$": {
+          "$ref": "common.schema.json#/$defs/value"
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 0,
+      "maxProperties": 16
+    },
+    "signature": {
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "type": {
+                "$ref": "common.schema.json#/$defs/type"
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 16
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "type": {
+                "$ref": "common.schema.json#/$defs/type"
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "inputs",
+        "outputs"
+      ],
+      "additionalProperties": false
+    },
+    "artifact_ref": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "relative_path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.{1,2}(?:/|$))[^\\\\\\u0000]+$"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "sha256",
+        "relative_path",
+        "media_type",
+        "size_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "domain": {
+      "type": "object",
+      "properties": {
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "input": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "op": {
+                "enum": [
+                  "eq",
+                  "ne",
+                  "ule",
+                  "uge",
+                  "sle",
+                  "sge",
+                  "le",
+                  "ge"
+                ]
+              },
+              "value": {
+                "$ref": "common.schema.json#/$defs/value"
+              }
+            },
+            "required": [
+              "input",
+              "op",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "constraints"
+      ],
+      "additionalProperties": false
+    },
+    "mapping": {
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "left": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "right": {
+                "$ref": "common.schema.json#/$defs/id"
+              }
+            },
+            "required": [
+              "left",
+              "right"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 16
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "left": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "right": {
+                "$ref": "common.schema.json#/$defs/id"
+              }
+            },
+            "required": [
+              "left",
+              "right"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "inputs",
+        "outputs"
+      ],
+      "additionalProperties": false
+    },
+    "comparison_policy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "exact-bv"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bitwise-fp32"
+            },
+            "nonfinite": {
+              "const": "reject"
+            }
+          },
+          "required": [
+            "kind",
+            "nonfinite"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "tolerance-fp32"
+            },
+            "atol": {
+              "type": "string",
+              "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            },
+            "rtol": {
+              "type": "string",
+              "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            },
+            "nonfinite": {
+              "const": "reject"
+            }
+          },
+          "required": [
+            "kind",
+            "atol",
+            "rtol",
+            "nonfinite"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "fp32_policy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bitwise-fp32"
+            },
+            "nonfinite": {
+              "const": "reject"
+            }
+          },
+          "required": [
+            "kind",
+            "nonfinite"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "tolerance-fp32"
+            },
+            "atol": {
+              "type": "string",
+              "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            },
+            "rtol": {
+              "type": "string",
+              "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            },
+            "nonfinite": {
+              "const": "reject"
+            }
+          },
+          "required": [
+            "kind",
+            "atol",
+            "rtol",
+            "nonfinite"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "planned": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "attempted": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "completed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "matched": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "mismatched": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "out_of_domain": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "planned",
+        "attempted",
+        "completed",
+        "matched",
+        "mismatched",
+        "failed",
+        "out_of_domain"
+      ],
+      "additionalProperties": false
+    },
+    "source_kind": {
+      "enum": [
+        "original_target",
+        "reference_fixture",
+        "lifted_model",
+        "candidate_model"
+      ]
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "scope": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "scope",
+        "retryable",
+        "artifacts"
+      ],
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "expression",
+            "exported_model",
+            "trace_slice",
+            "behavior_model"
+          ]
+        },
+        "observation": {
+          "const": "declared_outputs"
+        },
+        "source_completeness": {
+          "enum": [
+            "complete",
+            "partial",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "execution_guard": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "all_inputs"
+                }
+              },
+              "required": [
+                "kind"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "model_bool"
+                },
+                "node_id": {
+                  "$ref": "common.schema.json#/$defs/id"
+                }
+              },
+              "required": [
+                "kind",
+                "node_id"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "unknown"
+                }
+              },
+              "required": [
+                "kind"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "observation_point": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "expression_output",
+                "function_return",
+                "local_value"
+              ]
+            },
+            "source_location": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "source_location"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "kind",
+        "observation",
+        "source_completeness",
+        "execution_guard",
+        "observation_point"
+      ],
+      "additionalProperties": false
+    },
+    "rea_source_ref": {
+      "type": "object",
+      "properties": {
+        "bundle_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "provider_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "analysis_profile_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "bundle_sha256",
+        "evidence_id",
+        "provider_id",
+        "analysis_profile_digest",
+        "target_sha256",
+        "location"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source_kind": {
+          "enum": [
+            "manual",
+            "rea_portable",
+            "rea_live",
+            "oracle_fit"
+          ]
+        },
+        "source_ref": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/rea_source_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "source_kind",
+        "source_ref",
+        "source_artifacts",
+        "notes"
+      ],
+      "additionalProperties": false
+    },
+    "sample_source": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "inputs_artifact"
+            },
+            "artifact": {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            }
+          },
+          "required": [
+            "kind",
+            "artifact"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "dataset"
+            },
+            "dataset_id": {
+              "$ref": "common.schema.json#/$defs/id"
+            }
+          },
+          "required": [
+            "kind",
+            "dataset_id"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

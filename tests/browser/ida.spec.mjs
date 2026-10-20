@@ -1,0 +1,46 @@
+import {test,expect} from '@playwright/test';
+import {mkdir} from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const shots=path.join(root,'artifacts/ida-mcp/screenshots');
+const stamp=Date.now();
+test.beforeAll(async()=>{await mkdir(shots,{recursive:true});});
+test('real IDA analysis, graph, hashed evidence, export while polling, cancellation and mobile',async({page})=>{
+ const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/');await expect(page.locator('main h1')).toBeVisible();
+ await page.locator('[data-route="tasks"]').click();await page.getByText('创建独立案例',{exact:true}).click();await page.getByLabel('新案例名称').fill(`IDA 浏览器验收 ${stamp}`);await page.getByRole('button',{name:'创建并切换',exact:true}).click();
+ await expect(page.getByLabel('当前案例').locator('option:checked')).toHaveText(`IDA 浏览器验收 ${stamp}`);
+ const caseId=await page.getByLabel('当前案例').inputValue();
+ await page.locator('[data-route="ida"]').click();await expect(page.locator('[data-testid="view-ida"] h1')).toHaveText('IDA 分析');
+ await expect(page.locator('main')).toContainText('已实测可用');
+ await expect(page.locator('.ida-capability')).not.toContainText('null');
+ const bootstrap=(await (await page.request.get('/api/bootstrap')).json()).data;
+ const sample=bootstrap.ida.samples.find(item=>item.scope_kind==='derived_window'||item.id.includes('grid'));expect(sample).toBeTruthy();
+ await page.getByLabel('IDA 本机样例').selectOption(sample.id);await expect(page.getByLabel('IDA 目标文件')).toHaveValue(sample.file);await page.getByLabel('IDA 函数或字节地址').fill('0x498a50');
+ await page.getByTestId('submit-ida').click();await expect(page.getByTestId('ida-result')).toContainText('查询完成',{timeout:45000});
+ await expect(page.locator('.ida-code').first()).toContainText('__thiscall');await expect(page.locator('.dependency-graph .graph-node').first()).toBeVisible();
+ await expect(page.getByTestId('ida-result')).toContainText(sample.description);
+ const firstJob=await page.locator('[data-ida-job-id].selected').getAttribute('data-ida-job-id');expect(firstJob).toBeTruthy();
+ await page.locator('.dependency-graph .graph-node').first().click();await expect(page.getByTestId('ida-result')).toContainText('基本块');
+ await page.locator('.ida-result .artifact-buttons button').first().click();await expect(page.getByRole('dialog')).toContainText('SHA-256');await page.getByLabel('关闭证据').click();
+ await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(shots,'ida-grid-desktop.png'),fullPage:true});
+
+ // Keep a second, real owned static analysis pending while exporting the first.
+ await page.getByLabel('IDA 目标文件').fill('E:\\Vector Magic 2021\\vmde.exe');await page.getByLabel('IDA 查询预设').selectOption('overview');await page.getByTestId('submit-ida').click();
+ await expect.poll(async()=>await page.locator('[data-ida-job-id].selected').getAttribute('data-ida-job-id')).not.toBe(firstJob);
+ const secondJob=await page.locator('[data-ida-job-id].selected').getAttribute('data-ida-job-id');expect(secondJob).toBeTruthy();
+ await page.locator(`[data-ida-job-id="${firstJob}"]`).click();
+ await page.route(`**/api/cases/${caseId}/exports`,async route=>{const response=await route.fetch();await new Promise(resolve=>setTimeout(resolve,2200));await route.fulfill({response});});
+ await page.getByTestId('export-ida').click();await expect(page.locator('.ida-main .download-files')).toContainText('manifest.json',{timeout:20000});
+ const report=page.locator('.ida-main .download-files a').filter({hasText:'report.md'}).first();const downloaded=await page.request.get(await report.getAttribute('href'));expect(downloaded.ok()).toBeTruthy();expect(await downloaded.text()).toContain('not established');
+ const detail=page.getByTestId('ida-result').locator('details').filter({has:page.getByText('完整结构化查询结果',{exact:true})}).first();await detail.locator('summary').click();await expect(detail).toHaveAttribute('open','');
+ await page.waitForTimeout(1400);await expect(detail).toHaveAttribute('open','');
+ await page.locator(`[data-ida-job-id="${secondJob}"]`).click();await expect(page.getByTestId('cancel-ida')).toBeEnabled();await page.getByTestId('cancel-ida').click();await expect(page.locator(`[data-ida-job-id="${secondJob}"]`)).toContainText('已取消',{timeout:20000});
+ const saved=(await (await page.request.get(`/api/cases/${caseId}`)).json()).data;
+ const cancelled=saved.runs.find(run=>run.id===saved.jobs.find(job=>job.job_id===secondJob).result_id).result;
+ expect(cancelled.status).toBe('cancelled');expect(cancelled.cleanup.process_closed).toBe(true);expect(cancelled.validation.runnable_verified).toBe(false);
+ await page.locator(`[data-ida-job-id="${firstJob}"]`).click();await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(shots,'ida-mobile.png'),fullPage:true});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2)).toBeTruthy();
+ expect(errors).toEqual([]);
+});

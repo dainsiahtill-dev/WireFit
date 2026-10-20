@@ -1,0 +1,30 @@
+# Installed dependencies, runtimes and local configuration
+node_modules/
+dist/
+.tools/
+.upstream/
+.local/
+.env
+.env.*
+!.env.example
+
+# Research inputs, generated evidence, databases and report exports
+artifacts/
+cases/
+exports/
+node-records/
+.tmp/
+*.log
+__pycache__/
+*.py[cod]
+.pytest_cache/
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+
+# Local tool verification receipts (keep source and pinned dependency manifests)
+tools/**/*test-log*.json
+tools/**/*test-report*.json
+tools/**/*-review*.json
+tools/native-kernel/worker-performance.json

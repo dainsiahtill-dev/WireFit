@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "kit": "WireFix Codex Implementation Kit",
+  "date": "2026-10-19",
+  "artifact_role": "implementation_specification_and_self_authored_fixtures",
+  "product_implementation_status": "NOT_IMPLEMENTED_BY_THIS_KIT",
+  "integrity_algorithm": "sha256",
+  "manifest_excludes_itself": true,
+  "file_count_excluding_manifest": 59,
+  "files": [
+    {
+      "path": "CODEX_START.md",
+      "size_bytes": 4314,
+      "sha256": "8bcf9e201bcfd419beed4a321aaf32322c0a6391198e63f56d7ba0734f532ce7"
+    },
+    {
+      "path": "IMPLEMENTATION_PLAN.md",
+      "size_bytes": 38700,
+      "sha256": "c9572071e1c787ba4a7c993d4e3c180cc3f319ef039f6d77d6649f4a5ad24be2"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 2091,
+      "sha256": "9ac7d58fbb2b613086e222f445842234f05ab0f2ed2db9762461ecf7557e0ec6"
+    },
+    {
+      "path": "TASKS.md",
+      "size_bytes": 7625,
+      "sha256": "d6dafa93549c5f446cda8bf1356110cc6738664f5eff811c6197561ec651209f"
+    },
+    {
+      "path": "contracts/README.md",
+      "size_bytes": 8636,
+      "sha256": "7d2c9345d0ca91c7f733b1a17a46e1dc6524aa5d86b477621a87a3462fd78759"
+    },
+    {
+      "path": "contracts/budget.schema.json",
+      "size_bytes": 1254,
+      "sha256": "26cea5f4f18daa40c08cd4d1956e90602a0deebb8c3e54cafd9d12cb27b4254b"
+    },
+    {
+      "path": "contracts/common.schema.json",
+      "size_bytes": 25878,
+      "sha256": "d7f1db1b10de9354526c9411707b8d5ae627b08f492ca583b0c599557192173d"
+    },
+    {
+      "path": "contracts/dataset.schema.json",
+      "size_bytes": 4297,
+      "sha256": "4746b0f11bcdf695e73a2486955076235882f68902c23144f21a8660ffbf2b5d"
+    },
+    {
+      "path": "contracts/experiment-request.schema.json",
+      "size_bytes": 11465,
+      "sha256": "8896fa071873510c93320c43667ca3ce84ea2ea52680e72cc9bfb67601674555"
+    },
+    {
+      "path": "contracts/experiment-result.schema.json",
+      "size_bytes": 9439,
+      "sha256": "a8820785ce1a72eb0884e6ec43d9f8dc750d85bb071ddb6329915652af5bceb7"
+    },
+    {
+      "path": "contracts/input-sample.schema.json",
+      "size_bytes": 779,
+      "sha256": "671b5368efdf4bb8295e9a502583fc93e0f35a1e8e68d17b2ac18137de826cf7"
+    },
+    {
+      "path": "contracts/model.schema.json",
+      "size_bytes": 19588,
+      "sha256": "4c2978a6d58645cf7745416c89c1d24ffde662b87fcb8b71ce8db31afeeaf946"
+    },
+    {
+      "path": "contracts/observation.schema.json",
+      "size_bytes": 5834,
+      "sha256": "1681f919786556b2d00a1aadf5c8219661b0a19a41d73322c92a493a2862efe6"
+    },
+    {
+      "path": "contracts/oracle-request.schema.json",
+      "size_bytes": 529,
+      "sha256": "9ce86455f0150f880495e69a422c66d0456a3bfe4861a946016bb1dbda6b4a52"
+    },
+    {
+      "path": "contracts/oracle-response.schema.json",
+      "size_bytes": 1672,
+      "sha256": "4a06610eeb054cad1e3ba407347cec459fafa95f739bbfa303c50f833b124b6a"
+    },
+    {
+      "path": "contracts/oracle.schema.json",
+      "size_bytes": 2830,
+      "sha256": "fb10d1a3a5c624c1698405b0e0ba4bdbd497631101e8e89d2ef1c61cdcf4a75e"
+    },
+    {
+      "path": "docs/ACCEPTANCE.md",
+      "size_bytes": 9665,
+      "sha256": "76bca9c2e8d7b3e668f7a0700f6198f0ec571a880aaf340a6329b1971c1412c5"
+    },
+    {
+      "path": "docs/HANDOFF_VALIDATION.md",
+      "size_bytes": 7880,
+      "sha256": "035994f4c87e8f873276ad91c175aed660290f22091d53f907b2a5dc65273f9c"
+    },
+    {
+      "path": "docs/INTERFACES.md",
+      "size_bytes": 14576,
+      "sha256": "42323dd01de278e21edf822beb78d44a0f471cc7472179464b155d11d72adc7a"
+    },
+    {
+      "path": "docs/SEMANTICS.md",
+      "size_bytes": 18049,
+      "sha256": "63d9d02ea067571d9906df85482979e97ccefeeda337e0b4afc5cf44acba4174"
+    },
+    {
+      "path": "docs/SOURCES.md",
+      "size_bytes": 13723,
+      "sha256": "a21524e4d4cf3e97ac0527bf413c0b000b684dbcb2940b8aebab6c64e582b1a0"
+    },
+    {
+      "path": "examples/README.md",
+      "size_bytes": 4310,
+      "sha256": "fd918f13b0ba6cd2024094cd23a20658bfe35f9ae1985e74de54f4340d61e0f0"
+    },
+    {
+      "path": "examples/budget.default.json",
+      "size_bytes": 215,
+      "sha256": "45e75a270197c52b4784c32c87c4a78e45851eb3c4e7df89b17d89a0f566d1d9"
+    },
+    {
+      "path": "examples/contract-fixture-index.json",
+      "size_bytes": 3663,
+      "sha256": "828af047cddd5e0cfa9a5d32315dd63a5cdf402837fd6aeb0aace28cf37bc1b6"
+    },
+    {
+      "path": "examples/dataset.numeric-expected.json",
+      "size_bytes": 3001,
+      "sha256": "ef7b242e3bea78e937db1d5c77be07a6ad7562aefb611c136b33b490ec1a3eb3"
+    },
+    {
+      "path": "examples/model.add-u8-wrong.json",
+      "size_bytes": 1720,
+      "sha256": "595bf55520c345389934e23ed5c4af7795dcfaefa4de214752afb32655c2abd3"
+    },
+    {
+      "path": "examples/model.add-u8.json",
+      "size_bytes": 1238,
+      "sha256": "4408e8068bde1d51ce00359fe3b8e48ad8047dbbce655a44406782955434b75c"
+    },
+    {
+      "path": "examples/model.affine-clamp-initial.json",
+      "size_bytes": 2047,
+      "sha256": "a75dce371c61948058c3afd92d60d6d9a667f70d7a1a02b6ccd66e67c1ad4828"
+    },
+    {
+      "path": "examples/model.affine-initial.json",
+      "size_bytes": 1864,
+      "sha256": "c3c1d7bbe61bd150210465b412b329006f745618f2df75696c1ecb04c1c625ab"
+    },
+    {
+      "path": "examples/model.increment-u64.json",
+      "size_bytes": 1428,
+      "sha256": "767710688c33334485d2d26c3ab1f84b1e297c685d4a87b704db6cb989c4dcc2"
+    },
+    {
+      "path": "examples/model.mba-u8.json",
+      "size_bytes": 2101,
+      "sha256": "aa71f855f23e38dd1eb4f7f2a2504f91b10ba3e6210d7cba0098b7d26a2ea964"
+    },
+    {
+      "path": "examples/model.piecewise-initial.json",
+      "size_bytes": 2549,
+      "sha256": "9f1192572f9472859dc251161b1b8493b56186c9427ea9dc84f9217672005ae1"
+    },
+    {
+      "path": "examples/model.wide-shift-u8.json",
+      "size_bytes": 1277,
+      "sha256": "941d8bd985320be9cda3ce30eb632e6722296b3cfe7d5705531dbe6ce1f2ac97"
+    },
+    {
+      "path": "examples/numeric-holdout.jsonl",
+      "size_bytes": 4064,
+      "sha256": "78b47be478ea5a3efd21d67d1ef5594521b6681a09f600a5c80879ba27cefaf9"
+    },
+    {
+      "path": "examples/numeric-inputs.jsonl",
+      "size_bytes": 3000,
+      "sha256": "729da09185941851853000d9cb16b2ef00a13fcb0ef07dd3e72dba5f5c8fa146"
+    },
+    {
+      "path": "examples/numeric-reference-definition.json",
+      "size_bytes": 665,
+      "sha256": "492392de42b8ade73e7b02d37b22b8ab33d04065a3533c4e6c19caeb98b616ec"
+    },
+    {
+      "path": "examples/numeric-train.jsonl",
+      "size_bytes": 8096,
+      "sha256": "fbd82db7f90343ae7ab489254c788de6b0f18a4ffa6232e567f6dbda3c72290d"
+    },
+    {
+      "path": "examples/numeric-validation.jsonl",
+      "size_bytes": 4088,
+      "sha256": "9e2b51e8a5acf6ba4dac445d4feac9f1b909f2fe87508ca1d5326ed92a49160d"
+    },
+    {
+      "path": "examples/oracle.reference-fp32.json",
+      "size_bytes": 1408,
+      "sha256": "c290c0efaef2c18d7664607003fefd9b102a7c1ed20f3103ce84f69c6351bf57"
+    },
+    {
+      "path": "examples/policy.bitwise-fp32.json",
+      "size_bytes": 54,
+      "sha256": "c6eb0b429fef41e45e629ce5735080aea7449c892a4d2feafbae1e81cfe59099"
+    },
+    {
+      "path": "examples/policy.tolerance-fp32.json",
+      "size_bytes": 98,
+      "sha256": "4be1f50e3dfff8dee4fb8a1c037c16fefb8b4a1a4f11a5c437fd8441666c6be8"
+    },
+    {
+      "path": "examples/request.compare-counterexample.json",
+      "size_bytes": 728,
+      "sha256": "a0a3307db707e1332527d6f99f38035390e2337d90d4219a3d408dce3c421fb4"
+    },
+    {
+      "path": "examples/request.compare-equivalent.json",
+      "size_bytes": 727,
+      "sha256": "71e7edea01ccc5c8ff290754da6de12c13408d150439aa026d1062c765373607"
+    },
+    {
+      "path": "examples/request.compare-numeric-samples.json",
+      "size_bytes": 1359,
+      "sha256": "062e9109d29dde6a09afd5ec04b95229c5d91bcb4dfbb55b15bf9426e0ecc91f"
+    },
+    {
+      "path": "examples/request.fit-handwired.json",
+      "size_bytes": 628,
+      "sha256": "da0f3ec3e407fef63389e8d25983cee1d6e2af33aa734f3d7d3e4e9c3dae2163"
+    },
+    {
+      "path": "examples/request.simplify-mba.json",
+      "size_bytes": 855,
+      "sha256": "cde9c5134bfc87ea3809483f052fcdc3528a67496340b0152278d4526e846b75"
+    },
+    {
+      "path": "examples/request.suggest-inputs.json",
+      "size_bytes": 488,
+      "sha256": "80bc4d27cb2bdc04b112ba1ede2eb0c11f75a1ec68da3b987ae0e4a9c1226af4"
+    },
+    {
+      "path": "examples/request.verify-initial-recorded.json",
+      "size_bytes": 698,
+      "sha256": "db6570347ee35ad6309a1b42f849291aa885281b5743a86f7498cf4eeaf9ae71"
+    },
+    {
+      "path": "fixtures/LICENSE",
+      "size_bytes": 1089,
+      "sha256": "438fe5b136521dfc928ed95f9e1d7256c3b06add647c5fb24a2079ee2c41f8d1"
+    },
+    {
+      "path": "fixtures/README.md",
+      "size_bytes": 11727,
+      "sha256": "8bd3a3e8fe38caf9e77e08b1ec84f3c445d14ca30a099042222a63d49fea6174"
+    },
+    {
+      "path": "fixtures/behavior_fixtures.c",
+      "size_bytes": 4270,
+      "sha256": "c6dac79b50397217a52b966009e49c73ae18ec1d64f2333df10778f5e923a19c"
+    },
+    {
+      "path": "fixtures/behavior_fixtures.h",
+      "size_bytes": 2003,
+      "sha256": "7307a0ad96577e54c9942e285baf73ca7415f85c4b05d8dce7687cbc2117c196"
+    },
+    {
+      "path": "fixtures/fixture_probe.c",
+      "size_bytes": 8859,
+      "sha256": "4fef392a229a44b88e1cf7ed7076dd96473c614f93b24e81c608e5d94b0ca337"
+    },
+    {
+      "path": "fixtures/oracle_fp32.py",
+      "size_bytes": 7367,
+      "sha256": "96541884fa61957890c0f086538907e889d03d94252a2a1a350c8c39d2cace35"
+    },
+    {
+      "path": "fixtures/reference_vectors.jsonl",
+      "size_bytes": 63255,
+      "sha256": "faadeafd2a8b50959fc487469c7d44f8bcabac29e6f2e15a90570dc8bde2c1b2"
+    },
+    {
+      "path": "fixtures/reference_verify.py",
+      "size_bytes": 20939,
+      "sha256": "a9d5642fde1333c69848f2b9a27b1ec1978914f4d80ea813bb7411452b757b52"
+    },
+    {
+      "path": "fixtures/validation/local-validation.json",
+      "size_bytes": 17545,
+      "sha256": "4d2740522ffc7788a59af24691a8fdbb82b6c5d73eaad3f9e9bd9af67c56ec0c"
+    },
+    {
+      "path": "tools/check_handoff.py",
+      "size_bytes": 43194,
+      "sha256": "392394078c22910b4dd0955c669c12574d3e5334bfa54ed233f28360737de3d5"
+    },
+    {
+      "path": "upstream-lock.template.json",
+      "size_bytes": 9986,
+      "sha256": "5ec0ddb61fb013691746c3f4302b2cca720c33ad3f2c383dd834c5384ac2b6e1"
+    }
+  ]
+}

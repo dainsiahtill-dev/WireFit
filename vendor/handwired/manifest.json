@@ -1,0 +1,15 @@
+{
+  "upstream": "https://github.com/chenglou/handwired",
+  "commit": "257856e3b221140acb4cc4460626b850c0bd4ff1",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "src/runtime/numeric-ui-core.ts",
+      "sha256": "00c081d7438088894b85e2a3e78a5df763a44cb41ebbf538e9dbf6d4521aedd2"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "55d5c9c20065b2aa66887036f6741ee5ef12c7a72cd4ad96034889867d436824"
+    }
+  ]
+}

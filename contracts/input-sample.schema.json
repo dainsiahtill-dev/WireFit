@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/input-sample.schema.json",
+  "title": "Planned typed input JSONL line",
+  "type": "object",
+  "properties": {
+    "sample_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "split": {
+      "enum": [
+        "train",
+        "validation",
+        "holdout"
+      ]
+    },
+    "inputs": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$": {
+          "$ref": "common.schema.json#/$defs/value"
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 16
+    }
+  },
+  "required": [
+    "sample_id",
+    "split",
+    "inputs"
+  ],
+  "additionalProperties": false
+}

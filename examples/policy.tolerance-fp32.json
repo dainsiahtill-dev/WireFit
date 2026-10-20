@@ -1,0 +1,6 @@
+{
+  "kind": "tolerance-fp32",
+  "atol": "0.00001",
+  "rtol": "0.00001",
+  "nonfinite": "reject"
+}

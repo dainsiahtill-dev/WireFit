@@ -1,0 +1,4 @@
+{
+  "kind": "bitwise-fp32",
+  "nonfinite": "reject"
+}

@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/oracle.schema.json",
+  "title": "Explicit local process Oracle manifest",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "oracle_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "kind": {
+      "const": "process_jsonl"
+    },
+    "source_kind": {
+      "enum": [
+        "original_target",
+        "reference_fixture"
+      ]
+    },
+    "argv": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096
+      },
+      "minItems": 1,
+      "maxItems": 64
+    },
+    "cwd": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "signature": {
+      "$ref": "common.schema.json#/$defs/signature"
+    },
+    "domain": {
+      "$ref": "common.schema.json#/$defs/domain"
+    },
+    "target_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "role": {
+            "enum": [
+              "target",
+              "wrapper",
+              "runtime_helper"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "role"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 64
+    },
+    "protocol_version": {
+      "const": 1
+    },
+    "reset_strategy": {
+      "enum": [
+        "fresh_process",
+        "batch_resettable"
+      ]
+    },
+    "request_timeout_ms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 86400000
+    },
+    "batch_timeout_ms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 86400000
+    },
+    "max_stdout_line_bytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10485760
+    },
+    "max_stderr_bytes": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10485760
+    },
+    "allowed_env_keys": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4096
+    }
+  },
+  "required": [
+    "schema_version",
+    "oracle_id",
+    "kind",
+    "source_kind",
+    "argv",
+    "cwd",
+    "signature",
+    "domain",
+    "target_files",
+    "protocol_version",
+    "reset_strategy",
+    "request_timeout_ms",
+    "batch_timeout_ms",
+    "max_stdout_line_bytes",
+    "max_stderr_bytes",
+    "allowed_env_keys",
+    "notes"
+  ],
+  "additionalProperties": false
+}

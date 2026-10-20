@@ -1,0 +1,553 @@
+{
+  "schema_version": "wirefix.fixture-validation.v1",
+  "started_at": "2026-10-19T12:38:15.264547+00:00",
+  "scope": "self_authored_reference_fixtures_only",
+  "host": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "compiler": "/usr/bin/cc",
+  "compiler_version": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "seed": "0xb1ab2026",
+  "upstream_integration": {
+    "REA": {
+      "status": "NOT_RUN",
+      "reason": "This verifier does not invoke this integration"
+    },
+    "Ghidra": {
+      "status": "NOT_RUN",
+      "reason": "This verifier does not invoke this integration"
+    },
+    "Handwired": {
+      "status": "NOT_RUN",
+      "reason": "This verifier does not invoke this integration"
+    },
+    "Z3": {
+      "status": "NOT_RUN",
+      "reason": "This verifier does not invoke this integration"
+    },
+    "WireFix": {
+      "status": "NOT_RUN",
+      "reason": "This verifier does not invoke this integration"
+    },
+    "Codex_MCP": {
+      "status": "NOT_RUN",
+      "reason": "This verifier does not invoke this integration"
+    }
+  },
+  "compiled_checks": [
+    {
+      "configuration": "O0",
+      "started_at": "2026-10-19T12:38:15.706793+00:00",
+      "compile_argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-frounding-math",
+        "-fno-lto",
+        "-O0",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/behavior_fixtures.c",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/fixture_probe.c",
+        "-lm",
+        "-o",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/build/fixture_probe_O0"
+      ],
+      "compile_exit_code": 0,
+      "compile_stdout": "",
+      "compile_stderr": "",
+      "fp32_environment": {
+        "exit_code": 0,
+        "stdout": "OK environment binary32-rne-gradual\n",
+        "stderr": ""
+      },
+      "status": "PASS",
+      "finished_at": "2026-10-19T12:38:16.003855+00:00",
+      "run_argv": [
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/build/fixture_probe_O0",
+        "--batch"
+      ],
+      "executable_sha256": "fdc270e5e625e3e5f0fa49518b7ad102af30620b0321ad08dca1515096c5f2d4",
+      "stdin_sha256": "5e52be929de87efd3aa5bbb5e6b72000ddece19864cba10acf9a3df487684be3",
+      "stdout_sha256": "2335d0d10b34171cf6c18b71b21ea4ec4bb425e4acbb35198bf1b6c2349dc4c7",
+      "exit_code": 0,
+      "stderr": "",
+      "planned": 151355,
+      "response_lines": 151355,
+      "groups": {
+        "bv8_mba": {
+          "planned": 131072,
+          "observed": 131072,
+          "matched": 131072,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "bv64_wrap": {
+          "planned": 754,
+          "observed": 754,
+          "matched": 754,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "wide_shifts_bv8": {
+          "planned": 13056,
+          "observed": 13056,
+          "matched": 13056,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "wide_shifts_bv64": {
+          "planned": 3825,
+          "observed": 3825,
+          "matched": 3825,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "boundary_versions": {
+          "planned": 516,
+          "observed": 516,
+          "matched": 516,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "side_effect_sequence": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_goldens": {
+          "planned": 18,
+          "observed": 18,
+          "matched": 18,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_rejections": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 6
+        },
+        "fp32_piecewise_boundaries": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_targets": {
+          "planned": 48,
+          "observed": 48,
+          "matched": 48,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_random": {
+          "planned": 1280,
+          "observed": 1280,
+          "matched": 1280,
+          "mismatched": 0,
+          "expected_rejections": 89
+        },
+        "fp32_random_targets": {
+          "planned": 768,
+          "observed": 768,
+          "matched": 768,
+          "mismatched": 0,
+          "expected_rejections": 1
+        }
+      },
+      "failures": []
+    },
+    {
+      "configuration": "O2",
+      "started_at": "2026-10-19T12:38:16.008601+00:00",
+      "compile_argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-frounding-math",
+        "-fno-lto",
+        "-O2",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/behavior_fixtures.c",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/fixture_probe.c",
+        "-lm",
+        "-o",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/build/fixture_probe_O2"
+      ],
+      "compile_exit_code": 0,
+      "compile_stdout": "",
+      "compile_stderr": "",
+      "fp32_environment": {
+        "exit_code": 0,
+        "stdout": "OK environment binary32-rne-gradual\n",
+        "stderr": ""
+      },
+      "status": "PASS",
+      "finished_at": "2026-10-19T12:38:16.338330+00:00",
+      "run_argv": [
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/build/fixture_probe_O2",
+        "--batch"
+      ],
+      "executable_sha256": "db8d4c2230072f1d7f619b7be6a1db23742981cd116f67b7d868835000d55e7d",
+      "stdin_sha256": "5e52be929de87efd3aa5bbb5e6b72000ddece19864cba10acf9a3df487684be3",
+      "stdout_sha256": "2335d0d10b34171cf6c18b71b21ea4ec4bb425e4acbb35198bf1b6c2349dc4c7",
+      "exit_code": 0,
+      "stderr": "",
+      "planned": 151355,
+      "response_lines": 151355,
+      "groups": {
+        "bv8_mba": {
+          "planned": 131072,
+          "observed": 131072,
+          "matched": 131072,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "bv64_wrap": {
+          "planned": 754,
+          "observed": 754,
+          "matched": 754,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "wide_shifts_bv8": {
+          "planned": 13056,
+          "observed": 13056,
+          "matched": 13056,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "wide_shifts_bv64": {
+          "planned": 3825,
+          "observed": 3825,
+          "matched": 3825,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "boundary_versions": {
+          "planned": 516,
+          "observed": 516,
+          "matched": 516,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "side_effect_sequence": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_goldens": {
+          "planned": 18,
+          "observed": 18,
+          "matched": 18,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_rejections": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 6
+        },
+        "fp32_piecewise_boundaries": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_targets": {
+          "planned": 48,
+          "observed": 48,
+          "matched": 48,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_random": {
+          "planned": 1280,
+          "observed": 1280,
+          "matched": 1280,
+          "mismatched": 0,
+          "expected_rejections": 89
+        },
+        "fp32_random_targets": {
+          "planned": 768,
+          "observed": 768,
+          "matched": 768,
+          "mismatched": 0,
+          "expected_rejections": 1
+        }
+      },
+      "failures": []
+    },
+    {
+      "configuration": "O1_ubsan",
+      "started_at": "2026-10-19T12:38:16.343271+00:00",
+      "compile_argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-frounding-math",
+        "-fno-lto",
+        "-O1",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/behavior_fixtures.c",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/fixture_probe.c",
+        "-lm",
+        "-o",
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/build/fixture_probe_O1_ubsan"
+      ],
+      "compile_exit_code": 0,
+      "compile_stdout": "",
+      "compile_stderr": "",
+      "fp32_environment": {
+        "exit_code": 0,
+        "stdout": "OK environment binary32-rne-gradual\n",
+        "stderr": ""
+      },
+      "status": "PASS",
+      "finished_at": "2026-10-19T12:38:16.662785+00:00",
+      "run_argv": [
+        "/workspace/scratch/258cb6ba4b70/wirefix_codex_20261019/fixtures/build/fixture_probe_O1_ubsan",
+        "--batch"
+      ],
+      "executable_sha256": "028946becdea80b42f0a09d80573d6829dec0cf4150f0dc38b82fd09323eb156",
+      "stdin_sha256": "5e52be929de87efd3aa5bbb5e6b72000ddece19864cba10acf9a3df487684be3",
+      "stdout_sha256": "2335d0d10b34171cf6c18b71b21ea4ec4bb425e4acbb35198bf1b6c2349dc4c7",
+      "exit_code": 0,
+      "stderr": "",
+      "planned": 151355,
+      "response_lines": 151355,
+      "groups": {
+        "bv8_mba": {
+          "planned": 131072,
+          "observed": 131072,
+          "matched": 131072,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "bv64_wrap": {
+          "planned": 754,
+          "observed": 754,
+          "matched": 754,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "wide_shifts_bv8": {
+          "planned": 13056,
+          "observed": 13056,
+          "matched": 13056,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "wide_shifts_bv64": {
+          "planned": 3825,
+          "observed": 3825,
+          "matched": 3825,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "boundary_versions": {
+          "planned": 516,
+          "observed": 516,
+          "matched": 516,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "side_effect_sequence": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_goldens": {
+          "planned": 18,
+          "observed": 18,
+          "matched": 18,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_rejections": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 6
+        },
+        "fp32_piecewise_boundaries": {
+          "planned": 6,
+          "observed": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_targets": {
+          "planned": 48,
+          "observed": 48,
+          "matched": 48,
+          "mismatched": 0,
+          "expected_rejections": 0
+        },
+        "fp32_random": {
+          "planned": 1280,
+          "observed": 1280,
+          "matched": 1280,
+          "mismatched": 0,
+          "expected_rejections": 89
+        },
+        "fp32_random_targets": {
+          "planned": 768,
+          "observed": 768,
+          "matched": 768,
+          "mismatched": 0,
+          "expected_rejections": 1
+        }
+      },
+      "failures": []
+    }
+  ],
+  "fresh_process_wrapper": {
+    "status": "PASS",
+    "execution_mode": "fresh_process",
+    "actual_process_invocations": 26,
+    "independence_note": "Wrapper and reference use the same exact arithmetic; compiled-C comparisons and literal goldens supply the independent cross-check.",
+    "passed": 26,
+    "failed": 0,
+    "expected_error_codes": [
+      "INVALID_BITS",
+      "INVALID_INPUTS",
+      "INVALID_REQUEST",
+      "INVALID_REQUEST_ID",
+      "LINE_TOO_LONG",
+      "MALFORMED_JSON",
+      "NONFINITE_INPUT",
+      "NONFINITE_INTERMEDIATE"
+    ],
+    "record_details_sha256": "953bef011583e225c61da9e5044a67192a0c27a80000c0b864d20f1b80b4774d",
+    "wrapper_sha256": "55a53a0eb2b5a69ff7f06e8481c2b89ae6074874ad1a1faa949af877a7accd89",
+    "scope": "historical_wrapper_revision_full_fixture_checks"
+  },
+  "status": "PASS",
+  "finished_at": "2026-10-19T12:38:17.267845+00:00",
+  "final_request_id_revision_check": {
+    "status": "PASS",
+    "scope": "final_wrapper_request_id_and_error_envelope_only",
+    "started_at": "2026-10-19T12:43:27.141178+00:00",
+    "finished_at": "2026-10-19T12:43:27.235978+00:00",
+    "execution_mode": "fresh_process",
+    "actual_process_invocations": 4,
+    "wrapper_sha256": "96541884fa61957890c0f086538907e889d03d94252a2a1a350c8c39d2cace35",
+    "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "records": [
+      {
+        "status": "PASS",
+        "request_sha256": "7cae3b2fbc425762bd635322fedd617dfb485af1d272e644f52e96d2a1b0f463",
+        "response": {
+          "protocol_version": 1,
+          "request_id": "after_revision",
+          "status": "ok",
+          "outputs": {
+            "result": {
+              "kind": "fp32",
+              "bits": "0x3fa00000"
+            }
+          }
+        },
+        "exit_code": 0
+      },
+      {
+        "status": "PASS",
+        "request_sha256": "1d38cf3b660440bcfb249822be488eab2991ddb7cc7c9a2d3f42c90bf8ca2528",
+        "response": {
+          "protocol_version": 1,
+          "request_id": "after_nonfinite",
+          "status": "error",
+          "outputs": {},
+          "error": {
+            "code": "NONFINITE_INPUT",
+            "message": "NaN and infinity are outside this fixture",
+            "scope": "reference_fixture",
+            "retryable": false,
+            "artifacts": []
+          }
+        },
+        "exit_code": 0
+      },
+      {
+        "status": "PASS",
+        "request_sha256": "9035f196497cf456cf7ed3efa1cb9f738ed7634adff41887a20a9ecc15563157",
+        "response": {
+          "protocol_version": 1,
+          "request_id": "unbound_request",
+          "status": "error",
+          "outputs": {},
+          "error": {
+            "code": "INVALID_REQUEST_ID",
+            "message": "request_id must match [A-Za-z][A-Za-z0-9_.:-]{0,127}",
+            "scope": "reference_fixture",
+            "retryable": false,
+            "artifacts": []
+          }
+        },
+        "exit_code": 0
+      },
+      {
+        "status": "PASS",
+        "request_sha256": "9c1b9a81fd4dad8959a7e958eda355b060a24ae388be9abdd5ac1cfbea6fa538",
+        "response": {
+          "protocol_version": 1,
+          "request_id": "unbound_request",
+          "status": "error",
+          "outputs": {},
+          "error": {
+            "code": "MALFORMED_JSON",
+            "message": "Expected one UTF-8 JSON object",
+            "scope": "reference_fixture",
+            "retryable": false,
+            "artifacts": []
+          }
+        },
+        "exit_code": 0
+      }
+    ]
+  },
+  "recorded_run_source_sha256": {
+    "behavior_fixtures.h": "7307a0ad96577e54c9942e285baf73ca7415f85c4b05d8dce7687cbc2117c196",
+    "behavior_fixtures.c": "c6dac79b50397217a52b966009e49c73ae18ec1d64f2333df10778f5e923a19c",
+    "fixture_probe.c": "4fef392a229a44b88e1cf7ed7076dd96473c614f93b24e81c608e5d94b0ca337",
+    "oracle_fp32.py": "55a53a0eb2b5a69ff7f06e8481c2b89ae6074874ad1a1faa949af877a7accd89",
+    "reference_verify.py": "2c1fa0712aebf82875033c3f3f0cf19beba562c2af565115ae496ed807a4c1a6"
+  },
+  "notes": [
+    "This records source-owned fixtures, not WireFix product or upstream integration gates.",
+    "The full compiled-C and 26-process wrapper run used recorded_run_source_sha256. Only request-ID validation/correlation handling changed afterward; final_request_id_revision_check records the four actual checks of that final wrapper revision.",
+    "Build executables were removed from the implementation package. Recorded executable hashes identify the historical local run, not portable deliverables.",
+    "Full stdout transcripts were not retained; their hashes, exact counts, deterministic generator and commands are retained for reproduction."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/oracle-response.schema.json",
+  "title": "Oracle response JSONL line",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": 1
+        },
+        "request_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "status": {
+          "const": "ok"
+        },
+        "outputs": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$": {
+              "$ref": "common.schema.json#/$defs/value"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 8
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "status",
+        "outputs"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": 1
+        },
+        "request_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "status": {
+          "enum": [
+            "error",
+            "unsupported"
+          ]
+        },
+        "outputs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "error": {
+          "$ref": "common.schema.json#/$defs/error"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "status",
+        "outputs",
+        "error"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

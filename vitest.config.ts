@@ -1,0 +1,2 @@
+import {defineConfig} from 'vitest/config';
+export default defineConfig({test:{include:['tests/**/*.test.ts'],exclude:['node_modules/**','.upstream/**','.tools/**','vendor/**','dist/**'],testTimeout:15000,hookTimeout:30000,maxWorkers:3}});

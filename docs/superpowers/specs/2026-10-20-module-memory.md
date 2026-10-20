@@ -1,0 +1,15 @@
+# Module-relative trace memory
+
+The continuing vmde investigation needs the actual values of five system-module DWORD slots observed in private-code instructions. Previous private pages and disk import names cannot supply those values. The next acquisition must use a new owned process and its current module addresses through existing Wirefit commands.
+
+Extend the existing `binary trace` / `wirefit_trace_binary` plan range to `{rva,size_bytes,module?}`. An omitted module keeps the original main-image behavior and result shape. A provided module is a bounded ASCII basename, with case-insensitive matching. No new operation, canonical mathematical contract, runtime dependency, arbitrary PID, or supplied agent code is added.
+
+Keep the existing limits: eight ranges, one MiB each, four MiB per phase, one to sixty thousand milliseconds, existing breakpoint/API/event budgets. Request uniqueness includes module scope (the omitted module is its own scope), canonical RVA and length. All range ends fit the 32-bit RVA space; unscoped ranges and breakpoints must still fit the statically inspected main image. Scoped ranges are checked against the actually loaded module at each capture phase.
+
+Each scoped snapshot adds `module`, `module_base`, `module_size`, `address`. Success has non-null runtime location, exact `address=base+RVA`, a valid full module interval and a contained read interval. Use integer arithmetic for pointer bounds. A module not loaded at that phase has null location and an explicit error. A loaded module with an invalid requested range retains base/size, null address and an explicit error. Read/write failures may retain a validated attempted address, but never invented file/digest/bytes. Unscoped snapshots reject scoped metadata.
+
+Resolve the module afresh per phase using a unique case-insensitive basename match; do not reuse an old run's base, an inventory event or a prior phase's base. Preserve checkpoint recovery, exclusive files, code identities and owned-process cleanup. Store validated module fields alongside successful artifact refs so result/report/export and cancellation retain provenance. Raw observed JSON remains opaque to the export dependency closure.
+
+Validate with worker/API-model tests, host malformed-protocol and plan tests, actual CLI/MCP submission and portable result/export checks. Then issue a production CLI trace with passive empty hook/breakpoint lists and five KERNEL32-relative four-byte ranges: `0x817fc`, `0x817bc`, `0x80f74`, `0x82358`, `0xb07b4`. These RVAs came from the previous observed module base and static private operands; the new trace must record its own live base and values. Interpret values only within captured module inventories/location evidence, retaining missing pointer and file-identity limitations.
+
+The continuous local development and controlled-copy execution authorization applies. This bounded addition implements an existing flow; no deployment, publication, original overwrite or protection patch is involved. Completion of this feature or trace does not establish a true OEP, API implementation equivalence, full algorithm recovery or a runnable reconstructed vmde.

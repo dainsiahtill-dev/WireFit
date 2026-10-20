@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "oracle_id": "reference_fp32_oracle",
+  "kind": "process_jsonl",
+  "source_kind": "reference_fixture",
+  "argv": [
+    "python3",
+    "fixtures/oracle_fp32.py"
+  ],
+  "cwd": "..",
+  "signature": {
+    "inputs": [
+      {
+        "id": "x",
+        "type": {
+          "kind": "fp32"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "result",
+        "type": {
+          "kind": "fp32"
+        }
+      }
+    ]
+  },
+  "domain": {
+    "constraints": [
+      {
+        "input": "x",
+        "op": "ge",
+        "value": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        }
+      },
+      {
+        "input": "x",
+        "op": "le",
+        "value": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      }
+    ]
+  },
+  "target_files": [
+    {
+      "path": "../fixtures/oracle_fp32.py",
+      "sha256": "96541884fa61957890c0f086538907e889d03d94252a2a1a350c8c39d2cace35",
+      "role": "target"
+    }
+  ],
+  "protocol_version": 1,
+  "reset_strategy": "fresh_process",
+  "request_timeout_ms": 2000,
+  "batch_timeout_ms": 120000,
+  "max_stdout_line_bytes": 1048576,
+  "max_stderr_bytes": 1048576,
+  "allowed_env_keys": [
+    "PATH",
+    "LANG"
+  ],
+  "notes": "本包自写数值 fixture；路径相对本清单解析。register 另解析并记录实际 Python 解释器身份。此清单的存在不是已注册或已采样记录。"
+}

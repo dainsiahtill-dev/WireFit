@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "model_id": "piecewise_initial",
+  "title": "固定零断点的分段初始假设",
+  "kind": "numeric_template",
+  "semantics_profile": "wirefix.fp32.templates.v1",
+  "inputs": [
+    {
+      "id": "x",
+      "type": {
+        "kind": "fp32"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "result",
+      "type": {
+        "kind": "fp32"
+      }
+    }
+  ],
+  "domain": {
+    "constraints": [
+      {
+        "input": "x",
+        "op": "ge",
+        "value": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        }
+      },
+      {
+        "input": "x",
+        "op": "le",
+        "value": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      }
+    ]
+  },
+  "scope": {
+    "kind": "behavior_model",
+    "observation": "declared_outputs",
+    "source_completeness": "not_applicable",
+    "execution_guard": {
+      "kind": "all_inputs"
+    },
+    "observation_point": {
+      "kind": "expression_output",
+      "source_location": null
+    }
+  },
+  "provenance": {
+    "source_kind": "manual",
+    "source_ref": null,
+    "source_artifacts": [],
+    "notes": "本实施包自写模型/假设；不是 REA、Ghidra 或 Handwired 的已运行导出。"
+  },
+  "definition": {
+    "template": "piecewise_affine",
+    "parameters": {
+      "a0": {
+        "kind": "fp32",
+        "bits": "0x3f800000"
+      },
+      "b0": {
+        "kind": "fp32",
+        "bits": "0x00000000"
+      },
+      "a1": {
+        "kind": "fp32",
+        "bits": "0x3f000000"
+      },
+      "b1": {
+        "kind": "fp32",
+        "bits": "0x3e800000"
+      }
+    },
+    "fixed": {
+      "knots": [
+        {
+          "kind": "fp32",
+          "bits": "0x00000000"
+        }
+      ]
+    },
+    "parameter_bounds": {
+      "a0": {
+        "lower": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        },
+        "upper": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      },
+      "b0": {
+        "lower": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        },
+        "upper": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      },
+      "a1": {
+        "lower": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        },
+        "upper": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      },
+      "b1": {
+        "lower": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        },
+        "upper": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      }
+    }
+  }
+}

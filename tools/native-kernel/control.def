@@ -1,0 +1,3 @@
+EXPORTS
+wirefit_grid_control=?run@GridControl@@QAEXXZ
+wirefit_abi_probe=?probe@GridControl@@QAEII@Z

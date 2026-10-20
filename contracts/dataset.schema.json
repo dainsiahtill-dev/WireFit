@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/dataset.schema.json",
+  "title": "Immutable dataset manifest",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "dataset_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "signature": {
+      "$ref": "common.schema.json#/$defs/signature"
+    },
+    "domain": {
+      "$ref": "common.schema.json#/$defs/domain"
+    },
+    "comparison_policy": {
+      "$ref": "common.schema.json#/$defs/comparison_policy"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "common.schema.json#/$defs/source_kind"
+        },
+        "source_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "source_identity_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "oracle_id": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "source_id",
+        "source_identity_sha256",
+        "oracle_id"
+      ],
+      "additionalProperties": false
+    },
+    "sampling_plan": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "enum": [
+            "explicit",
+            "boundary_seeded",
+            "random_seeded"
+          ]
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "planned": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "inputs_artifact": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        }
+      },
+      "required": [
+        "strategy",
+        "seed",
+        "planned",
+        "inputs_artifact"
+      ],
+      "additionalProperties": false
+    },
+    "splits": {
+      "type": "object",
+      "properties": {
+        "train": {
+          "type": "object",
+          "properties": {
+            "artifact": {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            },
+            "sample_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "minItems": 0,
+              "maxItems": 10000000
+            }
+          },
+          "required": [
+            "artifact",
+            "sample_ids"
+          ],
+          "additionalProperties": false
+        },
+        "validation": {
+          "type": "object",
+          "properties": {
+            "artifact": {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            },
+            "sample_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "minItems": 0,
+              "maxItems": 10000000
+            }
+          },
+          "required": [
+            "artifact",
+            "sample_ids"
+          ],
+          "additionalProperties": false
+        },
+        "holdout": {
+          "type": "object",
+          "properties": {
+            "artifact": {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            },
+            "sample_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "minItems": 0,
+              "maxItems": 10000000
+            }
+          },
+          "required": [
+            "artifact",
+            "sample_ids"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "train",
+        "validation",
+        "holdout"
+      ],
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4096
+    }
+  },
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "signature",
+    "domain",
+    "comparison_policy",
+    "source",
+    "sampling_plan",
+    "splits",
+    "notes"
+  ],
+  "additionalProperties": false
+}

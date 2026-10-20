@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "dataset_id": "numeric_expected_fixture",
+  "signature": {
+    "inputs": [
+      {
+        "id": "x",
+        "type": {
+          "kind": "fp32"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "result",
+        "type": {
+          "kind": "fp32"
+        }
+      }
+    ]
+  },
+  "domain": {
+    "constraints": [
+      {
+        "input": "x",
+        "op": "ge",
+        "value": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        }
+      },
+      {
+        "input": "x",
+        "op": "le",
+        "value": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      }
+    ]
+  },
+  "comparison_policy": {
+    "kind": "bitwise-fp32",
+    "nonfinite": "reject"
+  },
+  "source": {
+    "kind": "reference_fixture",
+    "source_id": "numeric_reference_fixture",
+    "source_identity_sha256": "492392de42b8ade73e7b02d37b22b8ab33d04065a3533c4e6c19caeb98b616ec",
+    "oracle_id": null
+  },
+  "sampling_plan": {
+    "strategy": "explicit",
+    "seed": null,
+    "planned": 32,
+    "inputs_artifact": {
+      "sha256": "729da09185941851853000d9cb16b2ef00a13fcb0ef07dd3e72dba5f5c8fa146",
+      "relative_path": "examples/numeric-inputs.jsonl",
+      "media_type": "application/x-ndjson",
+      "size_bytes": 3000
+    }
+  },
+  "splits": {
+    "train": {
+      "artifact": {
+        "sha256": "fbd82db7f90343ae7ab489254c788de6b0f18a4ffa6232e567f6dbda3c72290d",
+        "relative_path": "examples/numeric-train.jsonl",
+        "media_type": "application/x-ndjson",
+        "size_bytes": 8096
+      },
+      "sample_ids": [
+        "num_0001",
+        "num_0002",
+        "num_0003",
+        "num_0004",
+        "num_0005",
+        "num_0006",
+        "num_0007",
+        "num_0008",
+        "num_0009",
+        "num_0010",
+        "num_0011",
+        "num_0012",
+        "num_0013",
+        "num_0014",
+        "num_0015",
+        "num_0016"
+      ]
+    },
+    "validation": {
+      "artifact": {
+        "sha256": "9e2b51e8a5acf6ba4dac445d4feac9f1b909f2fe87508ca1d5326ed92a49160d",
+        "relative_path": "examples/numeric-validation.jsonl",
+        "media_type": "application/x-ndjson",
+        "size_bytes": 4088
+      },
+      "sample_ids": [
+        "num_0017",
+        "num_0018",
+        "num_0019",
+        "num_0020",
+        "num_0021",
+        "num_0022",
+        "num_0023",
+        "num_0024"
+      ]
+    },
+    "holdout": {
+      "artifact": {
+        "sha256": "78b47be478ea5a3efd21d67d1ef5594521b6681a09f600a5c80879ba27cefaf9",
+        "relative_path": "examples/numeric-holdout.jsonl",
+        "media_type": "application/x-ndjson",
+        "size_bytes": 4064
+      },
+      "sample_ids": [
+        "num_0025",
+        "num_0026",
+        "num_0027",
+        "num_0028",
+        "num_0029",
+        "num_0030",
+        "num_0031",
+        "num_0032"
+      ]
+    }
+  },
+  "notes": "32 行独立标记的期望夹具，16/8/8；非真实目标调用，不授予 fidelity。真实集成请由 fixture Oracle 重新采集。"
+}

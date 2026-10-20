@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "compare_wrong_example",
+  "budget": {
+    "wall_time_ms": 120000,
+    "solver_soft_time_ms": 10000,
+    "solver_hard_time_ms": 15000,
+    "max_candidates": 50000,
+    "max_ast_nodes": 9,
+    "max_oracle_calls": 512,
+    "max_iterations": 2000,
+    "seed": 20261019
+  },
+  "operation": "compare_models",
+  "mode": "exact_bv",
+  "left_model_id": "mba_u8",
+  "right_model_id": "add_u8_wrong",
+  "domain": {
+    "constraints": []
+  },
+  "mapping": {
+    "inputs": [
+      {
+        "left": "a",
+        "right": "a"
+      },
+      {
+        "left": "b",
+        "right": "b"
+      }
+    ],
+    "outputs": [
+      {
+        "left": "result",
+        "right": "result"
+      }
+    ]
+  }
+}

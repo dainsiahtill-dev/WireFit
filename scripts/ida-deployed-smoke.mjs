@@ -1,0 +1,34 @@
+import {chromium} from '@playwright/test';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const folder=path.join(root,'artifacts/ida-mcp');
+const publicReceipt=JSON.parse(await readFile(path.join(folder,'integration/public-mcp.json'),'utf8'));
+const browser=await chromium.launch({channel:'msedge',headless:true});
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+ page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('http://127.0.0.1:4318/#ida');
+ await page.getByTestId('view-ida').waitFor();
+ const bootstrap=(await (await page.request.get('http://127.0.0.1:4318/api/bootstrap')).json()).data;
+ assert.equal(bootstrap.ida.status,'verified');
+ const historical=bootstrap.cases.find(item=>item.path.toLowerCase()===publicReceipt.case.toLowerCase());
+ assert.ok(historical,'Public MCP case must be discovered by deployed workbench');
+ await page.getByLabel('当前案例').selectOption(historical.id);
+ const result=page.getByTestId('ida-result');await result.waitFor();
+ await page.waitForFunction(()=>document.querySelector('[data-testid="ida-result"]')?.textContent.includes('查询完成'));
+ assert.match(await result.textContent(),/4096/);
+ assert.match(await page.locator('.ida-code').first().textContent(),/__thiscall/);
+ assert.ok(await page.locator('.dependency-graph .graph-node').count()>0);
+ await page.evaluate(()=>window.scrollTo(0,0));await mkdir(path.join(folder,'screenshots'),{recursive:true});
+ await page.screenshot({path:path.join(folder,'screenshots/ida-preview.png')});
+ await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.scrollTo(0,0));
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+ await page.screenshot({path:path.join(folder,'screenshots/ida-preview-mobile.png')});
+ assert.deepEqual(errors,[]);
+ const receipt={schema_version:1,status:'passed',checked_at:new Date().toISOString(),url:'http://127.0.0.1:4318/#ida',pid:bootstrap.pid,ida_status:bootstrap.ida.status,samples:bootstrap.ida.samples.length,case:historical.path,result_id:publicReceipt.result.result_id,graph_nodes:await page.locator('.dependency-graph .graph-node').count(),page_errors:errors,viewport_desktop:[1440,1000],viewport_mobile:[390,844],target_execution:'not_run'};
+ await writeFile(path.join(folder,'integration/deployed-workbench.json'),JSON.stringify(receipt,null,2)+'\n','utf8');
+ process.stdout.write(JSON.stringify(receipt)+'\n','utf8');
+}finally{await browser.close();}

@@ -1,0 +1,10 @@
+# Module-relative memory implementation
+
+- [x] Root: extend native trace host/protocol with strict scope/location validation and tested artifact/export/cancellation preservation.
+- [x] Worker lane: extend the fixed Python/Frida collector and test runtime module resolution, explicit failures, address bounds and checkpoint behavior.
+- [x] Entry lane: expose optional module in the MCP schema, verify real CLI/MCP submission, and document the existing-command usage.
+- [x] Independent review: compare final code with the module-memory spec; run relevant tests and resolve important findings before target execution.
+- [x] Run current product typecheck/build/full regression, preserving prior receipts and source identities. All 498 tests passed, with no skipped tests; typecheck/build passed.
+- [x] Acquire five currently unknown system DWORDs through a production passive trace command against a new staged vmde copy; preserve all errors and actual cleanup. Public CLI job `job_e69e896b39cd4341941ab2464afced8d` completed with 16 successful snapshots and four cleanup confirmations.
+- [x] Audit the pointer values against current module location evidence; record remaining startup, ABI, data and original-input/output gaps. Independent artifact audit: 26 checks; frozen bounded analysis: 64 files/45 inputs; five actual operand RVAs match, with four newly referenced unsampled slots and a truncated return retained as unknown. The guard changes from zero to a pointer.
+- [x] Export and verify the new evidence and update the restoration ledger. The original product closure has 50 files; the combined closure has 148 registered files. Source and fresh copied-directory verifiers passed without PE execution; receipt: `artifacts/native/module-memory-verification-20261020.json`. Bundle v1 failed before writes on normal system DLL hardlinks; its source/failure remain immutable, and reviewed v2 narrowly handles only three SHA-pinned read-only system inputs. The overarching restoration goal remains active; startup and original image/vector behavior are unverified.

@@ -1,0 +1,80 @@
+{
+  "commit": "27dc42d10249f0410904a75c0997842eb03b931c",
+  "version": "6.7.0",
+  "patches": [],
+  "files": [
+    {
+      "path": "src/domain/evidenceBundle.ts",
+      "sha256": "e0daab738dbbbda38d4d1f15faedb8571cd1afaccdc3972b0bddc32870bfc3e2"
+    },
+    {
+      "path": "src/domain/native/nativeValueFlow.ts",
+      "sha256": "2ffefe2ed9ba304235481bb4065bee73930552955a2e1c76488a09d404d92e7a"
+    },
+    {
+      "path": "src/domain/unicodeCodePointOrder.ts",
+      "sha256": "fdff9c493eec0fbca808c7975cd88abd9f1cb9398c333a3981f185c3eaee8cb5"
+    },
+    {
+      "path": "src/domain/evidence.ts",
+      "sha256": "4a92eedd48d416e37f9eacfae8d1296cc8bdc1c5d4a63840ce7d097eb959fb42"
+    },
+    {
+      "path": "src/domain/residualUnknown.ts",
+      "sha256": "c12e3ee6005f7fba3ad8ea1ea2daf1478abe417848ce7ed9a696e94e620aa7ec"
+    },
+    {
+      "path": "src/domain/immutableJson.ts",
+      "sha256": "ca9f7a274917aa632762be4cbbfe4ed2ea496bcb408e90042dc0ad4498358cc9"
+    },
+    {
+      "path": "src/domain/canonicalDigest.ts",
+      "sha256": "9d1ca03e3994cca139a69f7b510aea51777ea1f67b7e5ee9e2d7adf1935b8284"
+    },
+    {
+      "path": "src/domain/canonicalJsonDigestSteps.ts",
+      "sha256": "b6f2d0ec8659fec8a7747a84994cb4c2b17ffc1771f5be2a0520c17b5da053f3"
+    },
+    {
+      "path": "src/domain/localPath.ts",
+      "sha256": "6cbaacf59332290c49cb8d76340ff318e135d58dcb5bbe0d71116ecddf1d0ba0"
+    },
+    {
+      "path": "src/domain/analysisProfile.ts",
+      "sha256": "cd091457ef6919163084034b6a3502c7f1c6ab1080cb616317902c6bbe03f6c0"
+    },
+    {
+      "path": "src/domain/binaryTargetTypes.ts",
+      "sha256": "2c3c029cdd48a52bcea1520d4ffdd738739d4c0c16aa1bd3ef86b7a04a87c930"
+    },
+    {
+      "path": "src/domain/jsonValue.ts",
+      "sha256": "868d1e8e47f0a46e21d30d0bcd85967eb971bf453e400a19df60610b8b3fadc0"
+    },
+    {
+      "path": "src/domain/digests.ts",
+      "sha256": "94e86b9d1c4488cd5fa94cf80121fb3a21bbc0dc9ce0cef38bd1113ec2ac5f40"
+    },
+    {
+      "path": "src/domain/relationshipCoverage.ts",
+      "sha256": "4578c04c21148da89a030279f05964cb050e6a8f93513950edc0808a50ae18be"
+    },
+    {
+      "path": "src/domain/functionComparisonSchemas.ts",
+      "sha256": "0802bafe1e7be7b58cb3b7660b5b8d31dec5035b0d1f7d247688b433b2d6c82a"
+    },
+    {
+      "path": "src/domain/zipPackageFormat.ts",
+      "sha256": "d0e2821bcf64e796eda36f2f4c1346deffd5da42b776e100d358b946740ebbc3"
+    },
+    {
+      "path": "src/domain/fixedTupleSchema.ts",
+      "sha256": "97f5afff68f960667ab93d09dbdcfb37e084c3cd35bc4985efa74c1c835d4d64"
+    },
+    {
+      "path": "src/domain/functionComparisonResults.ts",
+      "sha256": "0ff66f3f9580eaaf1deba6ad8edc8c668cbf86ebc65490c40db3af28fa4610a1"
+    }
+  ],
+  "repository": "https://github.com/morluto/rea"
+}

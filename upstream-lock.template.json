@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "kind": "wirefix-unresolved-upstream-lock-template",
+  "prepared_at": "2026-10-19",
+  "resolved": false,
+  "status": "UNRESOLVED_TEMPLATE",
+  "resolved_at": null,
+  "resolution_record": null,
+  "notes": [
+    "This is a template, not an installed dependency inventory or a completed lockfile.",
+    "Resolve real package versions, git commit SHAs and content digests during M0 using the official repository, release or registry API. Never invent them.",
+    "The research observation of REA main is not a selected npm package version.",
+    "Node 24 and npm workspaces are design choices; the exact compatible versions remain unresolved.",
+    "pnpm is an optional alternative field. Selecting it instead of npm requires the implementation ADR.",
+    "Keep per-lane results independent. An unselected optional component does not need a fabricated resolution or PASS result."
+  ],
+  "host": {
+    "os": null,
+    "arch": null,
+    "os_release": null,
+    "environment_report_path": null,
+    "environment_report_sha256": null,
+    "planned_native_gate": {
+      "os": "linux",
+      "arch": "x64"
+    }
+  },
+  "runtimes": {
+    "node": {
+      "selected": true,
+      "requested_major": 24,
+      "resolved": false,
+      "version": null,
+      "executable_path": null,
+      "executable_sha256": null,
+      "release_url": null,
+      "artifact_integrity": null,
+      "compatibility_record": null
+    },
+    "bun": {
+      "selected_for_upstream_tests": null,
+      "selected_for_product_worker": false,
+      "resolved": false,
+      "version": null,
+      "executable_path": null,
+      "executable_sha256": null,
+      "release_url": null,
+      "artifact_integrity": null,
+      "product_worker_adr": null
+    }
+  },
+  "package_managers": {
+    "selected": "npm",
+    "npm": {
+      "selected": true,
+      "resolved": false,
+      "version": null,
+      "executable_path": null,
+      "executable_sha256": null,
+      "lockfile_path": null,
+      "lockfile_sha256": null
+    },
+    "pnpm": {
+      "selected": false,
+      "resolved": false,
+      "version": null,
+      "executable_path": null,
+      "executable_sha256": null,
+      "lockfile_path": null,
+      "lockfile_sha256": null,
+      "selection_adr": null
+    }
+  },
+  "upstreams": {
+    "rea": {
+      "selected": true,
+      "resolved": false,
+      "source": {
+        "repository": "https://github.com/morluto/rea",
+        "ref": null,
+        "sha": null,
+        "commit_url": null,
+        "resolved_via": null,
+        "retrieved_at": null,
+        "source_tree_sha256": null
+      },
+      "package": {
+        "name": "rea-agents",
+        "version": null,
+        "registry_url": "https://www.npmjs.com/package/rea-agents",
+        "artifact_url": null,
+        "integrity": null,
+        "sha256": null,
+        "package_to_source_record": null
+      },
+      "execution": {
+        "command": null,
+        "argv": [],
+        "node_version": null,
+        "installed_server_path": null,
+        "installed_server_sha256": null,
+        "build_commands": [],
+        "build_record": null
+      },
+      "mcp": {
+        "negotiated_protocol_version": null,
+        "server_identity_path": null,
+        "server_identity_sha256": null,
+        "catalog_digest": null,
+        "input_schema_profile": null,
+        "tools_list_path": null,
+        "tools_list_sha256": null,
+        "availability_snapshot_path": null,
+        "availability_snapshot_sha256": null,
+        "profile_digest": null
+      },
+      "portable_contract": {
+        "adapter_version": null,
+        "schema_snapshot_path": null,
+        "schema_snapshot_sha256": null,
+        "supported_versions": [],
+        "fixture_bundle_path": null,
+        "fixture_bundle_sha256": null,
+        "validation_record": null
+      },
+      "license": {
+        "upstream_url": "https://github.com/morluto/rea/blob/main/LICENSE",
+        "pinned_url": null,
+        "local_path": null,
+        "sha256": null,
+        "notice_files": []
+      },
+      "local_patches": [],
+      "smoke_record": null
+    },
+    "handwired": {
+      "selected": true,
+      "resolved": false,
+      "dependency_mode": "pinned-source",
+      "source": {
+        "repository": "https://github.com/chenglou/handwired",
+        "ref": null,
+        "sha": null,
+        "commit_url": null,
+        "resolved_via": null,
+        "retrieved_at": null,
+        "source_tree_sha256": null
+      },
+      "vendoring": {
+        "destination": "vendor/handwired",
+        "copied_files_manifest": null,
+        "copied_files_manifest_sha256": null,
+        "local_patches": [],
+        "patch_manifest_sha256": null
+      },
+      "build": {
+        "commands": [],
+        "upstream_test_runtime": null,
+        "product_runtime": null,
+        "build_record": null,
+        "product_output_sha256": null,
+        "runtime_adjustment_adr": null
+      },
+      "api": {
+        "map_path": null,
+        "map_sha256": null,
+        "source_exports": [],
+        "fp32_contract_record": null,
+        "gradient_contract_record": null,
+        "buffer_lifetime_record": null
+      },
+      "license": {
+        "upstream_url": "https://github.com/chenglou/handwired/blob/main/LICENSE",
+        "pinned_url": null,
+        "local_path": null,
+        "sha256": null,
+        "notice_files": []
+      },
+      "smoke_record": null
+    },
+    "z3": {
+      "selected": true,
+      "resolved": false,
+      "source": {
+        "repository": "https://github.com/Z3Prover/z3",
+        "ref": null,
+        "sha": null,
+        "commit_url": null,
+        "resolved_via": null,
+        "retrieved_at": null,
+        "source_tree_sha256": null
+      },
+      "package": {
+        "name": "z3-solver",
+        "version": null,
+        "registry_url": "https://www.npmjs.com/package/z3-solver",
+        "artifact_url": null,
+        "integrity": null,
+        "sha256": null,
+        "package_to_source_record": null
+      },
+      "wasm_and_worker_assets": [],
+      "worker_policy": {
+        "kind": "child_process",
+        "max_inflight_per_module": 1,
+        "initialization_api": null,
+        "cleanup_api": null,
+        "timeout_record": null,
+        "cancellation_record": null,
+        "exit_record": null
+      },
+      "license": {
+        "upstream_url": "https://github.com/Z3Prover/z3/blob/master/LICENSE.txt",
+        "pinned_url": null,
+        "local_path": null,
+        "sha256": null,
+        "notice_files": []
+      },
+      "local_patches": [],
+      "smoke_record": null
+    },
+    "mcp_sdk": {
+      "selected": true,
+      "resolved": false,
+      "packages": [],
+      "api_map_path": null,
+      "api_map_sha256": null,
+      "license_files": [],
+      "smoke_record": null
+    }
+  },
+  "providers": {
+    "ghidra": {
+      "provider_id": "ghidra",
+      "selected_for_native_gate": true,
+      "resolved": false,
+      "source": {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra",
+        "ref": null,
+        "sha": null,
+        "commit_url": null,
+        "resolved_via": null
+      },
+      "version": null,
+      "release_url": null,
+      "distribution_integrity": null,
+      "distribution_sha256": null,
+      "installation_path": null,
+      "java": {
+        "distribution": null,
+        "version": null,
+        "executable_path": null,
+        "executable_sha256": null,
+        "compatibility_record": null
+      },
+      "native_decompiler": {
+        "os": null,
+        "arch": null,
+        "path": null,
+        "sha256": null
+      },
+      "rea_binding": {
+        "rea_source_sha": null,
+        "bridge_manifest_path": null,
+        "bridge_manifest_sha256": null,
+        "analysis_profile_digest": null,
+        "analysis_profile_path": null,
+        "value_flow_schema_map_path": null,
+        "value_flow_schema_map_sha256": null
+      },
+      "fixture": {
+        "source_manifest_path": null,
+        "source_manifest_sha256": null,
+        "compiler": null,
+        "compiler_version": null,
+        "compiler_argv": [],
+        "target_os": null,
+        "target_arch": null,
+        "binary_sha256": null,
+        "oracle_manifest_sha256": null
+      },
+      "license": {
+        "upstream_url": "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE",
+        "pinned_url": null,
+        "local_path": null,
+        "sha256": null,
+        "notice_files": []
+      },
+      "smoke_record": null
+    },
+    "additional": []
+  },
+  "m0_lanes": {
+    "core": {
+      "resolved": false,
+      "status": "NOT_RUN",
+      "record_path": null,
+      "record_sha256": null
+    },
+    "z3": {
+      "resolved": false,
+      "status": "NOT_RUN",
+      "record_path": null,
+      "record_sha256": null
+    },
+    "handwired": {
+      "resolved": false,
+      "status": "NOT_RUN",
+      "record_path": null,
+      "record_sha256": null
+    },
+    "rea": {
+      "resolved": false,
+      "status": "NOT_RUN",
+      "record_path": null,
+      "record_sha256": null
+    }
+  },
+  "resolution_requirements": [
+    "Replace mutable source references with actual full commit SHAs resolved from git or an official API; record how each was obtained.",
+    "Record exact selected package/runtime/provider versions and the integrity of installed artifacts. Do not use floating latest or copy research observations as locks.",
+    "Record actual CLI/MCP schema and server identity separately from documentation versions.",
+    "Populate WASM/worker assets, vendored source and bridge manifests with their real paths and digests when selected.",
+    "Preserve pinned license/notice files and any local patches.",
+    "Link each selected lane to its actual compatibility and smoke results before marking that lane resolved.",
+    "Set the top-level resolved flag only after required selected components are fully resolved; leave blocked lanes explicit in partial work.",
+    "Write the resolved result as upstream-lock.json; keep this file an unexecuted template."
+  ]
+}

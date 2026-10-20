@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "model_id": "affine_initial",
+  "title": "affine 初始假设",
+  "kind": "numeric_template",
+  "semantics_profile": "wirefix.fp32.templates.v1",
+  "inputs": [
+    {
+      "id": "x",
+      "type": {
+        "kind": "fp32"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "result",
+      "type": {
+        "kind": "fp32"
+      }
+    }
+  ],
+  "domain": {
+    "constraints": [
+      {
+        "input": "x",
+        "op": "ge",
+        "value": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        }
+      },
+      {
+        "input": "x",
+        "op": "le",
+        "value": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      }
+    ]
+  },
+  "scope": {
+    "kind": "behavior_model",
+    "observation": "declared_outputs",
+    "source_completeness": "not_applicable",
+    "execution_guard": {
+      "kind": "all_inputs"
+    },
+    "observation_point": {
+      "kind": "expression_output",
+      "source_location": null
+    }
+  },
+  "provenance": {
+    "source_kind": "manual",
+    "source_ref": null,
+    "source_artifacts": [],
+    "notes": "本实施包自写模型/假设；不是 REA、Ghidra 或 Handwired 的已运行导出。"
+  },
+  "definition": {
+    "template": "affine",
+    "parameters": {
+      "a": {
+        "kind": "fp32",
+        "bits": "0x3f800000"
+      },
+      "b": {
+        "kind": "fp32",
+        "bits": "0x00000000"
+      }
+    },
+    "parameter_bounds": {
+      "a": {
+        "lower": {
+          "kind": "fp32",
+          "bits": "0xc0800000"
+        },
+        "upper": {
+          "kind": "fp32",
+          "bits": "0x40800000"
+        }
+      },
+      "b": {
+        "lower": {
+          "kind": "fp32",
+          "bits": "0xc0000000"
+        },
+        "upper": {
+          "kind": "fp32",
+          "bits": "0x40000000"
+        }
+      }
+    },
+    "fixed": {}
+  }
+}

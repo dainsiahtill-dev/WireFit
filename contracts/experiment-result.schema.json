@@ -1,0 +1,424 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/experiment-result.schema.json",
+  "title": "Verifier-owned experiment result, never writable request input",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "result_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "experiment_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "operation": {
+      "enum": [
+        "simplify",
+        "compare_models",
+        "compare_oracles",
+        "verify_candidate",
+        "fit_numeric",
+        "suggest_inputs"
+      ]
+    },
+    "job_status": {
+      "enum": [
+        "completed",
+        "failed",
+        "cancelled",
+        "interrupted"
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "request_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "model_semantic_hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "source_envelope_hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "oracle_binding_hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "input_plan_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "policy_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observation_binding_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "request_sha256",
+        "model_semantic_hashes",
+        "source_envelope_hashes",
+        "oracle_binding_hashes",
+        "input_plan_sha256",
+        "policy_sha256",
+        "observation_binding_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "model_check": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "proved",
+            "refuted",
+            "inconclusive",
+            "not_run"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "solver_record": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reason",
+        "artifacts",
+        "solver_record"
+      ],
+      "additionalProperties": false
+    },
+    "target_validation": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "matched",
+            "mismatch",
+            "partial",
+            "unavailable",
+            "not_run"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "mode": {
+          "enum": [
+            "recorded",
+            "live",
+            "mixed",
+            "none"
+          ]
+        },
+        "counts": {
+          "$ref": "common.schema.json#/$defs/counts"
+        },
+        "source_counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "$ref": "common.schema.json#/$defs/source_kind"
+              },
+              "mode": {
+                "enum": [
+                  "recorded",
+                  "live"
+                ]
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "kind",
+              "mode",
+              "count"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "status",
+        "reason",
+        "artifacts",
+        "mode",
+        "counts",
+        "source_counts"
+      ],
+      "additionalProperties": false
+    },
+    "fit": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "fitted",
+            "failed",
+            "not_run"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "candidate_model_id": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "backend": {
+          "anyOf": [
+            {
+              "enum": [
+                "analytic_baseline",
+                "reference",
+                "handwired"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "train_counts": {
+          "$ref": "common.schema.json#/$defs/counts"
+        },
+        "validation_counts": {
+          "$ref": "common.schema.json#/$defs/counts"
+        },
+        "holdout_counts": {
+          "$ref": "common.schema.json#/$defs/counts"
+        }
+      },
+      "required": [
+        "status",
+        "reason",
+        "artifacts",
+        "candidate_model_id",
+        "backend",
+        "train_counts",
+        "validation_counts",
+        "holdout_counts"
+      ],
+      "additionalProperties": false
+    },
+    "sample_comparison": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "matched",
+            "mismatch",
+            "partial",
+            "not_run"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "counts": {
+          "$ref": "common.schema.json#/$defs/counts"
+        }
+      },
+      "required": [
+        "status",
+        "reason",
+        "artifacts",
+        "counts"
+      ],
+      "additionalProperties": false
+    },
+    "fidelity": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "unvalidated",
+            "sampled_match",
+            "sampled_mismatch",
+            "unavailable",
+            "not_applicable"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "binding_identity_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reason",
+        "artifacts",
+        "binding_identity_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      },
+      "minItems": 0,
+      "maxItems": 1024
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 4096
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/error"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "result_id",
+    "experiment_id",
+    "operation",
+    "job_status",
+    "identity",
+    "model_check",
+    "target_validation",
+    "fit",
+    "sample_comparison",
+    "fidelity",
+    "dependencies",
+    "artifacts",
+    "limitations",
+    "error"
+  ],
+  "additionalProperties": false
+}

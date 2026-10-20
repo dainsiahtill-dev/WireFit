@@ -1,0 +1,659 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/model.schema.json",
+  "title": "WireFix executable model",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "scope": {
+          "$ref": "common.schema.json#/$defs/scope"
+        },
+        "provenance": {
+          "$ref": "common.schema.json#/$defs/provenance"
+        },
+        "domain": {
+          "$ref": "common.schema.json#/$defs/domain"
+        },
+        "kind": {
+          "const": "bv_dag"
+        },
+        "semantics_profile": {
+          "const": "wirefix.bv.total.v1"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "type": {
+                "$ref": "common.schema.json#/$defs/core_type"
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 16
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "op": {
+                    "enum": [
+                      "const"
+                    ]
+                  },
+                  "type": {
+                    "$ref": "common.schema.json#/$defs/core_type"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "minItems": 0,
+                    "maxItems": 0
+                  },
+                  "attrs": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "$ref": "common.schema.json#/$defs/core_value"
+                      }
+                    },
+                    "required": [
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "op",
+                  "type",
+                  "args",
+                  "attrs"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "op": {
+                    "enum": [
+                      "copy",
+                      "bv_neg",
+                      "bv_not",
+                      "bool_not",
+                      "bv_nonzero",
+                      "bool_to_bv",
+                      "bv_zext",
+                      "bv_sext"
+                    ]
+                  },
+                  "type": {
+                    "$ref": "common.schema.json#/$defs/core_type"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "minItems": 1,
+                    "maxItems": 1
+                  },
+                  "attrs": {
+                    "type": "object",
+                    "properties": {},
+                    "required": [],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "op",
+                  "type",
+                  "args",
+                  "attrs"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "op": {
+                    "enum": [
+                      "bv_add",
+                      "bv_sub",
+                      "bv_mul",
+                      "bv_and",
+                      "bv_or",
+                      "bv_xor",
+                      "bv_eq",
+                      "bv_ne",
+                      "bv_ult",
+                      "bv_ule",
+                      "bv_slt",
+                      "bv_sle",
+                      "bool_and",
+                      "bool_or",
+                      "bv_shl",
+                      "bv_lshr",
+                      "bv_ashr",
+                      "bv_concat"
+                    ]
+                  },
+                  "type": {
+                    "$ref": "common.schema.json#/$defs/core_type"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "attrs": {
+                    "type": "object",
+                    "properties": {},
+                    "required": [],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "op",
+                  "type",
+                  "args",
+                  "attrs"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "op": {
+                    "enum": [
+                      "select"
+                    ]
+                  },
+                  "type": {
+                    "$ref": "common.schema.json#/$defs/core_type"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "attrs": {
+                    "type": "object",
+                    "properties": {},
+                    "required": [],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "op",
+                  "type",
+                  "args",
+                  "attrs"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "op": {
+                    "enum": [
+                      "bv_extract"
+                    ]
+                  },
+                  "type": {
+                    "$ref": "common.schema.json#/$defs/core_type"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "minItems": 1,
+                    "maxItems": 1
+                  },
+                  "attrs": {
+                    "type": "object",
+                    "properties": {
+                      "low": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 63
+                      }
+                    },
+                    "required": [
+                      "low"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "op",
+                  "type",
+                  "args",
+                  "attrs"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 512
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "type": {
+                "$ref": "common.schema.json#/$defs/core_type"
+              },
+              "ref": {
+                "$ref": "common.schema.json#/$defs/id"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "ref"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_id",
+        "title",
+        "scope",
+        "provenance",
+        "domain",
+        "kind",
+        "semantics_profile",
+        "inputs",
+        "nodes",
+        "outputs"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "model_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "scope": {
+          "$ref": "common.schema.json#/$defs/scope"
+        },
+        "provenance": {
+          "$ref": "common.schema.json#/$defs/provenance"
+        },
+        "domain": {
+          "$ref": "common.schema.json#/$defs/domain"
+        },
+        "kind": {
+          "const": "numeric_template"
+        },
+        "semantics_profile": {
+          "const": "wirefix.fp32.templates.v1"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "type": {
+                "$ref": "common.schema.json#/$defs/fp32_type"
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "type": {
+                "$ref": "common.schema.json#/$defs/fp32_type"
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "definition": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "template": {
+                  "const": "affine"
+                },
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "a": {
+                      "$ref": "common.schema.json#/$defs/fp32_value"
+                    },
+                    "b": {
+                      "$ref": "common.schema.json#/$defs/fp32_value"
+                    }
+                  },
+                  "required": [
+                    "a",
+                    "b"
+                  ],
+                  "additionalProperties": false
+                },
+                "fixed": {
+                  "type": "object",
+                  "properties": {},
+                  "required": [],
+                  "additionalProperties": false
+                },
+                "parameter_bounds": {
+                  "type": "object",
+                  "properties": {
+                    "a": {
+                      "type": "object",
+                      "properties": {
+                        "lower": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        },
+                        "upper": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        }
+                      },
+                      "required": [
+                        "lower",
+                        "upper"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "b": {
+                      "type": "object",
+                      "properties": {
+                        "lower": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        },
+                        "upper": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        }
+                      },
+                      "required": [
+                        "lower",
+                        "upper"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "a",
+                    "b"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "template",
+                "parameters",
+                "fixed",
+                "parameter_bounds"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "template": {
+                  "const": "affine_clamp"
+                },
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "a": {
+                      "$ref": "common.schema.json#/$defs/fp32_value"
+                    },
+                    "b": {
+                      "$ref": "common.schema.json#/$defs/fp32_value"
+                    }
+                  },
+                  "required": [
+                    "a",
+                    "b"
+                  ],
+                  "additionalProperties": false
+                },
+                "fixed": {
+                  "type": "object",
+                  "properties": {
+                    "lo": {
+                      "$ref": "common.schema.json#/$defs/fp32_value"
+                    },
+                    "hi": {
+                      "$ref": "common.schema.json#/$defs/fp32_value"
+                    }
+                  },
+                  "required": [
+                    "lo",
+                    "hi"
+                  ],
+                  "additionalProperties": false
+                },
+                "parameter_bounds": {
+                  "type": "object",
+                  "properties": {
+                    "a": {
+                      "type": "object",
+                      "properties": {
+                        "lower": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        },
+                        "upper": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        }
+                      },
+                      "required": [
+                        "lower",
+                        "upper"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "b": {
+                      "type": "object",
+                      "properties": {
+                        "lower": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        },
+                        "upper": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        }
+                      },
+                      "required": [
+                        "lower",
+                        "upper"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "a",
+                    "b"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "template",
+                "parameters",
+                "fixed",
+                "parameter_bounds"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "template": {
+                  "const": "piecewise_affine"
+                },
+                "parameters": {
+                  "type": "object",
+                  "patternProperties": {
+                    "^[ab][0-7]$": {
+                      "$ref": "common.schema.json#/$defs/fp32_value"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 4,
+                  "maxProperties": 16
+                },
+                "fixed": {
+                  "type": "object",
+                  "properties": {
+                    "knots": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "common.schema.json#/$defs/fp32_value"
+                      },
+                      "minItems": 1,
+                      "maxItems": 7
+                    }
+                  },
+                  "required": [
+                    "knots"
+                  ],
+                  "additionalProperties": false
+                },
+                "parameter_bounds": {
+                  "type": "object",
+                  "patternProperties": {
+                    "^[ab][0-7]$": {
+                      "type": "object",
+                      "properties": {
+                        "lower": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        },
+                        "upper": {
+                          "$ref": "common.schema.json#/$defs/fp32_value"
+                        }
+                      },
+                      "required": [
+                        "lower",
+                        "upper"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 4,
+                  "maxProperties": 16
+                }
+              },
+              "required": [
+                "template",
+                "parameters",
+                "fixed",
+                "parameter_bounds"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_id",
+        "title",
+        "scope",
+        "provenance",
+        "domain",
+        "kind",
+        "semantics_profile",
+        "inputs",
+        "outputs",
+        "definition"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

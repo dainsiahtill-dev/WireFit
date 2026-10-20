@@ -1,0 +1,27 @@
+{
+  "record_kind": "expected_fixture_definition",
+  "source_id": "numeric_reference_fixture",
+  "formula": "strict_clamp(f32(f32(1.5*x)+(-0.25)), -2, +2)",
+  "semantics_profile": "wirefix.fp32.templates.v1",
+  "parameters": {
+    "a": {
+      "kind": "fp32",
+      "bits": "0x3fc00000"
+    },
+    "b": {
+      "kind": "fp32",
+      "bits": "0xbe800000"
+    }
+  },
+  "fixed": {
+    "lo": {
+      "kind": "fp32",
+      "bits": "0xc0000000"
+    },
+    "hi": {
+      "kind": "fp32",
+      "bits": "0x40000000"
+    }
+  },
+  "notes": "公开真值仅供夹具作者和验证器；不得作为 learner 参数输入。这里没有记录任何 REA 或原二进制调用。"
+}

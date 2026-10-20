@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "kind": "wirefit-resolved-local-upstream-lock",
+  "resolved_at": "2026-10-19T14:20:33.172Z",
+  "host": {
+    "platform": "win32",
+    "arch": "x64",
+    "release": "10.0.26200",
+    "tested_native_gate": "Windows x64 local developer environment; Linux native gate blocked/not run"
+  },
+  "runtime": {
+    "node": {
+      "resolved": true,
+      "version": "24.22.0",
+      "executable_path": "E:\\wirefit\\.tools\\runtime\\node_modules\\node-win-x64\\bin\\node.exe",
+      "executable_sha256": "ba93f9a70bd86fce3ebbb39ec758501458453467aa92a34a0a3602d1e3fc2b9c",
+      "distribution": {
+        "version": "24.22.0",
+        "resolved": "https://registry.npmmirror.com/node-win-x64/-/node-win-x64-24.22.0.tgz",
+        "integrity": "sha512-ViWFVg5B2DIWi9AhCItzf02wzwBS4nE/852My2yb5EG471WvU3UWI0ocU/b0qU/ZtrUVLPI8ggBuUUy9/S01rw==",
+        "cpu": "x64",
+        "license": "MIT",
+        "os": "win32",
+        "bin": {
+          "node": "bin/node.exe"
+        }
+      },
+      "distribution_lock": {
+        "relative_path": ".tools/runtime/package-lock.json",
+        "sha256": "294a06229543b43e7c4c87dc4330307d4e5883c1a6d51de9ffa656f44c57760e",
+        "size_bytes": 570,
+        "media_type": "application/json"
+      },
+      "note": "Exact executed image is hashed. npm distribution URL/integrity are recorded as installed, including mirror provenance; no independent Node release-signature verification claimed."
+    },
+    "bun": {
+      "selected_for_product_worker": false,
+      "resolved": false,
+      "reason": "Real pinned Circuit executes on native Node; no Bun compatibility workaround needed."
+    }
+  },
+  "package_manager": {
+    "name": "npm",
+    "version": "11.16.0",
+    "executable_path": "C:\\Users\\dains\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js",
+    "executable_sha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7",
+    "lockfile": {
+      "relative_path": "package-lock.json",
+      "sha256": "01dcf1e4c5aa07551d21af1a41a074d69adcd5fcd77331802b468c17f345fc9f",
+      "size_bytes": 112733,
+      "media_type": "application/json"
+    }
+  },
+  "packages": {
+    "typescript": {
+      "name": "typescript",
+      "version": "7.0.2",
+      "resolved": true,
+      "resolved_url": "https://registry.npmmirror.com/typescript/-/typescript-7.0.2.tgz",
+      "integrity": "sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==",
+      "package_json": {
+        "relative_path": "node_modules/typescript/package.json",
+        "sha256": "3722b30210616a13a3213ded11575ba6b2dbab10c32a5ef67afca8513e27017e",
+        "size_bytes": 3087,
+        "media_type": "application/json"
+      },
+      "license": "Apache-2.0"
+    },
+    "vitest": {
+      "name": "vitest",
+      "version": "5.0.5",
+      "resolved": true,
+      "resolved_url": "https://registry.npmmirror.com/vitest/-/vitest-5.0.5.tgz",
+      "integrity": "sha512-cPODOMF8YnkiiYtDdHo6n4wWmBrOBBbOIYH2d33M4l3CdNn72h+qMmO6uXffUN6A5AZFXNND/d+krS9mgkXRfg==",
+      "package_json": {
+        "relative_path": "node_modules/vitest/package.json",
+        "sha256": "d00333f3a13ed44fedc77184c8675bae45246534f06684d94cff5e4f8a9f7c10",
+        "size_bytes": 5737,
+        "media_type": "application/json"
+      },
+      "license": "MIT"
+    },
+    "tsx": {
+      "name": "tsx",
+      "version": "4.23.15",
+      "resolved": true,
+      "resolved_url": "https://registry.npmmirror.com/tsx/-/tsx-4.23.15.tgz",
+      "integrity": "sha512-Yiex1Ovn8z2xPpOWckIiysV1SSyRMY9BkLF++q0yKiDxCqRhosKfMg3janKkiLBwZ5c/YryloKwGZcrEmtwxKw==",
+      "package_json": {
+        "relative_path": "node_modules/tsx/package.json",
+        "sha256": "ab5f14c4251638844ade3905d3cfc52fc1c833644694d655a05f6d0ca746b83c",
+        "size_bytes": 1663,
+        "media_type": "application/json"
+      },
+      "license": "MIT"
+    },
+    "ajv": {
+      "name": "ajv",
+      "version": "8.20.0",
+      "resolved": true,
+      "resolved_url": "https://registry.npmmirror.com/ajv/-/ajv-8.20.0.tgz",
+      "integrity": "sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==",
+      "package_json": {
+        "relative_path": "node_modules/ajv/package.json",
+        "sha256": "1f9033ee5a6515e7d76938b7072941862d1ed228a6879cc7fe10cdeb75107989",
+        "size_bytes": 4405,
+        "media_type": "application/json"
+      },
+      "license": "MIT"
+    },
+    "canonicalize": {
+      "name": "canonicalize",
+      "version": "3.0.0",
+      "resolved": true,
+      "resolved_url": "https://registry.npmmirror.com/canonicalize/-/canonicalize-3.0.0.tgz",
+      "integrity": "sha512-yYLfHyDMIXRyRqsKBRLX023riFLpXY2YOfdtqKXZRZy9qsfOJ9U+4F9YZL7MEzL5+ziN2x2nlBvY/Voi3EBljA==",
+      "package_json": {
+        "relative_path": "node_modules/canonicalize/package.json",
+        "sha256": "c9bcb2590b7a2ded24ea63582f2a47cbafb934733ed9429cef120e8d6e55bea9",
+        "size_bytes": 1365,
+        "media_type": "application/json"
+      },
+      "license": "Apache-2.0"
+    },
+    "z3-solver": {
+      "name": "z3-solver",
+      "version": "5.3.1",
+      "resolved": true,
+      "resolved_url": "https://registry.npmmirror.com/z3-solver/-/z3-solver-5.3.1.tgz",
+      "integrity": "sha512-xndynBQoXmFMopcdpCchRhT2mJyuIfmwY2lxBje0OCkDAX8WEWSCg0AXHPZwskcFIziVaA7bBQJxPTKkWy5Diw==",
+      "package_json": {
+        "relative_path": "node_modules/z3-solver/package.json",
+        "sha256": "d4a3b0225ddef3a72029a74314b9e85dcd0a35dab5541b95c5c5649b283a1bc6",
+        "size_bytes": 1842,
+        "media_type": "application/json"
+      },
+      "license": "MIT"
+    },
+    "@modelcontextprotocol/sdk": {
+      "name": "@modelcontextprotocol/sdk",
+      "version": "1.32.1",
+      "resolved": true,
+      "resolved_url": "https://registry.npmmirror.com/@modelcontextprotocol/sdk/-/sdk-1.32.1.tgz",
+      "integrity": "sha512-2DdE+SJDtzLEEWzY1ZjY7Q+VcPhcV1KisD3zI4u0XZyktsjHum1mwbMI+JaulUBi2OZk+KJAi2uPXzxichPkdw==",
+      "package_json": {
+        "relative_path": "node_modules/@modelcontextprotocol/sdk/package.json",
+        "sha256": "0216319ea53177f7ed419d660b2f52ccc7e3327e57f9ee2ef03225ff543aeae4",
+        "size_bytes": 6511,
+        "media_type": "application/json"
+      },
+      "license": "MIT"
+    }
+  },
+  "lanes": {
+    "core": {
+      "dependencies_resolved": true,
+      "build": "PASS",
+      "typecheck": "PASS"
+    },
+    "z3": {
+      "resolved": true,
+      "package": {
+        "name": "z3-solver",
+        "version": "5.3.1",
+        "resolved": true,
+        "resolved_url": "https://registry.npmmirror.com/z3-solver/-/z3-solver-5.3.1.tgz",
+        "integrity": "sha512-xndynBQoXmFMopcdpCchRhT2mJyuIfmwY2lxBje0OCkDAX8WEWSCg0AXHPZwskcFIziVaA7bBQJxPTKkWy5Diw==",
+        "package_json": {
+          "relative_path": "node_modules/z3-solver/package.json",
+          "sha256": "d4a3b0225ddef3a72029a74314b9e85dcd0a35dab5541b95c5c5649b283a1bc6",
+          "size_bytes": 1842,
+          "media_type": "application/json"
+        },
+        "license": "MIT"
+      },
+      "source_commit": null,
+      "source_commit_status": "not independently resolved from this npm release",
+      "assets": [
+        {
+          "relative_path": "node_modules/z3-solver/build/node.js",
+          "sha256": "28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98",
+          "size_bytes": 2407,
+          "media_type": "application/octet-stream"
+        },
+        {
+          "relative_path": "node_modules/z3-solver/build/z3-built.js",
+          "sha256": "9838f5428af10edaa56cf28fe490c502eab7e54050821effa9a31eb022b6ec6b",
+          "size_bytes": 358187,
+          "media_type": "application/octet-stream"
+        },
+        {
+          "relative_path": "node_modules/z3-solver/build/z3-built.wasm",
+          "sha256": "dadc8051d994f42664f4400ff9d1bd87fb11d2150fac9de49597f20cd84a6fcc",
+          "size_bytes": 34580492,
+          "media_type": "application/octet-stream"
+        },
+        {
+          "relative_path": "node_modules/z3-solver/build/kill-threads.js",
+          "sha256": "2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238",
+          "size_bytes": 1694,
+          "media_type": "application/octet-stream"
+        }
+      ],
+      "real_sat_unsat_verified": true,
+      "genuine_unknown": "NOT_RUN",
+      "worker_policy": "Fresh owned child per request; real hard timeout/cancel tests are separate from genuine UNKNOWN"
+    },
+    "handwired": {
+      "resolved": true,
+      "repository": "https://github.com/chenglou/handwired",
+      "commit": "257856e3b221140acb4cc4460626b850c0bd4ff1",
+      "dependency_mode": "unmodified pinned source dependency closure",
+      "manifest": {
+        "relative_path": "vendor/handwired/manifest.json",
+        "sha256": "7a6927cf69961098a2d016b4cbe8b971a17b28cfc592536e4f3605c96282d53e",
+        "size_bytes": 431,
+        "media_type": "application/json"
+      },
+      "files": [
+        {
+          "path": "src/runtime/numeric-ui-core.ts",
+          "sha256": "00c081d7438088894b85e2a3e78a5df763a44cb41ebbf538e9dbf6d4521aedd2"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "55d5c9c20065b2aa66887036f6741ee5ef12c7a72cd4ad96034889867d436824"
+        }
+      ],
+      "license": {
+        "relative_path": "vendor/handwired/LICENSE",
+        "sha256": "55d5c9c20065b2aa66887036f6741ee5ef12c7a72cd4ad96034889867d436824",
+        "size_bytes": 1066,
+        "media_type": "text/plain"
+      },
+      "api_map": {
+        "relative_path": "docs/handwired-api-map.md",
+        "sha256": "a49bd80a936c046465bce955f018fa0dc486ca17e1b984e8cf5af7221ed78342",
+        "size_bytes": 5324,
+        "media_type": "text/markdown"
+      },
+      "runtime": "Node 24.22.0",
+      "real_build_evaluate_backprop_verified": true,
+      "local_patches": [],
+      "adr": "docs/adr/0002-handwired-numeric-runtime.md"
+    },
+    "rea": {
+      "resolved": true,
+      "version": "6.7.0",
+      "commit": "27dc42d10249f0410904a75c0997842eb03b931c",
+      "source_resolution": "npm registry SLSA resolvedDependencies gitCommit; attestation decoded, signature not independently checked",
+      "package_archive": {
+        "relative_path": "artifacts/rea/rea-agents-6.7.0.tgz",
+        "sha256": "20958a66dba1a011e50a486beb9463a343128ed368c984f94065362c13f51f90",
+        "size_bytes": 6276963,
+        "media_type": "application/gzip"
+      },
+      "lock": {
+        "relative_path": "artifacts/rea/rea-lock.json",
+        "sha256": "ee20c4083377dd6b5ecf54048366176d2fd6dc31ef146b866ea00922bb69e5e2",
+        "size_bytes": 3912,
+        "media_type": "application/json"
+      },
+      "live_discovery": {
+        "relative_path": "artifacts/rea/live-discovery.json",
+        "sha256": "ec3d7c3a558db9627043cbb784ffc6d7c26f126165f3f2f0c38874dc20b6ddb3",
+        "size_bytes": 9628722,
+        "media_type": "application/json"
+      },
+      "catalog_digest": "af39310c9591bb981893ec0d2188b1bcf6e9cc8ba3ac513d5bbefc8ddcb85639",
+      "tool_count": 207,
+      "portable_fixture": {
+        "relative_path": "artifacts/rea/real-js-bundle.json",
+        "sha256": "dc43125724158779c0b7b857d7a3fd8c6b4b0fa881d829131f805f866afa8844",
+        "size_bytes": 43739,
+        "media_type": "application/json"
+      },
+      "capabilities": {
+        "portable": "PASS",
+        "real_mcp_discovery": "PASS",
+        "real_js_portable_export": "PASS",
+        "cross_session_portable_transfer": "PASS",
+        "native_ghidra": "BLOCKED",
+        "native_pcode_fixture": "NOT_RUN",
+        "cfg_phi": "UNSUPPORTED"
+      },
+      "native_blockers": [
+        "GHIDRA_INSTALL_DIR not configured",
+        "Matching Ghidra native decompiler not available",
+        "No usable Java runtime found by real REA provider probe",
+        "pwntools binary-layout lane supports Linux x64 only"
+      ],
+      "note": "npm provenance payload gitCommit was decoded; its attestation signature was not independently verified. Real native Ghidra lane remains blocked."
+    },
+    "mcp_sdk": {
+      "resolved": true,
+      "package": {
+        "name": "@modelcontextprotocol/sdk",
+        "version": "1.32.1",
+        "resolved": true,
+        "resolved_url": "https://registry.npmmirror.com/@modelcontextprotocol/sdk/-/sdk-1.32.1.tgz",
+        "integrity": "sha512-2DdE+SJDtzLEEWzY1ZjY7Q+VcPhcV1KisD3zI4u0XZyktsjHum1mwbMI+JaulUBi2OZk+KJAi2uPXzxichPkdw==",
+        "package_json": {
+          "relative_path": "node_modules/@modelcontextprotocol/sdk/package.json",
+          "sha256": "0216319ea53177f7ed419d660b2f52ccc7e3327e57f9ee2ef03225ff543aeae4",
+          "size_bytes": 6511,
+          "media_type": "application/json"
+        },
+        "license": "MIT"
+      },
+      "actual_official_client_test_verified": true,
+      "codex_actual_client": "NOT_RUN"
+    }
+  },
+  "verification": {
+    "checks": [
+      {
+        "id": "build",
+        "status": "PASS",
+        "started_at": "2026-10-19T14:19:31.692Z",
+        "finished_at": "2026-10-19T14:19:32.494Z",
+        "outputs": [
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/build.stdout.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/build.stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/build.command.json",
+            "sha256": "d1f42e4217cc81fe16a8a82efa54c71e82cdad50a80d9bf9de5d7217b65e679f",
+            "size_bytes": 1075,
+            "media_type": "application/json"
+          }
+        ]
+      },
+      {
+        "id": "typecheck",
+        "status": "PASS",
+        "started_at": "2026-10-19T14:19:32.499Z",
+        "finished_at": "2026-10-19T14:19:33.270Z",
+        "outputs": [
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/typecheck.stdout.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/typecheck.stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/typecheck.command.json",
+            "sha256": "dee6945404258aaa871bd1752a4ac326db17790e8c9dece53749b99907112a25",
+            "size_bytes": 1114,
+            "media_type": "application/json"
+          }
+        ]
+      },
+      {
+        "id": "vitest",
+        "status": "PASS",
+        "started_at": "2026-10-19T14:19:33.279Z",
+        "finished_at": "2026-10-19T14:20:12.104Z",
+        "outputs": [
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/vitest.stdout.log",
+            "sha256": "45bccd88becde4fabe628b13bff457b7029ebba720d34e70e4e870f764cacb2d",
+            "size_bytes": 96,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/vitest.stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/vitest.command.json",
+            "sha256": "a61457934719ab053f9187ba95bb30e2549bd7649215aa43f0324669f2b44f1f",
+            "size_bytes": 1182,
+            "media_type": "application/json"
+          }
+        ]
+      },
+      {
+        "id": "demos",
+        "status": "PASS",
+        "started_at": "2026-10-19T14:20:12.125Z",
+        "finished_at": "2026-10-19T14:20:20.195Z",
+        "outputs": [
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/demos.stdout.log",
+            "sha256": "a371ba5f3ceea6360ee56920fcf96e5410872c5339ccde397f877a430eb6e154",
+            "size_bytes": 787,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/demos.stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain"
+          },
+          {
+            "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/demos.command.json",
+            "sha256": "1bc949edad374d5772fff9f09244ef0ea29f6c7b0e0420a4bf03b376bb90fffa",
+            "size_bytes": 1026,
+            "media_type": "application/json"
+          }
+        ]
+      }
+    ],
+    "vitest_report": {
+      "relative_path": "artifacts/acceptance/run-20261019141931597-lnBJ73/vitest.json",
+      "sha256": "04d0489b4e48f7cd5fc5487c0d65dae6f12f800eb4fb2f479cfd62000f25e8b9",
+      "size_bytes": 55918,
+      "media_type": "application/json"
+    },
+    "scope": "Dependency resolution and component verification are recorded separately; installed versions do not imply a native end-to-end PASS."
+  },
+  "unresolved": {
+    "linux_platform": "NOT_RUN",
+    "macos_platform": "NOT_RUN",
+    "ghidra_native": "BLOCKED",
+    "cfg_phi": "UNSUPPORTED",
+    "gpu": "NOT_RUN"
+  }
+}

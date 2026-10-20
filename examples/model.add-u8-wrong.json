@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "model_id": "add_u8_wrong",
+  "title": "故意错误的 BV8 加一候选",
+  "kind": "bv_dag",
+  "semantics_profile": "wirefix.bv.total.v1",
+  "inputs": [
+    {
+      "id": "a",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      }
+    },
+    {
+      "id": "b",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "result",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "ref": "wrong_sum"
+    }
+  ],
+  "domain": {
+    "constraints": []
+  },
+  "scope": {
+    "kind": "expression",
+    "observation": "declared_outputs",
+    "source_completeness": "not_applicable",
+    "execution_guard": {
+      "kind": "all_inputs"
+    },
+    "observation_point": {
+      "kind": "expression_output",
+      "source_location": null
+    }
+  },
+  "provenance": {
+    "source_kind": "manual",
+    "source_ref": null,
+    "source_artifacts": [],
+    "notes": "本实施包自写模型/假设；不是 REA、Ghidra 或 Handwired 的已运行导出。"
+  },
+  "nodes": [
+    {
+      "id": "sum",
+      "op": "bv_add",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [
+        "a",
+        "b"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "one",
+      "op": "const",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [],
+      "attrs": {
+        "value": {
+          "kind": "bv",
+          "width": 8,
+          "bits": "0x01"
+        }
+      }
+    },
+    {
+      "id": "wrong_sum",
+      "op": "bv_add",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [
+        "sum",
+        "one"
+      ],
+      "attrs": {}
+    }
+  ]
+}

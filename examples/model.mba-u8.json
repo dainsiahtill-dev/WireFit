@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "model_id": "mba_u8",
+  "title": "BV8 MBA 加法恒等式",
+  "kind": "bv_dag",
+  "semantics_profile": "wirefix.bv.total.v1",
+  "inputs": [
+    {
+      "id": "a",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      }
+    },
+    {
+      "id": "b",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "result",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "ref": "total"
+    }
+  ],
+  "domain": {
+    "constraints": []
+  },
+  "scope": {
+    "kind": "expression",
+    "observation": "declared_outputs",
+    "source_completeness": "not_applicable",
+    "execution_guard": {
+      "kind": "all_inputs"
+    },
+    "observation_point": {
+      "kind": "expression_output",
+      "source_location": null
+    }
+  },
+  "provenance": {
+    "source_kind": "manual",
+    "source_ref": null,
+    "source_artifacts": [],
+    "notes": "本实施包自写模型/假设；不是 REA、Ghidra 或 Handwired 的已运行导出。"
+  },
+  "nodes": [
+    {
+      "id": "xor_ab",
+      "op": "bv_xor",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [
+        "a",
+        "b"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "and_ab",
+      "op": "bv_and",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [
+        "a",
+        "b"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "two",
+      "op": "const",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [],
+      "attrs": {
+        "value": {
+          "kind": "bv",
+          "width": 8,
+          "bits": "0x02"
+        }
+      }
+    },
+    {
+      "id": "twice_and",
+      "op": "bv_mul",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [
+        "and_ab",
+        "two"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "total",
+      "op": "bv_add",
+      "type": {
+        "kind": "bv",
+        "width": 8
+      },
+      "args": [
+        "xor_ab",
+        "twice_and"
+      ],
+      "attrs": {}
+    }
+  ]
+}
