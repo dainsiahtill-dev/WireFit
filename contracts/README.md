@@ -1,6 +1,6 @@
 # 契约实现说明
 
-本目录是拟实现的 JSON Schema 2020-12 契约。所有 `$id` 都使用保留的 `.invalid` 名称作为离线标识；将 11 个 schema 注册到同一 validator 实例，按 `$id` 解析相对 `$ref`，禁止为了校验而请求该域名。M1 必须用真正的 2020-12 validator 编译全套 schema，并把其精确依赖写入锁文件。
+本目录是拟实现的 JSON Schema 2020-12 契约。所有 `$id` 都使用保留的 `.invalid` 名称作为离线标识；将 14 个 schema 注册到同一 validator 实例，按 `$id` 解析相对 `$ref`，禁止为了校验而请求该域名。M1 必须用真正的 2020-12 validator 编译全套 schema，并把其精确依赖写入锁文件。
 
 ## 文件和边界
 
@@ -17,6 +17,11 @@
 | dataset.schema.json | 不可变的输入、split、政策和观测文件集合 |
 | experiment-request.schema.json | 六种 operation；按 mode/source_mode 继续判别 |
 | experiment-result.schema.json | 仅 verifier 生成的结果；绝非可提交的请求 |
+| research-direction.schema.json | 17 个方向的可证伪规格；阈值、划分和负控必须先于运行写死 |
+| research-request.schema.json | 研究实验请求：单对象 + `direction_id` 枚举 + 已解析预算 |
+| research-result.schema.json | 仅研究 verifier 生成的结果；绝非可提交的请求 |
+
+研究契约是独立的一族，**不并入** `experiment-request.schema.json` 的六种 operation 并集：`docs/cli.md` 已明确 binary/trace/ida 属于 "separate job operations，do not extend the canonical mathematical experiment union"，研究实验有独立的规格、判定代数和审计面，塞进并集会迫使 `ExperimentResult` 长出研究维度并污染 `wirefit_run_experiment` 的内联契约。
 
 JSON 语法和 schema 校验成功，只是第一层。以下语义校验是必须实现的第二层；不能以“schema 放行”作为跳过的理由。
 

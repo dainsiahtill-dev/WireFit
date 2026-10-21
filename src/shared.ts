@@ -70,7 +70,7 @@ function loadSchemas():void{
  if(validators.size)return;
  const ajv=new Ajv2020({strict:true,allErrors:true,validateFormats:true});
  ajv.addFormat('date-time',{type:'string',validate:(value:string)=>/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(value)&&Number.isFinite(Date.parse(value))});
- const names=['common','model','budget','oracle','oracle-request','oracle-response','input-sample','observation','dataset','experiment-request','experiment-result'];
+ const names=['common','model','budget','oracle','oracle-request','oracle-response','input-sample','observation','dataset','experiment-request','experiment-result','research-direction','research-request','research-result'];
  for(const name of names){
   const schema=JSON.parse(readFileSync(path.join(rootDir,'contracts',name+'.schema.json'),'utf8')) as Record<string,unknown>;
   ajv.addSchema(schema);

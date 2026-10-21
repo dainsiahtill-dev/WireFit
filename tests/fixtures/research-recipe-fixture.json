@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "documents": {
+    "doc": {
+      "groups": [
+        { "cases": [ { "matched": true, "count": 3 }, { "matched": false, "count": 4 } ] },
+        { "cases": [ { "matched": true, "count": 5 } ] }
+      ],
+      "scalars": [3, 4, 5, 3],
+      "table": [
+        { "key": "0000", "indicator": 0 },
+        { "key": "0101", "indicator": 1 }
+      ],
+      "text": "hello world",
+      "empty": []
+    }
+  },
+  "binaries": {
+    "blob": "01020301020309"
+  },
+  "cases": [
+    { "id": "row_count", "derivation": { "kernel": "row_count", "artifact_role": "doc", "path": "groups[*].cases[*].matched" }, "expected": 3, "comparator": "eq" },
+    { "id": "distinct_count", "derivation": { "kernel": "distinct_count", "artifact_role": "doc", "path": "scalars[*]" }, "expected": 3, "comparator": "eq" },
+    { "id": "field_count_true", "derivation": { "kernel": "field_count", "artifact_role": "doc", "path": "groups[*].cases[*].matched", "value": true }, "expected": 2, "comparator": "eq" },
+    { "id": "field_count_false", "derivation": { "kernel": "field_count", "artifact_role": "doc", "path": "groups[*].cases[*].matched", "value": false }, "expected": 1, "comparator": "eq" },
+    { "id": "field_sum", "derivation": { "kernel": "field_sum", "artifact_role": "doc", "path": "scalars[*]" }, "expected": 15, "comparator": "eq" },
+    { "id": "field_min", "derivation": { "kernel": "field_min", "artifact_role": "doc", "path": "scalars[*]" }, "expected": 3, "comparator": "eq" },
+    { "id": "field_max", "derivation": { "kernel": "field_max", "artifact_role": "doc", "path": "scalars[*]" }, "expected": 5, "comparator": "eq" },
+    { "id": "all_equal_empty", "derivation": { "kernel": "all_equal", "artifact_role": "doc", "path": "empty[*]", "value": 1 }, "expected": false, "comparator": "eq" },
+    { "id": "all_equal_match", "derivation": { "kernel": "all_equal", "artifact_role": "doc", "path": "groups[*].cases[*].matched", "value": true }, "expected": false, "comparator": "eq" },
+    { "id": "any_equal", "derivation": { "kernel": "any_equal", "artifact_role": "doc", "path": "groups[*].cases[*].matched", "value": false }, "expected": true, "comparator": "eq" },
+    { "id": "set_serialized", "derivation": { "kernel": "set_equality", "artifact_role": "doc", "path": "table[*].indicator" }, "expected": "n:0|n:1", "comparator": "identical_set" },
+    { "id": "set_serialized_keys", "derivation": { "kernel": "set_equality", "artifact_role": "doc", "path": "table[*].key" }, "expected": "s:0000|s:0101", "comparator": "identical_set" },
+    { "id": "set_two_paths", "derivation": { "kernel": "set_equality", "artifact_role": "doc", "path": "table[*].indicator", "second_artifact_role": "doc", "second_path": "scalars[*]" }, "expected": false, "comparator": "eq" },
+    { "id": "file_sha256", "derivation": { "kernel": "file_sha256", "artifact_role": "blob" }, "expected": "f34eaad85be44c636bce583b0487ae5418e860968381a79f2f06f8ca09bcd569", "comparator": "eq" },
+    { "id": "byte_pattern_count", "derivation": { "kernel": "byte_pattern_count", "artifact_role": "blob", "pattern_hex": "010203" }, "expected": 2, "comparator": "eq" },
+    { "id": "byte_pattern_overlap", "derivation": { "kernel": "byte_pattern_count", "artifact_role": "blob", "pattern_hex": "010203010203" }, "expected": 1, "comparator": "eq" },
+    { "id": "non_integer", "derivation": { "kernel": "field_sum", "artifact_role": "doc", "path": "text" }, "expected": 0, "comparator": "eq" },
+    { "id": "empty_aggregation", "derivation": { "kernel": "field_min", "artifact_role": "doc", "path": "empty[*]" }, "expected": 0, "comparator": "eq" },
+    { "id": "missing_property", "derivation": { "kernel": "row_count", "artifact_role": "doc", "path": "absent[*]" }, "expected": 0, "comparator": "eq" },
+    { "id": "comparator_gte", "derivation": { "kernel": "row_count", "artifact_role": "doc", "path": "groups[*].cases[*].matched" }, "expected": 3, "comparator": "gte" },
+    { "id": "comparator_ne", "derivation": { "kernel": "row_count", "artifact_role": "doc", "path": "groups[*].cases[*].matched" }, "expected": 4, "comparator": "ne" }
+  ]
+}

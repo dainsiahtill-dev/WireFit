@@ -59,7 +59,7 @@ it('advertises explicit bounded trace plans with execution annotations and no ca
     const { tools } = await linked.client.listTools();
     const trace = tools.find(tool => tool.name === 'wirefit_trace_binary');
     expect(trace).toBeDefined();
-    expect(tools).toHaveLength(17);
+    expect(tools).toHaveLength(19);
     const rangeSchema = (trace!.inputSchema.properties as any).plan.properties.ranges.items;
     expect(rangeSchema.required).toEqual(['rva', 'size_bytes']);
     expect(rangeSchema.properties.module).toMatchObject({ type: 'string', not: { enum: ['.', '..'] } });

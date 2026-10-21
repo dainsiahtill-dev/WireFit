@@ -81,6 +81,10 @@ const commands: Record<string, string[]> = {
     'budget',
   ],
   'experiment run': ['case', 'request'],
+  'research list': [],
+  'research spec': ['direction'],
+  'research run': ['case', 'direction', 'budget'],
+  'research recheck': ['case', 'run'],
   jobs: ['case'],
   'job show': ['case', 'job'],
   show: ['case', 'kind', 'id'],
@@ -329,6 +333,17 @@ async function readOnly(command: string, options: Parsed['options']): Promise<un
       const inputs = await readJson<ValueMap>(file);
       return { model_id: model.model_id, inputs, outputs: evaluateModel(model, inputs) };
     }
+    if (command === 'research recheck') {
+      const { recheckResearchRunFromStore } = await import('./research/recheck.js');
+      const outcome = await recheckResearchRunFromStore(store, required(options, 'run'));
+      return {
+        run: required(options, 'run'),
+        status: outcome.mismatches.length === 0 ? 'agreed' : 'mismatch',
+        checked_count: outcome.checked_count,
+        agreed_count: outcome.agreed_count,
+        mismatches: outcome.mismatches,
+      };
+    }
     const section = typeof options.section === 'string' ? options.section : 'result',
       record = await store.getObject<any>('runs', required(options, 'run'));
     const value =
@@ -336,9 +351,11 @@ async function readOnly(command: string, options: Parsed['options']): Promise<un
         ? record.result
         : section === 'request'
           ? record.request
-          : section === 'counterexamples' && record.comparison_artifact
-            ? JSON.parse((await store.readArtifact(record.comparison_artifact)).toString('utf8'))
-            : null;
+          : section === 'audit'
+            ? record.result?.audit ?? null
+            : section === 'counterexamples' && record.comparison_artifact
+              ? JSON.parse((await store.readArtifact(record.comparison_artifact)).toString('utf8'))
+              : null;
     assert(value !== null, 'REPORT_SECTION_UNAVAILABLE', 'Requested report section is unavailable');
     const offset = integer(options, 'offset', 0),
       limit = integer(options, 'limit', 100);
@@ -564,6 +581,26 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<numb
     return 0;
   }
   if(command==='ida status'){json(await idaCapabilities(rootDir));return 0;}
+  if (command === 'research list' || command === 'research spec') {
+    const { researchCatalog, researchDirection } = await import('./research/index.js');
+    if (command === 'research list') {
+      json({
+        directions: researchCatalog().map((direction) => ({
+          direction_id: direction.direction_id,
+          title: direction.title,
+          corpus_role: direction.corpus_role,
+          claim_count: direction.claims.length,
+          primary_claim_id: direction.primary_claim_id,
+        })),
+      });
+      return 0;
+    }
+    const directionId = required(options, 'direction');
+    const spec = researchDirection(directionId);
+    assert(spec !== null, 'CLI_USAGE', 'Unknown research direction: ' + directionId);
+    json(spec);
+    return 0;
+  }
   if (command === 'mcp') {
     const { startMcp } = await import('./mcp.js');
     await startMcp({ caseDir: required(options, 'case'), create: options.create === true });
@@ -578,7 +615,7 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<numb
     }
     return 0;
   }
-  if (['jobs', 'job show', 'show', 'model evaluate', 'report show'].includes(command)) {
+  if (['jobs', 'job show', 'show', 'model evaluate', 'report show', 'research recheck'].includes(command)) {
     json(await readOnly(command, options));
     return 0;
   }
@@ -742,6 +779,23 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<numb
       const completed = await foreground(service, () =>
         service.acquireEvidence(request as Parameters<WirefitService['acquireEvidence']>[0]),
       );
+      result = completed.value;
+      code = completed.code;
+    } else if (command === 'research run') {
+      const directionId = required(options, 'direction');
+      const { researchDirection } = await import('./research/index.js');
+      assert(
+        researchDirection(directionId) !== null,
+        'CLI_USAGE',
+        'Unknown research direction: ' + directionId,
+      );
+      const request = {
+        schema_version: 1 as const,
+        research_id: id('research'),
+        direction_id: directionId,
+        budget: resolveBudget(await optionalJson<Partial<Budget>>(options, 'budget', {})),
+      };
+      const completed = await foreground(service, () => service.submitResearch(request));
       result = completed.value;
       code = completed.code;
     } else {

@@ -51,7 +51,7 @@ export async function runDemos():Promise<{run_directory:string;demos:DemoReceipt
   const different=await waitExperiment(service,{schema_version:1,experiment_id:'demo_a_counterexample',operation:'compare_models',mode:'exact_bv',budget:defaultBudget,left_model_id:left.model_id,right_model_id:right.model_id,domain:left.domain,mapping:defaultMapping(left,right)});
   assert(different.result.model_check.status==='refuted','DEMO_A_FAILED','Changed expression did not produce a model counterexample');
   const exported=await service.exportReport(run.result.result_id,path.join(runDirectory,'export-a'));
-  assert(exported.candidate_module,'DEMO_A_FAILED','Export has no candidate module');
+  assert('candidate_module' in exported&&exported.candidate_module,'DEMO_A_FAILED','Export has no candidate module');
   const program="import {evaluate} from "+JSON.stringify('./export-a/'+exported.candidate_module)+";let count=0;const v=n=>({kind:'bv',width:8,bits:'0x'+n.toString(16).padStart(2,'0')});for(let a=0;a<256;a++)for(let b=0;b<256;b++){const out=evaluate({a:v(a),b:v(b)}).result;if(out.bits!==v((a+b)%256).bits)throw Error('export mismatch');count++;}console.log(JSON.stringify({pairs:count,matched:count,reference:'independent modular addition, not an original binary'}));\n";
   const checker=path.join(runDirectory,'exhaustive-a.mjs');await writeFile(checker,program,'utf8');
   const fresh=await runProcess(process.execPath,[checker],{timeout_ms:30000});

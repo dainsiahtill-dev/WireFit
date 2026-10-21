@@ -161,6 +161,28 @@ Jobs/show/model evaluation/report inspection open the case read-only, so they wo
 
 `experiment run` accepts the exact finite union in `contracts/experiment-request.schema.json`: simplify, model/Oracle comparison, recorded/live candidate verification, fitting, and input suggestions. Unknown fields, injected verdicts, empty output maps and invalid input bindings are rejected. It provides access to advanced operations without adding hidden CLI semantics.
 
+## Research experiments
+
+```powershell
+./wirefit.cmd research list
+./wirefit.cmd research spec --direction D07
+./wirefit.cmd research run --case ./cases/research-vmde --direction D01
+./wirefit.cmd research recheck --case ./cases/research-vmde --run RUN_ID
+./wirefit.cmd report export --case ./cases/research-vmde --run RUN_ID --out ./exports/research-D01
+```
+
+`research list` and `research spec` read the seventeen pre-registered direction specifications that are compiled into the product. They need no case and open no case: they are the catalogue, not an experiment.
+
+`research run` runs one direction through the five research phases: plan, develop, freeze, evaluate, recheck. It is a writer: it produces a job, a stored run and exportable artifacts. It takes the writer lease on the case, so it cannot run while an MCP instance owns the same case.
+
+`research recheck` recomputes every recorded observation from the stored artifacts and the pinned evidence. It is read only and opens the case without the writer lease, so it can run against a case an MCP instance owns.
+
+A research run never lets a caller set the verdict. The verdict is one of `supported`, `refuted`, `inconclusive` or `not_run` and is produced by the verifier alone. `refuted` is a completed analysis, not a process failure: the exit code stays 0 and the verdict is reported in the result field.
+
+Every threshold, data split expectation and negative control is fixed in the frozen specification before the run; the specification digest is recorded as `plan_sha256`. The develop phase never sees the holdout rows: the develop context has no holdout accessor at all. This is a structural non-disclosure, not an operating system isolation, so the auditor additionally scans the develop artifacts for holdout row identifiers and reports `SPLIT_LEAKAGE` if any appear. See [RESEARCH-PROTOCOL.md](RESEARCH-PROTOCOL.md) for the full protocol, the restricted path language and the kernel semantics.
+
+`report export` on a research run writes the lane package: `plan.json`, `checks.json`, `receipt.json`, `report.md` and `manifest.json`, plus the run artifacts under `artifacts/`. The manifest pins the product sources the package depends on, so a lane re-run that changes a pinned product source invalidates the package.
+
 ## MCP
 
 Start the stdio server from an MCP client:
@@ -171,7 +193,7 @@ node apps/mcp/bin/wirefit-mcp.js --case /absolute/path/to/case
 
 Use `--create` explicitly to create a missing case. An existing case opens normally with that flag. `wirefit mcp --case CASE --create` is equivalent. All tools remain bound to this case; no global current binary is selected. Stdout is exclusively MCP protocol traffic. Errors/startup diagnostics go to stderr. Shutdown cancels owned jobs and closes the case.
 
-The server uses the official MCP SDK and advertises these seventeen tools:
+The server uses the official MCP SDK and advertises these nineteen tools:
 
 | Tool | Arguments |
 | --- | --- |
@@ -188,6 +210,8 @@ The server uses the official MCP SDK and advertises these seventeen tools:
 | `wirefit_import_dataset` | `{manifest,artifact_root}` |
 | `wirefit_collect_dataset` | `{oracle_id,inputs,comparison_policy,max_calls?}` |
 | `wirefit_run_experiment` | Raw canonical ExperimentRequest object |
+| `wirefit_research_directions` | `{direction_id?}` |
+| `wirefit_run_research_direction` | `{direction_id,budget?}` |
 | `wirefit_get_job` | `{job_id}` |
 | `wirefit_cancel_job` | `{job_id}` |
 | `wirefit_get_report` | `{result_id,section?,offset?,limit?}` |

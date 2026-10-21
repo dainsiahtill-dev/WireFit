@@ -1,10 +1,10 @@
 # Wirefit 实际验收记录
 
-运行：run-20261019141931597-lnBJ73。开始 2026-10-19T14:19:31.597Z，结束 2026-10-19T14:20:33.688Z。
+运行：run-20261021151055366-QhjcBL。开始 2026-10-21T15:10:55.366Z，结束 2026-10-21T15:12:28.070Z。
 主机：win32/x64，Node 24.22.0。
 命令执行状态：PASS；完整规范交付状态：PARTIAL。
 
-完整机器可读证据：[matrix.json](../artifacts/acceptance/run-20261019141931597-lnBJ73/matrix.json)。依赖身份：[upstream-lock.json](../upstream-lock.json)。
+完整机器可读证据：[matrix.json](../artifacts/acceptance/run-20261021151055366-QhjcBL/matrix.json)。依赖身份：[upstream-lock.json](../upstream-lock.json)。
 
 门禁状态来自真实执行日志、具体断言与保留的历史捕获。INCONCLUSIVE 表示仅部分组件已覆盖；BLOCKED 和 NOT_RUN 不计入 PASS。
 
@@ -67,7 +67,7 @@
 | R13 | INCONCLUSIVE | Synthetic unsupported side-effect rejection | Real native instruction side-effect/ABI correspondence is not independently established. |
 | R14 | NOT_RUN | Conditional CFG/phi enhancement | CFG/phi capability is explicitly unsupported; no real incoming-edge-slot gate. |
 | P01 | INCONCLUSIVE | Real CLI import/acquire, Oracle collection/compare, simplify/fit and report export | Complete CLI Oracle/REA acquire-to-fit-to-export paths are not all independently exercised. |
-| P02 | PASS | Official MCP SDK client: schema, asynchronous jobs, cancel, counterexample retrieval | All required assertions for the stated scope passed in the recorded run. |
+| P02 | INCONCLUSIVE | Official MCP SDK client: schema, asynchronous jobs, cancel, counterexample retrieval | Required evidence was not run or not captured. |
 | P03 | PASS | Copied self-contained replay after original case removal | All required assertions for the stated scope passed in the recorded run. |
 | P04 | PASS | Recorded observations stay separate from unavailable fresh target replay | All required assertions for the stated scope passed in the recorded run. |
 | P05 | PASS | Explicit actual-host/backend/provider support matrix | This report explicitly separates Windows tested, Linux/macOS not run, native blocked, optional backend outcomes and unsupported CFG/phi. |
@@ -80,6 +80,6 @@
 - Linux/macOS、真实 solver UNKNOWN、实际 Codex 客户端与 CFG/phi 不冒充已运行。
 - 保留的研究基准每10个 holdout 点中有3个训练边界复查点，只有7个未见 typed 输入；不把全部10点称作独立未见样本。
 - 固定数值基准：reference 8/9，Handwired 8/9；失败记录保留，不声称速度收益。
-- 干净安装 smoke：PASS。
+- 干净安装 smoke：NOT_RUN。
 
 每个 gate 的命令、请求、时间、主机、依赖身份、输入摘要、输出引用、计数与具体失败信息见 matrix.json；完整 Vitest JSON 与 stdout/stderr 均保留。

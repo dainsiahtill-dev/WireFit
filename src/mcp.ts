@@ -15,7 +15,7 @@ import { WirefitService } from './service.js';
 import { submitBinaryInspection, submitBinaryUnpack } from './binary-service.js';
 import { submitBinaryTrace } from './native-trace.js';
 import {submitIdaAnalysis} from './ida/index.js';
-import { assert, WirefitError, errorRecord, rootDir } from './shared.js';
+import { assert, WirefitError, errorRecord, id as newId, rootDir } from './shared.js';
 import type { InputSample } from './oracle.js';
 import type { ComparisonPolicy } from './types.js';
 type JsonSchema = Record<string, unknown>;
@@ -90,6 +90,7 @@ function object(
 export async function createMcpServer(service: WirefitService): Promise<Server> {
   const model = await inlineContract('model'),
     experiment = await inlineContract('experiment-request'),
+    budget = await inlineContract('budget'),
     sample = await inlineContract('input-sample');
   const common = JSON.parse(
     await readFile(path.join(rootDir, 'contracts/common.schema.json'), 'utf8'),
@@ -315,6 +316,50 @@ export async function createMcpServer(service: WirefitService): Promise<Server> 
       execute: (a) => service.submitExperiment(a),
     },
     {
+      name: 'research_directions',
+      description:
+        'List the seventeen pre-registered research directions, or read one direction specification with its hypothesis, control, data split, pre-registered thresholds and negative controls. Read only; it does not run anything.',
+      schema: object({
+        direction_id: { enum: ['D01','D02','D03','D04','D05','D06','D07','D08','D09','D10','D11','D12','D13','D14','D15','D16','D17'] },
+      }, []),
+      readOnly: true,
+      idempotent: true,
+      execute: async (a) => {
+        const { researchCatalog, researchDirection } = await import('./research/index.js');
+        if (typeof a.direction_id === 'string') {
+          const spec = researchDirection(a.direction_id);
+          assert(spec !== null, 'DIRECTION_UNKNOWN', 'Unknown research direction: ' + a.direction_id);
+          return spec;
+        }
+        return {
+          directions: researchCatalog().map((direction) => ({
+            direction_id: direction.direction_id,
+            title: direction.title,
+            corpus_role: direction.corpus_role,
+            claim_count: direction.claims.length,
+            primary_claim_id: direction.primary_claim_id,
+          })),
+        };
+      },
+    },
+    {
+      name: 'run_research_direction',
+      description:
+        'Run one pre-registered research direction end to end: plan, develop, freeze, evaluate and recheck. Returns a job ID immediately. The verdict is produced by the verifier alone and a refuted claim is a completed analysis, not a failure.',
+      schema: object({
+        direction_id: { enum: ['D01','D02','D03','D04','D05','D06','D07','D08','D09','D10','D11','D12','D13','D14','D15','D16','D17'] },
+        budget: budget,
+      }, ['direction_id']),
+      openWorld: true,
+      execute: (a) =>
+        service.submitResearch({
+          schema_version: 1,
+          research_id: newId('research'),
+          direction_id: a.direction_id,
+          budget: a.budget ?? {},
+        }),
+    },
+    {
       name: 'get_job',
       description: 'Read a local job lifecycle record, including result ID or structured failure.',
       schema: object({ job_id: id }),
@@ -337,7 +382,7 @@ export async function createMcpServer(service: WirefitService): Promise<Server> 
       schema: object(
         {
           result_id: id,
-          section: { enum: ['result', 'request', 'counterexamples'] },
+          section: { enum: ['result', 'request', 'counterexamples', 'audit'] },
           offset: { type: 'integer', minimum: 0 },
           limit: { type: 'integer', minimum: 1, maximum: 1000 },
         },

@@ -1,0 +1,721 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wirefix.invalid/contracts/research-result.schema.json",
+  "title": "Verifier-owned research experiment result, never writable request input",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "result_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "research_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "operation": {
+      "const": "research_experiment"
+    },
+    "direction_id": {
+      "enum": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D10",
+        "D11",
+        "D12",
+        "D13",
+        "D14",
+        "D15",
+        "D16",
+        "D17"
+      ]
+    },
+    "job_status": {
+      "enum": [
+        "completed",
+        "failed",
+        "cancelled",
+        "interrupted"
+      ]
+    },
+    "verdict": {
+      "enum": [
+        "supported",
+        "refuted",
+        "inconclusive",
+        "not_run"
+      ]
+    },
+    "verdict_reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "primary_claim_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/result_claim"
+      }
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "request_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "plan_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "frozen_candidate_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "corpus_row_counts": {
+          "type": "object",
+          "properties": {
+            "train": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "validation": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "holdout": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "train",
+            "validation",
+            "holdout"
+          ],
+          "additionalProperties": false
+        },
+        "corpus_holdout_row_ids_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        }
+      },
+      "required": [
+        "request_sha256",
+        "plan_sha256",
+        "frozen_candidate_sha256",
+        "corpus_row_counts",
+        "corpus_holdout_row_ids_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "counts": {
+      "$ref": "common.schema.json#/$defs/counts"
+    },
+    "evidence_pins": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 128,
+      "items": {
+        "$ref": "#/$defs/observed_pin"
+      }
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/phase"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 64,
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      }
+    },
+    "audit": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "agreed",
+            "mismatch",
+            "not_run"
+          ]
+        },
+        "recomputed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "checked_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "agreed_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "mismatches": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "properties": {
+              "check_id": {
+                "type": "string",
+                "maxLength": 128
+              },
+              "claim_id": {
+                "type": "string",
+                "maxLength": 128
+              },
+              "recorded_observed": {
+                "type": "string",
+                "maxLength": 4096
+              },
+              "recomputed_observed": {
+                "type": "string",
+                "maxLength": 4096
+              },
+              "code": {
+                "type": "string",
+                "maxLength": 128
+              }
+            },
+            "required": [
+              "check_id",
+              "claim_id",
+              "recorded_observed",
+              "recomputed_observed",
+              "code"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "status",
+        "recomputed_at",
+        "checked_count",
+        "agreed_count",
+        "mismatches"
+      ],
+      "additionalProperties": false
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 128,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      }
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/error"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "result_id",
+    "research_id",
+    "operation",
+    "direction_id",
+    "job_status",
+    "verdict",
+    "verdict_reason",
+    "primary_claim_id",
+    "claims",
+    "identity",
+    "counts",
+    "evidence_pins",
+    "phases",
+    "artifacts",
+    "audit",
+    "limitations",
+    "error"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "observed_pin": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "kind": {
+          "enum": [
+            "stable_corpus",
+            "lane_artifact"
+          ]
+        },
+        "expected_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "size_bytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_sha256_before": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_sha256_after": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "role",
+        "path",
+        "kind",
+        "expected_sha256",
+        "size_bytes",
+        "observed_sha256_before",
+        "observed_sha256_after",
+        "verified"
+      ],
+      "additionalProperties": false
+    },
+    "phase": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "enum": [
+            "plan",
+            "develop",
+            "freeze",
+            "evaluate",
+            "recheck"
+          ]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "failed",
+            "skipped"
+          ]
+        }
+      },
+      "required": [
+        "phase",
+        "started_at",
+        "finished_at",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "result_claim": {
+      "type": "object",
+      "properties": {
+        "claim_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "hypothesis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "control": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "data_split": {
+          "type": "object",
+          "properties": {
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "key": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "rule": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "seed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "expected_counts": {
+              "type": "object",
+              "properties": {
+                "train": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "validation": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "holdout": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "train",
+                "validation",
+                "holdout"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "unit",
+            "key",
+            "rule",
+            "seed",
+            "expected_counts"
+          ],
+          "additionalProperties": false
+        },
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric_id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "threshold": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "comparator": {
+                "enum": [
+                  "eq",
+                  "ne",
+                  "gte",
+                  "lte",
+                  "gt",
+                  "lt"
+                ]
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              }
+            },
+            "required": [
+              "metric_id",
+              "description",
+              "threshold",
+              "comparator",
+              "source"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "failure_condition": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "properties": {
+              "check_id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "role": {
+                "enum": [
+                  "primary",
+                  "negative_control"
+                ]
+              },
+              "derivation": {
+                "type": "object",
+                "properties": {
+                  "kernel": {
+                    "enum": [
+                      "row_count",
+                      "distinct_count",
+                      "field_count",
+                      "field_sum",
+                      "field_min",
+                      "field_max",
+                      "all_equal",
+                      "any_equal",
+                      "set_equality",
+                      "file_sha256",
+                      "byte_pattern_count"
+                    ]
+                  },
+                  "artifact_role": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "path": {
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "field": {
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "second_artifact_role": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "second_path": {
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "pattern_hex": {
+                    "type": "string",
+                    "maxLength": 4096,
+                    "pattern": "^([0-9a-fA-F]{2})+$"
+                  }
+                },
+                "required": [
+                  "kernel",
+                  "artifact_role"
+                ],
+                "additionalProperties": false
+              },
+              "comparator": {
+                "enum": [
+                  "eq",
+                  "ne",
+                  "gte",
+                  "lte",
+                  "gt",
+                  "lt",
+                  "identical_set",
+                  "subset",
+                  "superset"
+                ]
+              },
+              "expected": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "observed": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "source_roles": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 32,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              }
+            },
+            "required": [
+              "check_id",
+              "statement",
+              "role",
+              "derivation",
+              "comparator",
+              "expected",
+              "observed",
+              "passed",
+              "source_roles"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "not_claimed": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          }
+        },
+        "verdict": {
+          "enum": [
+            "supported",
+            "refuted",
+            "inconclusive",
+            "not_run"
+          ]
+        },
+        "verdict_reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "claim_id",
+        "hypothesis",
+        "control",
+        "data_split",
+        "metrics",
+        "failure_condition",
+        "checks",
+        "not_claimed",
+        "limitations",
+        "verdict",
+        "verdict_reason"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

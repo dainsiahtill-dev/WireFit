@@ -1,5 +1,6 @@
 import {exportBinaryReport} from './binary-reporting.js';
 import {exportIdaReport} from './ida-reporting.js';
+import type {ResearchExportManifest} from './research/export.js';
 import { mkdir, lstat, realpath, readdir, writeFile, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import type { ArtifactRef, ComparisonPolicy, Mapping, Model, Observation, TypedValue, ValueMap } from './types.js';
@@ -110,10 +111,14 @@ function generatedSmoke(model:Model):ValueMap|null{
 }
 
 /** Export immutable evidence and generated modules without elevating stored verdicts. */
-export async function exportReport(store:CaseStore,runId:string,outDir:string):Promise<ExportManifest>{
+export async function exportReport(store:CaseStore,runId:string,outDir:string):Promise<ExportManifest|ResearchExportManifest>{
   const stored=await store.getObject<StoredExportRun>('runs',runId);
   if(stored.result?.operation==='analyze_ida')return exportIdaReport(store,runId,outDir);
   if(stored.result?.operation==='inspect_binary'||stored.result?.operation==='unpack_binary'||stored.result?.operation==='trace_binary')return exportBinaryReport(store,runId,outDir);
+  if(stored.result?.operation==='research_experiment'){
+   const module=await import('./research/export.js');
+   return module.exportResearchReport(store,runId,outDir);
+  }
   assert(typeof outDir==='string'&&outDir.length>0&&!outDir.includes('\0'),'EXPORT_PATH_INVALID','Export destination must be nonempty');
   const destination=path.resolve(outDir);await ensureNoLinks(destination);
   try{assert((await readdir(destination)).length===0,'EXPORT_DIRECTORY_NOT_EMPTY','Export destination must be absent or empty');}

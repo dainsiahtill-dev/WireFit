@@ -40,11 +40,11 @@ async function wait(client: Client, id: string) {
   }
   throw Error('Job poll deadline');
 }
-it('advertises seventeen strict tools including bounded IDA analysis and the canonical experiment union', async () => {
+it('advertises nineteen strict tools including bounded IDA analysis, the canonical experiment union and the research tools', async () => {
   const { dir, client } = await setup();
   try {
     const { tools } = await client.listTools();
-    expect(tools).toHaveLength(17);
+    expect(tools).toHaveLength(19);
     const ida=tools.find(t=>t.name==='wirefit_analyze_ida');expect(ida).toBeDefined();
     const invalidIda=await call(client,'analyze_ida',{file:'sample.exe',queries:[{kind:'py_eval',code:'bad'}]});
     expect(invalidIda.isError).toBe(true);expect((invalidIda.structuredContent as any).error.code).toBe('SCHEMA_INVALID');

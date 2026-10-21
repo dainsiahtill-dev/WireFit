@@ -13,6 +13,7 @@ import {liftPcode} from './pcode.js';
 import {runExperiment} from './experiments.js';
 import type {ArtifactRef,ComparisonPolicy,ValueMap} from './types.js';
 import type {StoredRun,ExperimentRequest} from './run-types.js';
+import type {ResearchRequest} from './research/types.js';
 import {loadNativeStatus} from './native-status.js';
 
 async function readEvidenceBytes(file:string):Promise<Buffer>{
@@ -119,11 +120,18 @@ export class WirefitService {
   const request=validateSchema<ExperimentRequest>('experiment-request',structuredClone({...source,budget:resolveBudget(source.budget??{})}));
   return this.jobs.submit(request.operation,request,(signal,job)=>runExperiment(this.store,request,job,signal),request.budget.wall_time_ms);
  }
+ async submitResearch(input:unknown):Promise<JobState>{
+  assert(input!==null&&typeof input==='object'&&!Array.isArray(input),'REQUEST_INVALID','Research request must be an object');
+  const source=input as Record<string,unknown>;
+  const request=validateSchema<ResearchRequest>('research-request',structuredClone({...source,budget:resolveBudget(source.budget??{})}));
+  const {runResearchExperiment}=await import('./research/runner.js');
+  return this.jobs.submit('research_experiment',request,(signal,job)=>runResearchExperiment(this.store,request,job,signal),request.budget.wall_time_ms);
+ }
  async getResult(resultId:string){const record=await this.store.getObject<{result:unknown}>('runs',resultId);return record.result;}
  async getReport(resultId:string,section='result',offset=0,limit=100){
   assert(Number.isSafeInteger(offset)&&offset>=0&&Number.isSafeInteger(limit)&&limit>0&&limit<=1000,'PAGINATION_INVALID','Invalid report page');
   const record=await this.store.getObject<StoredRun>('runs',resultId);
-  const value=section==='result'?record.result:section==='request'?record.request:section==='counterexamples'&&record.comparison_artifact?JSON.parse((await this.store.readArtifact(record.comparison_artifact)).toString('utf8')):null;
+  const value=section==='result'?record.result:section==='request'?record.request:section==='audit'?(record.result as {audit?:unknown})?.audit??null:section==='counterexamples'&&record.comparison_artifact?JSON.parse((await this.store.readArtifact(record.comparison_artifact)).toString('utf8')):null;
   assert(value!==null,'REPORT_SECTION_UNAVAILABLE','Requested report section is not available');
   if(Array.isArray(value))return {section,candidate_model_id:record.candidate_model_id,model_ids:record.model_ids,dataset_id:record.dataset_id,offset,limit,total:value.length,data:value.slice(offset,offset+limit)};
   const bytes=Buffer.byteLength(JSON.stringify(value),'utf8');
