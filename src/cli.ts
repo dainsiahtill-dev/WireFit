@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { readFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { WirefitService } from './service.js';
 import {
@@ -55,6 +55,7 @@ const commands: Record<string, string[]> = {
   'binary inspect': ['case', 'file', 'config', 'timeout'],
   'binary trace': ['case', 'file', 'config', 'plan'],
   'binary unpack': ['case', 'file', 'backend', 'config', 'timeout', 'target-timeout'],
+  'binary emulate': ['case', 'manifest', 'corpus', 'out'],
   'evidence acquire': [
     'case',
     'config',
@@ -781,6 +782,35 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<numb
       );
       result = completed.value;
       code = completed.code;
+    } else if (command === 'binary emulate') {
+      const {executeEmulation,readCodeBytes}=await import('./emulation/manifest.js');
+      const manifest=validateSchema<import('./emulation/manifest.js').EmulationRequest>(
+       'emulation-request',await readJson(required(options,'manifest')));
+      const corpus=await readJsonl<Record<string,unknown>>(required(options,'corpus'));
+      const code=await readCodeBytes(manifest,async(file)=>readFile(path.resolve(rootDir,file)));
+      const outcomes=[];
+      for(const row of corpus){
+       const outcome=await executeEmulation(manifest,code,row);
+       outcomes.push({sample_id:row['sample_id']??null,outputs:outcome.outputs,captures:Object.fromEntries(
+        Object.entries(outcome.captures).map(([id,capture])=>[id,{sha256:capture.sha256,size_bytes:capture.size_bytes}])),
+        instructions_executed:outcome.instructions_executed,visited_instructions:outcome.visited_instructions,
+        final_eip:outcome.final_eip,final_esp:outcome.final_esp,fault:outcome.fault});
+      }
+      const faults=outcomes.filter((outcome)=>outcome.fault!==null);
+      const artifact=await service.store.putJsonl(outcomes);
+      const outPath=path.resolve(required(options,'out'));
+      await mkdir(path.dirname(outPath),{recursive:true});
+      await writeFile(outPath,outcomes.map((outcome)=>JSON.stringify(outcome)).join('\n')+'\n','utf8');
+      result={
+       emulation_id:manifest.emulation_id,
+       code_sha256:manifest.code.sha256,
+       rows:outcomes.length,
+       faults:faults.length,
+       fault_codes:[...new Set(faults.map((outcome)=>outcome.fault?.code??''))].sort(),
+       instructions_executed:outcomes.reduce((total,outcome)=>total+outcome.instructions_executed,0),
+       artifact:{sha256:artifact.sha256,relative_path:artifact.relative_path,size_bytes:artifact.size_bytes,media_type:artifact.media_type},
+       observations:outPath,
+      };
     } else if (command === 'research run') {
       const directionId = required(options, 'direction');
       const { researchDirection } = await import('./research/index.js');

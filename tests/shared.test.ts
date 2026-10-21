@@ -15,8 +15,8 @@ describe('canonical contracts',()=>{
    expect(()=>canonical({'中文':1})).toThrow();
    expect(()=>canonical({a:undefined})).toThrow();
  });
- it('compiles all eleven canonical contracts and the three research contracts offline',()=>{
-   expect(schemaNames()).toHaveLength(14);
+ it('compiles all eleven canonical contracts, the research contracts and the emulation request offline',()=>{
+   expect(schemaNames()).toHaveLength(15);
    for(const name of schemaNames()) expect(name.length).toBeGreaterThan(0);
  });
  it('rejects injected verdicts and malformed typed values',async()=>{

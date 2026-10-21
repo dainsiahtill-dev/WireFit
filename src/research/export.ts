@@ -52,6 +52,7 @@ const PRODUCT_SOURCE_FILES:readonly string[]=[
  'contracts/research-direction.schema.json',
  'contracts/research-request.schema.json',
  'contracts/research-result.schema.json',
+ 'src/emulation/x86.ts',
  'tools/research/audit.py',
  'tools/research/verify-manifest.py',
 ];

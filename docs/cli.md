@@ -193,6 +193,29 @@ python artifacts\research\vmde\directions\verify-manifest.py
 
 `audit.py` is the authoritative audit layer: a Python implementation of the recipe kernels that shares no code with the product and only reads the frozen packages. `verify-manifest.py` re-checks every file identity and every pinned product source. Both are read only, and both are frozen copies of the source-controlled scripts in `tools/research/`. See [RESEARCH-PROTOCOL.md](RESEARCH-PROTOCOL.md) for the protocol, the restricted path language and the kernel semantics.
 
+
+## Native function emulation
+
+`src/emulation/x86.ts` is a bounded 32-bit x86 interpreter. It lets the product call a native function without an external wrapper process, which is the missing link between "the function exists in the binary" and "the function's behaviour can be observed, modelled and verified".
+
+It is deliberately small and explicit:
+
+- It implements the integer 32-bit subset that recovered kernels use and refuses everything else with a concrete fault code (`EMULATION_UNSUPPORTED_OPCODE`, `EMULATION_UNMAPPED_READ`, `EMULATION_UNMAPPED_WRITE`, `EMULATION_ACCESS_DENIED`, `EMULATION_EXECUTION_DENIED`, `EMULATION_BUDGET_EXHAUSTED`, `EMULATION_FAULT`).
+- It never executes native code. The target bytes are read from a file and interpreted.
+- Every access is checked against a declared region and against the caller's read and write policy, so an emulation run cannot reach outside the synthetic buffers it was given.
+- The instruction budget is enforced, and a repeated string instruction repeats the instruction, so the executed sequence matches the hardware.
+
+A native function is called from a **declarative manifest** rather than from a wrapper script. `contracts/emulation-request.schema.json` names the code bytes and their digest, the memory regions the function may see, how the caller's arguments are placed into memory, how the results are read back, the access policy and the instruction budget. The manifest is data: it cannot execute anything.
+
+```powershell
+.\wirefit.cmd binary emulate --case .\cases\vmde --manifest .\cases\vmde\grid-kernel.json --corpus .\cases\vmde\corpus.jsonl --out .\exports\vmde\observations.jsonl
+```
+
+`tests/fixtures/emulation-vmde-grid-kernel.json` is the manifest of the vmde grid kernel (`0x498a50`). It reproduces the recorded native calls of that kernel inside the product, which is what lets the recovery pipeline treat a native function as an observation source instead of a bespoke script.
+
+The interpreter is verified against an independent reference emulator rather than against itself. `tests/emulation.test.ts` replays the vmde grid kernel (`0x498a50`, 637 bytes of the analysis dump `50b6bb68...6992`) and asserts that every register and every flag of all 207 executed instructions equals the recorded reference trace in `tests/fixtures/emulation-reference-trace.json`, and that the produced node grid equals the recorded native observation. The same kernel is the subject of the D01 and D02 research directions, so a change in the interpreter changes the audited lane and forces the lane to be rebuilt and re-signed.
+
+
 ## MCP
 
 Start the stdio server from an MCP client:

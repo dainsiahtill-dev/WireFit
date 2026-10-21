@@ -1,10 +1,10 @@
 # Wirefit 实际验收记录
 
-运行：run-20261021162742009-C8UKd9。开始 2026-10-21T16:27:42.009Z，结束 2026-10-21T16:29:17.606Z。
+运行：run-20261021192427847-XonG6Y。开始 2026-10-21T19:24:27.847Z，结束 2026-10-21T19:26:04.656Z。
 主机：win32/x64，Node 24.22.0。
 命令执行状态：PASS；完整规范交付状态：PARTIAL。
 
-完整机器可读证据：[matrix.json](../artifacts/acceptance/run-20261021162742009-C8UKd9/matrix.json)。依赖身份：[upstream-lock.json](../upstream-lock.json)。
+完整机器可读证据：[matrix.json](../artifacts/acceptance/run-20261021192427847-XonG6Y/matrix.json)。依赖身份：[upstream-lock.json](../upstream-lock.json)。
 
 门禁状态来自真实执行日志、具体断言与保留的历史捕获。INCONCLUSIVE 表示仅部分组件已覆盖；BLOCKED 和 NOT_RUN 不计入 PASS。
 

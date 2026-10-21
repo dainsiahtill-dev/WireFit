@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "emulation_id": "vmde_grid_kernel",
+  "title": "vmde 0x498a50 grid kernel, node numbering and count",
+  "code": {
+    "file": "exports/vmde-20261020/unpacked_vmde.exe",
+    "sha256": "50b6bb68637b23d14ee1886ca1e84d944fade255204e70a831f27a3ef4fd6992",
+    "file_offset": 622160,
+    "virtual_address": 4819536,
+    "size_bytes": 637
+  },
+  "regions": [
+    {
+      "name": "code",
+      "base": 4816896,
+      "size_bytes": 4096,
+      "read": true,
+      "write": false,
+      "execute": true
+    },
+    {
+      "name": "context",
+      "base": 33554432,
+      "size_bytes": 4096,
+      "read": true,
+      "write": false,
+      "execute": false
+    },
+    {
+      "name": "header",
+      "base": 34603008,
+      "size_bytes": 4096,
+      "read": true,
+      "write": false,
+      "execute": false
+    },
+    {
+      "name": "pixels",
+      "base": 35651584,
+      "size_bytes": 4096,
+      "read": true,
+      "write": false,
+      "execute": false
+    },
+    {
+      "name": "nodes",
+      "base": 36700160,
+      "size_bytes": 4096,
+      "read": true,
+      "write": true,
+      "execute": false
+    },
+    {
+      "name": "stack",
+      "base": 37748736,
+      "size_bytes": 8192,
+      "read": true,
+      "write": true,
+      "execute": false
+    },
+    {
+      "name": "stop",
+      "base": 1879048192,
+      "size_bytes": 4096,
+      "read": true,
+      "write": false,
+      "execute": true
+    }
+  ],
+  "initial_memory": [
+    {
+      "region": "nodes",
+      "offset": 0,
+      "encoding": "bytes_hex",
+      "fill_hex": "a5",
+      "repeat": 4096
+    },
+    {
+      "region": "context",
+      "offset": 0,
+      "encoding": "bytes_hex",
+      "fill_hex": "a5",
+      "repeat": 4096
+    },
+    {
+      "region": "context",
+      "offset": 0,
+      "encoding": "uint32_le",
+      "value": 36700160
+    },
+    {
+      "region": "context",
+      "offset": 4,
+      "encoding": "uint32_le",
+      "value": 0
+    },
+    {
+      "region": "context",
+      "offset": 8,
+      "encoding": "uint32_le",
+      "value_expression": "height+1"
+    },
+    {
+      "region": "context",
+      "offset": 12,
+      "encoding": "uint32_le",
+      "value": 34603008
+    },
+    {
+      "region": "context",
+      "offset": 148,
+      "encoding": "uint32_le",
+      "value": 0
+    },
+    {
+      "region": "context",
+      "offset": 152,
+      "encoding": "uint32_le",
+      "value": 0
+    },
+    {
+      "region": "header",
+      "offset": 0,
+      "encoding": "uint32_le",
+      "value": 35651584
+    },
+    {
+      "region": "header",
+      "offset": 4,
+      "encoding": "uint32_le",
+      "value": 0
+    },
+    {
+      "region": "header",
+      "offset": 8,
+      "encoding": "uint32_le",
+      "value": 0
+    },
+    {
+      "region": "pixels",
+      "offset": 0,
+      "encoding": "int32_le",
+      "value": -1515870811,
+      "count_expression": "source_stride*height"
+    }
+  ],
+  "input_fills": [
+    {
+      "input": "node_stride",
+      "region": "context",
+      "offset": 4,
+      "encoding": "uint32_le"
+    },
+    {
+      "input": "width",
+      "region": "context",
+      "offset": 148,
+      "encoding": "uint32_le"
+    },
+    {
+      "input": "height",
+      "region": "context",
+      "offset": 152,
+      "encoding": "uint32_le"
+    },
+    {
+      "input": "source_stride",
+      "region": "header",
+      "offset": 4,
+      "encoding": "uint32_le"
+    },
+    {
+      "input": "height",
+      "region": "header",
+      "offset": 8,
+      "encoding": "uint32_le"
+    },
+    {
+      "input": "labels",
+      "region": "pixels",
+      "offset": 0,
+      "encoding": "int32_le",
+      "element_size": 4,
+      "count_expression": "width*height",
+      "stride_expression": "source_stride*4",
+      "elements_per_row_expression": "width"
+    }
+  ],
+  "registers": {
+    "ecx": 33554432,
+    "eflags": 2,
+    "ebx": 305419896,
+    "esi": 591751049,
+    "edi": 878082202,
+    "ebp": 1164413355
+  },
+  "call": {
+    "stack_region": "stack",
+    "stack_pointer_offset": 4096,
+    "return_address": 1879048192,
+    "stop_address": 1879048192
+  },
+  "outputs": [
+    {
+      "id": "count",
+      "source": {
+        "kind": "register",
+        "register": "eax"
+      },
+      "encoding": "bv32"
+    }
+  ],
+  "captures": [
+    {
+      "id": "nodes",
+      "region": "nodes",
+      "offset": 0,
+      "size_expression": "node_stride*(height+1)*4"
+    }
+  ],
+  "policy": {
+    "readable": [
+      {
+        "region": "context"
+      },
+      {
+        "region": "header"
+      },
+      {
+        "region": "pixels"
+      },
+      {
+        "region": "nodes"
+      },
+      {
+        "region": "stack"
+      }
+    ],
+    "writable": [
+      {
+        "region": "nodes"
+      },
+      {
+        "region": "stack"
+      }
+    ]
+  },
+  "budget": {
+    "max_instructions": 100000
+  },
+  "notes": "The recorded native observations of the vmde grid kernel were produced by an external CPU emulator. This manifest reproduces the same calls inside the product."
+}

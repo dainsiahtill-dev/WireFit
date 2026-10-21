@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "kind": "wirefit-resolved-local-upstream-lock",
-  "resolved_at": "2026-10-21T16:29:17.047Z",
+  "resolved_at": "2026-10-21T19:26:04.078Z",
   "host": {
     "platform": "win32",
     "arch": "x64",
@@ -316,25 +316,25 @@
       {
         "id": "build",
         "status": "PASS",
-        "started_at": "2026-10-21T16:27:42.141Z",
-        "finished_at": "2026-10-21T16:27:43.118Z",
+        "started_at": "2026-10-21T19:24:27.984Z",
+        "finished_at": "2026-10-21T19:24:28.993Z",
         "outputs": [
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/build.stdout.log",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/build.stdout.log",
             "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             "size_bytes": 0,
             "media_type": "text/plain"
           },
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/build.stderr.log",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/build.stderr.log",
             "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             "size_bytes": 0,
             "media_type": "text/plain"
           },
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/build.command.json",
-            "sha256": "01a0159a1556cf77d6c59b5a6c74c21dc7332b29ec436baf5d3fb70a058398d0",
-            "size_bytes": 1084,
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/build.command.json",
+            "sha256": "e467d6d1865f9f83a36c320c9f98de636f38d03056d1ee48c1d022172ab42d5f",
+            "size_bytes": 1085,
             "media_type": "application/json"
           }
         ]
@@ -342,24 +342,24 @@
       {
         "id": "typecheck",
         "status": "PASS",
-        "started_at": "2026-10-21T16:27:43.122Z",
-        "finished_at": "2026-10-21T16:27:43.967Z",
+        "started_at": "2026-10-21T19:24:28.999Z",
+        "finished_at": "2026-10-21T19:24:29.832Z",
         "outputs": [
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/typecheck.stdout.log",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/typecheck.stdout.log",
             "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             "size_bytes": 0,
             "media_type": "text/plain"
           },
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/typecheck.stderr.log",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/typecheck.stderr.log",
             "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             "size_bytes": 0,
             "media_type": "text/plain"
           },
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/typecheck.command.json",
-            "sha256": "1464407e71abfddccbb0dac7e6cb30a469d2c3c6b37bed0f4aab5a80ec1ee396",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/typecheck.command.json",
+            "sha256": "5121ae5873da4df1f02d543e2409784ddd4baca3de3a143ecacd8ff29cfb0cb5",
             "size_bytes": 1114,
             "media_type": "application/json"
           }
@@ -368,24 +368,24 @@
       {
         "id": "vitest",
         "status": "PASS",
-        "started_at": "2026-10-21T16:27:43.972Z",
-        "finished_at": "2026-10-21T16:29:17.008Z",
+        "started_at": "2026-10-21T19:24:29.837Z",
+        "finished_at": "2026-10-21T19:26:04.034Z",
         "outputs": [
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/vitest.stdout.log",
-            "sha256": "f49bd7a8bb9ea4b521d9ede07376b0156bb8c60d4afebe5902a771e2e5238d80",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/vitest.stdout.log",
+            "sha256": "9b4e1894b765fdc319c1972370f63c033d6efa0ac29e8e9be11be9713147198d",
             "size_bytes": 96,
             "media_type": "text/plain"
           },
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/vitest.stderr.log",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/vitest.stderr.log",
             "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             "size_bytes": 0,
             "media_type": "text/plain"
           },
           {
-            "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/vitest.command.json",
-            "sha256": "c440f95462480a7c5d20007d7e400ed2351ac1190d9b726da67a215860a46bdd",
+            "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/vitest.command.json",
+            "sha256": "8c338b3ffa0335e924b6f82d5d13a55379264eac07d26cf77b4b9b71636295f5",
             "size_bytes": 1182,
             "media_type": "application/json"
           }
@@ -393,9 +393,9 @@
       }
     ],
     "vitest_report": {
-      "relative_path": "artifacts/acceptance/run-20261021162742009-C8UKd9/vitest.json",
-      "sha256": "e40f35d0e25c1c733c247c663b91ca0523e2ece1f1968c156c7b392433273f25",
-      "size_bytes": 328853,
+      "relative_path": "artifacts/acceptance/run-20261021192427847-XonG6Y/vitest.json",
+      "sha256": "16e3ce83cd09eaa1520cf61a39e4bf49075c48c8efded941c83904a81e5a37ad",
+      "size_bytes": 334336,
       "media_type": "application/json"
     },
     "scope": "Dependency resolution and component verification are recorded separately; installed versions do not imply a native end-to-end PASS."

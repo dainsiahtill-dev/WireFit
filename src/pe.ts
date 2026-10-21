@@ -3,6 +3,22 @@ import { createHash } from 'node:crypto';
 export interface PeDiagnostic { code: string; message: string }
 export type PeImportSymbol = { name: string; hint: number } | { ordinal: number };
 export interface PeImport { library: string; symbols: PeImportSymbol[] }
+export interface PeString {
+  /** Virtual address of the first byte. */
+  va: string;
+  rva: number;
+  file_offset: number;
+  encoding: 'ascii' | 'utf16le';
+  length: number;
+  text: string;
+}
+export interface PeExport {
+  name: string | null;
+  ordinal: number;
+  rva: number;
+  va: string;
+  forwarder: string | null;
+}
 export interface PeSection {
   name: string;
   rva: number;
@@ -47,6 +63,14 @@ export interface PeInspection {
   tls_complete: boolean;
   imports: PeImport[];
   imports_complete: boolean;
+  /** Printable strings found in the file backed parts of the image. */
+  strings: PeString[];
+  strings_complete: boolean;
+  /** The sections whose string list hit the per section limit. */
+  strings_truncated_sections: string[];
+  /** The export directory, when the image exports symbols. */
+  exports: PeExport[];
+  exports_complete: boolean;
   diagnostics: PeDiagnostic[];
   indicators: { packed_suspected: boolean; reasons: string[] };
 }
@@ -65,6 +89,11 @@ const MAX_IMPORT_STRING_BYTES = 4 * 1024 * 1024;
 const MAX_ENTROPY_SAMPLE_BYTES = 1024 * 1024;
 const MAX_ENTRY_ASSESSMENT_BYTES = 64;
 const MAX_TLS_CALLBACKS = 64;
+const MAX_STRINGS_PER_SECTION = 20000;
+const MAX_STRING_TEXT = 1024;
+const MIN_STRING_LENGTH = 4;
+const MAX_EXPORT_SYMBOLS = 65536;
+const MAX_EXPORT_NAME_BYTES = 4096;
 // push imm32; mov eax, fs:[0]; push eax; mov eax,[esp+10h];
 // mov [esp+10h],ebp; lea ebp,[esp+10h]; sub esp,eax; push ebx.
 const X86_SEH_PROLOG_SUFFIX = Uint8Array.from([
@@ -404,6 +433,125 @@ export function inspectPe(input: Uint8Array): PeInspection {
     return invalid('Import descriptor table has no terminator within its declared size and inspection limit');
   }
 
+  /*
+   * Printable strings.
+   *
+   * A triage tool without strings is blind, so the image is scanned for
+   * printable ASCII and for UTF-16LE runs. Only file backed section bytes are
+   * scanned and every string keeps its file offset, its RVA and its virtual
+   * address so a reader can jump straight to the reference.
+   */
+  const printable=(value:number):boolean=>value>=0x20&&value<=0x7e;
+  const strings:PeString[]=[];
+  const truncatedSections:string[]=[];
+  let stringsComplete=true;
+  for (const section of sections) {
+    if (section.raw_size===0||section.raw_offset+section.raw_size>bytes.length)continue;
+    const end=section.raw_offset+section.raw_size;
+    let offset=section.raw_offset;
+    let sectionStrings=0;
+    while (offset<end) {
+      if (sectionStrings>=MAX_STRINGS_PER_SECTION){
+        // A section that hits the limit is truncated on its own, so a data
+        // section is never crowded out by the code section before it.
+        stringsComplete=false;
+        truncatedSections.push(section.name);
+        break;
+      }
+      // A UTF-16LE run is a printable byte followed by a zero byte.
+      if (offset+1<end&&printable(bytes[offset]!)&&bytes[offset+1]===0) {
+        let length=0;
+        while (offset+length*2+1<end&&printable(bytes[offset+length*2]!)&&bytes[offset+length*2+1]===0)length++;
+        if (length>=MIN_STRING_LENGTH) {
+          const text=String.fromCharCode(...Array.from({length:Math.min(length,MAX_STRING_TEXT)},(_,index)=>bytes[offset+index*2]!));
+          strings.push({va:hex(imageBase+BigInt(section.rva+(offset-section.raw_offset))),rva:section.rva+(offset-section.raw_offset),file_offset:offset,encoding:'utf16le',length,text});
+          sectionStrings++;
+          offset+=length*2;
+          continue;
+        }
+      }
+      if (printable(bytes[offset]!)) {
+        let length=0;
+        while (offset+length<end&&printable(bytes[offset+length]!))length++;
+        if (length>=MIN_STRING_LENGTH) {
+          const text=String.fromCharCode(...Array.from({length:Math.min(length,MAX_STRING_TEXT)},(_,index)=>bytes[offset+index]!));
+          strings.push({va:hex(imageBase+BigInt(section.rva+(offset-section.raw_offset))),rva:section.rva+(offset-section.raw_offset),file_offset:offset,encoding:'ascii',length,text});
+          sectionStrings++;
+          offset+=length;
+          continue;
+        }
+      }
+      offset++;
+    }
+  }
+
+  /*
+   * The export directory.
+   *
+   * An image that exports symbols is a library, and the exported names are
+   * often the fastest route into what a library actually does.
+   */
+  const exports:PeExport[]=[];
+  let exportsComplete=true;
+  const readExportName=(stringRva:number):string|null=>{
+    const nameMapping=map(stringRva,1);
+    if(!nameMapping)return null;
+    let value='';
+    for(let index=0;index<MAX_EXPORT_NAME_BYTES&&nameMapping.offset+index<bytes.length;index++){
+      const byte=bytes[nameMapping.offset+index]!;
+      if(byte===0)return value.length>0?value:null;
+      if(byte<0x20||byte>0x7e)return null;
+      value+=String.fromCharCode(byte);
+    }
+    return null;
+  };
+  let exportDirectory:{rva:number;size:number}|null=null;
+  if (validDirectoryCount&&directoryCount>0) {
+    const directory=optional+directoryOffset;
+    const exportRva=view.getUint32(directory,true);
+    const exportSize=view.getUint32(directory+4,true);
+    if (exportRva!==0||exportSize!==0)exportDirectory={rva:exportRva,size:exportSize};
+  }
+  if (exportDirectory!==null&&exportDirectory.rva!==0&&exportDirectory.size>0) {
+    const mapping=map(exportDirectory.rva,40);
+    if(!mapping){exportsComplete=false;addDiagnostic('EXPORT_DIRECTORY_INVALID','Export directory does not map to file backed data');}
+    else {
+      const base=mapping.offset;
+      const nameRva=view.getUint32(base+12,true);
+      const ordinalBase=view.getUint32(base+16,true);
+      const functionCount=view.getUint32(base+20,true);
+      const nameCount=view.getUint32(base+24,true);
+      const functionsRva=view.getUint32(base+28,true);
+      const namesRva=view.getUint32(base+32,true);
+      const ordinalsRva=view.getUint32(base+36,true);
+      if (functionCount>MAX_EXPORT_SYMBOLS||nameCount>MAX_EXPORT_SYMBOLS){exportsComplete=false;addDiagnostic('EXPORT_DIRECTORY_INVALID','Export symbol count exceeds the inspection limit');}
+      else {
+        const functionTable=functionsRva===0?null:map(functionsRva,functionCount*4);
+        const nameTable=nameCount===0||namesRva===0?null:map(namesRva,nameCount*4);
+        const ordinalTable=nameCount===0||ordinalsRva===0?null:map(ordinalsRva,nameCount*2);
+        if (functionCount>0&&(functionTable===null||(nameCount>0&&(nameTable===null||ordinalTable===null)))){
+          exportsComplete=false;addDiagnostic('EXPORT_DIRECTORY_INVALID','Export tables do not map to file backed data');
+        }else if (functionTable!==null){
+          const names=new Map<number,string>();
+          if (nameTable!==null&&ordinalTable!==null){
+            for (let index=0;index<nameCount;index++){
+              const namePointer=view.getUint32(nameTable.offset+index*4,true);
+              const ordinal=view.getUint16(ordinalTable.offset+index*2,true);
+              const text=readExportName(namePointer);
+              if (text!==null)names.set(ordinal,text);
+            }
+          }
+          for (let index=0;index<functionCount;index++){
+            const rva=view.getUint32(functionTable.offset+index*4,true);
+            if (rva===0)continue;
+            const forwarder=exportDirectory.rva<=rva&&rva<exportDirectory.rva+exportDirectory.size?readExportName(rva):null;
+            exports.push({name:names.get(index)??null,ordinal:ordinalBase+index,rva,va:hex(imageBase+BigInt(rva)),forwarder});
+          }
+        }
+      }
+    }
+  }
+
   const reasons: string[] = [];
   let highEntropy = false;
   let writableExecutable = false;
@@ -422,7 +570,9 @@ export function inspectPe(input: Uint8Array): PeInspection {
     schema_version: 1, sha256: createHash('sha256').update(bytes).digest('hex'), size_bytes: bytes.length,
     format: is64 ? 'PE32+' : 'PE32', architecture: architectures[machine] ?? `unknown_0x${machine.toString(16)}`,
     image_base: hex(imageBase), entry_point: { rva: entryRva, va: hex(imageBase + BigInt(entryRva)), file_offset: entryMapping?.offset ?? null, section: entrySection, bytes_hex: entryBytes },
-    entry_assessment: entryAssessment, sections, tls, tls_complete: tlsComplete, imports, imports_complete: importsComplete, diagnostics,
+    entry_assessment: entryAssessment, sections, tls, tls_complete: tlsComplete, imports, imports_complete: importsComplete,
+    strings, strings_complete: stringsComplete, strings_truncated_sections: truncatedSections,
+    exports, exports_complete: exportsComplete, diagnostics,
     indicators: { packed_suspected: highEntropy && writableExecutable, reasons },
   };
 }

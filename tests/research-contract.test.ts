@@ -5,8 +5,8 @@ import {researchCatalog,researchDirection} from '../src/research/catalog.js';
 import {validateDirectionSemantics} from '../src/research/runner.js';
 
 describe('research contracts',()=>{
- it('compiles the three research contracts offline and keeps the catalogue at fourteen',()=>{
-  expect(schemaNames()).toHaveLength(14);
+ it('compiles the three research contracts offline and keeps the catalogue at fifteen',()=>{
+  expect(schemaNames()).toHaveLength(15);
   expect(schemaNames()).toContain('research-direction');
   expect(schemaNames()).toContain('research-request');
   expect(schemaNames()).toContain('research-result');

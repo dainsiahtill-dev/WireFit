@@ -24,7 +24,9 @@ Every file-byte RVA mapping stays inside SizeOfImage, a unique mapped region, th
 
 Ordinary imports are transactional: a malformed descriptor, thunk, name, or unterminated table clears the entire import list and sets `imports_complete: false` with `IMPORT_DIRECTORY_INVALID`. This prevents an apparently complete prefix from hiding later damage. The lookup table falls back to FirstThunk when OriginalFirstThunk is zero. Bound IAT addresses that cannot be interpreted as lookup entries are reported incomplete. Reserved name/ordinal bits are checked, and library/symbol names must be printable ASCII and null terminated.
 
-Import walks allow at most 4,096 descriptors and 65,536 total symbols. Each string is bounded to its mapped region and 4,096 bytes; cumulative scanned string bytes are limited to 4 MiB. The declared import-directory size must contain its null descriptor. Missing ordinary imports are a complete empty result. Delay imports, exports, resource contents, signatures, and overlay classification remain outside this API's scope.
+Import walks allow at most 4,096 descriptors and 65,536 total symbols. Each string is bounded to its mapped region and 4,096 bytes; cumulative scanned string bytes are limited to 4 MiB. The declared import-directory size must contain its null descriptor. Missing ordinary imports are a complete empty result. Delay imports, resource contents, signatures, and overlay classification remain outside this API's scope.
+
+**Strings and exports are now in scope.** The inspection reports the printable strings found in the file backed parts of the image (`strings`, with the encoding, the file offset, the RVA and the virtual address of each) and the symbols an image exports (`exports`, with the name, the ordinal, the RVA, the virtual address and any forwarder). A section that hits the per section string limit is named in `strings_truncated_sections` and `strings_complete` becomes false, so a truncated list is never presented as a complete one.
 
 ## Entry assessment
 
