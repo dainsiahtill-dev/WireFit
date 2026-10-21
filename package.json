@@ -27,6 +27,7 @@
     "web": "node scripts/run-local.mjs web",
     "test:web": "node scripts/run-local.mjs test:web",
     "test:e2e": "node scripts/run-local.mjs test:e2e",
+    "research:lane": "node scripts/run-local.mjs research:lane",
     "test:ida": "node scripts/run-local.mjs test:ida"
   },
   "dependencies": {

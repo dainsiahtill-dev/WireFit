@@ -40,7 +40,7 @@ async function wait(client: Client, id: string) {
   }
   throw Error('Job poll deadline');
 }
-it('advertises nineteen strict tools including bounded IDA analysis, the canonical experiment union and the research tools', async () => {
+it('advertises the strict tool catalog with bounded IDA analysis, the canonical experiment union and the research tools', async () => {
   const { dir, client } = await setup();
   try {
     const { tools } = await client.listTools();

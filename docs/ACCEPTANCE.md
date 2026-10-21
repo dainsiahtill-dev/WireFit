@@ -8,6 +8,8 @@
 
 status 为 PASS、FAIL、NOT_RUN、SKIPPED、BLOCKED、INCONCLUSIVE。SKIPPED 不参与 PASS 数；“允许缺依赖”只允许明确显示阻塞，不能通过整链支持 gate。
 
+每条 gate 另记录 `unresolved_selectors`：它引用的断言在本次运行中没有任何存活的测试名命中。这表示**证据指针已失效**（测试被改名或删除），此时该 gate 不能主张其范围，矩阵的 `stale_gate_pointers` 汇总全部此类指针。指针里不得写工具数量之类的会变字面量，否则改一次工具集就会让 gate 静默失去证据。
+
 ## 2. 核心与存储
 
 | Gate | 检查 | 通过条件 |

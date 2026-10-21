@@ -10,7 +10,8 @@ Wirefit 是在本地运行的软件逆向行为建模与验证工具。它使用
 | 逆向证据接入 | REA portable evidence 校验、真实公共 MCP 采集、受限纯直线 p-code 提升 |
 | 结果交付 | 独立 JS/TS 候选、回放脚本、原始观测、来源映射、SMT 记录和文件哈希 |
 | 二进制实战 | PE32/PE32+ 检查、DIE 识别、显式 Unlicense 解包、Frida 运行及内存采样、[有界 Ghidra 静态分析](tools/ghidra/README.md) |
-| 自动化 | CLI，以及 17 个 MCP 工具；核心工作不需要 LLM、API Key 或 GPU |
+| 自动化 | CLI，以及 19 个 MCP 工具；核心工作不需要 LLM、API Key 或 GPU |
+| 研究实验 | 17 个预注册方向：五阶段协议、冻结划分、独立复算与双实现审计，见 [研究协议](docs/RESEARCH-PROTOCOL.md) |
 | IDA 分析 | IDA 9.3 MCP：反汇编、反编译、CFG、交叉引用、字节与类型查询，保留独立证据和真实失败 |
 | 可视化 | 本地七页工作台：研究证据、代码与模型、运行时间线、模型实验室、验证比较、IDA 分析和真实任务/报告操作 |
 

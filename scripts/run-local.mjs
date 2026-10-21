@@ -22,6 +22,7 @@ const commands={
  'test:web':['node_modules/vitest/vitest.mjs','run','tests/web-'],
  'test:ida':['node_modules/vitest/vitest.mjs','run','tests/ida-','tests/web-ida-'],
  'test:e2e':['node_modules/@playwright/test/cli.js','test','--config','playwright.config.mjs'],
+ 'research:lane':['scripts/build-research-lane.mjs'],
 };
 const command=process.argv[2];
 if(!Object.hasOwn(commands,command)){process.stderr.write('Unknown local development command\n');process.exit(2);}

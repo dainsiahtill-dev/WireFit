@@ -183,6 +183,16 @@ Every threshold, data split expectation and negative control is fixed in the fro
 
 `report export` on a research run writes the lane package: `plan.json`, `checks.json`, `receipt.json`, `report.md` and `manifest.json`, plus the run artifacts under `artifacts/`. The manifest pins the product sources the package depends on, so a lane re-run that changes a pinned product source invalidates the package.
 
+The frozen vmde lane is built and audited with:
+
+```powershell
+npm run research:lane -- --case ./cases/research-vmde
+python artifacts\research\vmde\directions\audit.py --all
+python artifacts\research\vmde\directions\verify-manifest.py
+```
+
+`audit.py` is the authoritative audit layer: a Python implementation of the recipe kernels that shares no code with the product and only reads the frozen packages. `verify-manifest.py` re-checks every file identity and every pinned product source. Both are read only, and both are frozen copies of the source-controlled scripts in `tools/research/`. See [RESEARCH-PROTOCOL.md](RESEARCH-PROTOCOL.md) for the protocol, the restricted path language and the kernel semantics.
+
 ## MCP
 
 Start the stdio server from an MCP client:

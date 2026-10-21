@@ -11,6 +11,25 @@ it('does not upgrade partial component coverage or absent evidence to a full gat
  expect(partial?.status).toBe('INCONCLUSIVE');
  expect(api.deriveAcceptanceGate?.({id:'V03',title:'translator corruption',criterion:'reject false counterexample'},[],{})?.status).toBe('NOT_RUN');
 });
+it('names a gate whose evidence pointer no longer resolves instead of reporting a generic gap',()=>{
+ // A selector that matches no live test name is a stale evidence pointer.
+ // The gate cannot claim its scope, and the report must say which pointer
+ // is broken rather than "evidence was not captured".
+ const stale=api.deriveAcceptanceGate?.({id:'C01',title:'contracts',criterion:'all schemas'},
+  [{file:'tests/shared.test.ts',name:'canonical contracts rejects injected verdicts and malformed typed values',status:'passed'}],{});
+ expect(stale?.unresolved_selectors).toEqual([
+  {file:'shared.test.ts',fragment:'compiles all eleven'},
+  {file:'shared.test.ts',fragment:'rejects cross-operation'},
+ ]);
+ expect(stale?.reason).toContain('compiles all eleven');
+ expect(stale?.status).toBe('INCONCLUSIVE');
+ const live=api.deriveAcceptanceGate?.({id:'C01',title:'contracts',criterion:'all schemas'},
+  [{file:'tests/shared.test.ts',name:'canonical contracts compiles all eleven JSON Schema 2020-12 contracts offline',status:'passed'},
+   {file:'tests/shared.test.ts',name:'canonical contracts rejects injected verdicts and malformed typed values',status:'passed'},
+   {file:'tests/shared.test.ts',name:'canonical contracts rejects cross-operation request fields',status:'passed'}],{});
+ expect(live?.unresolved_selectors).toEqual([]);
+ expect(live?.status).toBe('PASS');
+});
 it('keeps empirical recovery failures and blocked native gates visible',()=>{
  const options={benchmark:{counts:{handwired:{failed:1,passed:8,planned:9}},entries:[{template:'piecewise_affine',parameter_seed:1,backend:'handwired',status:'FAIL'}]},rea:{native_blockers:['Ghidra unavailable']}};
  expect(api.deriveAcceptanceGate?.({id:'N08',title:'holdout',criterion:'fixed tolerance'},[],options)?.status).toBe('FAIL');
